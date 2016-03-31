@@ -10,10 +10,10 @@
     <title>Index</title>
 
     @*Easyui需要引入的文件*@
-    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
-    <script src="~/Scripts/jquery.easyui-1.4.3.min.js"></script>
-    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
-    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
 
     @*本地css和js引入*@
     <link href="~/Content/Site.css" rel="stylesheet" />
@@ -28,7 +28,7 @@
         <div class="easyui-accordion" style="width:100%;">
             <div title="药品采购" data-options="iconCls:'icon-edit'" style="overflow:auto;padding:10px;">
                 <ul class="easyui-tree">
-                    <li>采购入库</li>
+                    <li><a href="#" onclick="addTab('药品信息', '../DrugManagement/DrugInfo')">采购入库</a></li>
                     <li>财务验收</li>
                     <li>付款管理</li>
                     <li>采购历史</li>

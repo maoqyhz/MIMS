@@ -25,3 +25,13 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\zh-Hans\System.Web.Mv
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\obj\Debug\MIMS.Web.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\obj\Debug\MIMS.Web.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\obj\Debug\MIMS.Web.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Entity.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Entity.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Business.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.IBusiness.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\Newtonsoft.Json.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Service.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Business.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.IBusiness.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\Newtonsoft.Json.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Service.pdb

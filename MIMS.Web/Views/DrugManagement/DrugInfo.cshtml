@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    @*<meta name="viewport" content="width=device-width" />*@
+    <meta charset="UTF-8">
+    <title>DrugInfo</title>
+    @*Easyui需要引入的文件*@
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div class="easyui-panel" style="padding:5px;">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">刷新</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'">打印</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">关闭</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'"></a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'"></a>
+        </div>
+        <div class="easyui-tabs">
+
+            <div title="基本属性">
+                <table class="easyui-datagrid"
+                       url="../DrugManagement/LoadList" toolbar="#tb"
+                       @*title="Load Data" iconcls="icon-save"*@
+                       rownumbers="true" pagination="true">
+                    <thead>
+                        <tr>
+                            <th field="YPMC" width="120">药品名称</th>
+                            <th field="YPGG" width="80" @*align="right"*@>药品规格</th>
+                            <th field="YPDW" width="80">单位</th>
+                            <th field="attr1" width="180">剂型</th>
+                            <th field="PYDM" width="60">拼音码</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div id="tb" style="padding:3px">
+                    <span>拼音码</span>
+                    <input id="itemid" style="line-height:26px;border:1px solid #ccc">
+                    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">查找</a>
+                </div>
+            </div>
+            <div title="价格管理" style="padding:10px">
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

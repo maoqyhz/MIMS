@@ -43,10 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MIMS_TYPK_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MIMS.Entity\MIMS.Entity.csproj">
+      <Project>{6eb934ef-77d9-4a84-a001-deef096814a6}</Project>
+      <Name>MIMS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.IBusiness\MIMS.IBusiness.csproj">
+      <Project>{3ecaf333-807b-48ea-acb6-c1404335d01b}</Project>
+      <Name>MIMS.IBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.Service\MIMS.Service.csproj">
+      <Project>{add37f07-9f39-43f1-8ba1-28908b4652c5}</Project>
+      <Name>MIMS.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
