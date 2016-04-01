@@ -12,47 +12,71 @@
     <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
     <script type="text/javascript">
         $(function () {
-
+            InitGrid();
+            $('#btnReload').click(function () {
+                $("#grid").datagrid("reload");
+            });
         });
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid(queryData) {
+            $('#grid').datagrid({
+                url: '../DrugManagement/LoadList',
+                height: 406,
+                nowrap: true,
+                autoRowHeight: false,
+                striped: false,
+                collapsible: true,
+                pagination: true,
+                pageSize: 100,
+                pageList: [50, 100, 200],
+                fitColumns: true,
+                rownumbers: true,
+                //sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: false,
+                idField: 'ID',
+                queryParams: queryData,  //异步查询的参数
+                columns: [[
+                     { title: '药品名称', field: 'YPMC', width: 200 },
+                     { title: '药品规格', field: 'YPGG', width: 80 },
+                     { title: '药品单位', field: 'YPDW', width: 80 },
+                     { title: '剂型', field: 'YPSX', width: 80 },
+                     { title: '拼音码', field: 'PYDM', width: 100 },
+                     { title: '药品编码', field: 'YPDM', width: 100 },
+                     { title: '特殊药品', field: 'TSYP', width: 100 },
+                     { title: '五笔码', field: 'WBDM', width: 100 },
+                     { title: '角型码', field: 'JXDM', width: 100 }
+                ]],
+                toolbar: '#tb',
+                onDblClickRow: function (rowIndex, rowData) {
+                    alert(rowIndex);
+                }
+            })
+        };
     </script>
 </head>
-<body>
+<body style="margin:0">
     <div>
         <div class="easyui-panel" style="padding:5px;">
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">刷新</a>
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
             <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'">打印</a>
             <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">关闭</a>
             <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'"></a>
             <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'"></a>
         </div>
         <div class="easyui-tabs">
-
             <div title="基本属性">
-                <table class="easyui-datagrid"
-                       url="../DrugManagement/LoadList" toolbar="#tb"
-                       @*title="Load Data" iconcls="icon-save"*@
-                       rownumbers="true" pagination="true">
-                    <thead>
-                        <tr>
-                            <th field="YPMC" width="120">药品名称</th>
-                            <th field="YPGG" width="80" @*align="right"*@>药品规格</th>
-                            <th field="YPDW" width="80">单位</th>
-                            <th field="attr1" width="180">剂型</th>
-                            <th field="PYDM" width="60">拼音码</th>
-                        </tr>
-                    </thead>
-                </table>
-
+                <table id="grid"></table>
                 <div id="tb" style="padding:3px">
+                    <a id="btnView" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-more'">查看</a>
+                    <a id="btnReload" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">刷新</a>
                     <span>拼音码</span>
-                    <input id="itemid" style="line-height:26px;border:1px solid #ccc">
-                    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">查找</a>
+                    <input id="itemid" style="border:1px solid #ccc">
+                    <a href="#" class="easyui-linkbutton" plain="true">查找</a>
                 </div>
             </div>
             <div title="价格管理" style="padding:10px">
             </div>
-
         </div>
     </div>
 </body>

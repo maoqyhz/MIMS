@@ -32,7 +32,7 @@ namespace MIMS.Service
         {
             using (Conn)
             {
-                string query = "SELECT * FROM MIMS_TYPK";
+                string query = "SELECT top 20 * FROM MIMS_TYPK";
                 return Conn.Query<MIMS_TYPK>(query).ToList();
             }
 
