@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace MIMS.Entity
 {
-   /// <summary>
-   /// 药品基本库表
-   /// </summary>
+    /// <summary>
+    /// 药品基本库表
+    /// </summary>
     public class MIMS_TYPK
     {
 
@@ -38,7 +38,7 @@ namespace MIMS.Entity
         /// <summary>
         /// 药品属性
         /// </summary>		
-        public double YPSX { get; set; }
+        public string YPSX { get; set; }
         /// <summary>
         /// 特殊药品
         /// </summary>		

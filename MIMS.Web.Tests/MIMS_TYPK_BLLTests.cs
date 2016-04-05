@@ -14,8 +14,14 @@ namespace MIMS.Business.Tests
         [TestMethod()]
         public void GetListTest()
         {
+            //arrange 
             MIMS_TYPK_BLL bll = new MIMS_TYPK_BLL();
-            Debug.WriteLine(bll.GetList().Count);
+            int count = 1971;
+            int actual;
+            //act 
+            //actual = bll.GetPageList().Count;
+            //assert
+            //Assert.AreEqual(count, actual);
         }
     }
 }

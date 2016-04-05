@@ -3,6 +3,5 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Debug\MIMS.Entity.
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Debug\Dapper.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Debug\Dapper.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Debug\Dapper.xml
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\obj\Debug\MIMS.Entity.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\obj\Debug\MIMS.Entity.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\obj\Debug\MIMS.Entity.pdb

@@ -1,4 +1,3 @@
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\obj\Debug\MIMS.Web.Tests.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\MIMS.Web.Tests.dll.config
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\MIMS.Web.Tests.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\MIMS.Web.Tests.pdb
@@ -10,6 +9,7 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\MIMS.Serv
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\MIMS.Utilities.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\MIMS.Web.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.Mvc.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\Newtonsoft.Json.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.Razor.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.WebPages.Razor.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.WebPages.dll
@@ -23,6 +23,7 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\MIMS.Web.
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\Dapper.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\Dapper.xml
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.Mvc.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\Newtonsoft.Json.xml
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.Razor.xml
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.WebPages.Razor.xml
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\System.Web.WebPages.xml
@@ -32,5 +33,6 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\zh-Hans\S
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\zh-Hans\System.Web.WebPages.resources.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\obj\Debug\MIMS.Web.Tests.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\obj\Debug\MIMS.Web.Tests.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web.Tests\obj\Debug\MIMS.Web.Tests.pdb

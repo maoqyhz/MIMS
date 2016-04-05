@@ -1,4 +1,3 @@
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\obj\Debug\MIMS.Business.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\MIMS.Business.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\MIMS.Business.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\Dapper.dll
@@ -10,5 +9,6 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\MIMS.IBusi
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\MIMS.Service.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\Dapper.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\Dapper.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\obj\Debug\MIMS.Business.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\obj\Debug\MIMS.Business.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\obj\Debug\MIMS.Business.pdb

@@ -56,6 +56,10 @@
       <Project>{6eb934ef-77d9-4a84-a001-deef096814a6}</Project>
       <Name>MIMS.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MIMS.Utilities\MIMS.Utilities.csproj">
+      <Project>{139d048f-379a-4627-8bc2-d94ab1df1221}</Project>
+      <Name>MIMS.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
