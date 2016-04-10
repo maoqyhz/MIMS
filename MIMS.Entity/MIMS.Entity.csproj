@@ -43,18 +43,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MIMS_BMSZ.cs" />
-    <Compile Include="MIMS_BMZD.cs" />
-    <Compile Include="MIMS_CDDZ.cs" />
-    <Compile Include="MIMS_KWSZ.cs" />
-    <Compile Include="MIMS_KWZD.cs" />
-    <Compile Include="MIMS_TYPK.cs" />
-    <Compile Include="MIMS_User.cs" />
-    <Compile Include="MIMS_YKLB.cs" />
-    <Compile Include="MIMS_YPBM.cs" />
-    <Compile Include="MIMS_YPSX.cs" />
-    <Compile Include="MIMS_ZBLB.cs" />
+    <Compile Include="Model\COM_User.cs" />
+    <Compile Include="Model\PHA_Accounts.cs" />
+    <Compile Include="Model\PHA_AdjustPrice.cs" />
+    <Compile Include="Model\PHA_AdjustPriceDetail.cs" />
+    <Compile Include="Model\PHA_BaseInfo.cs" />
+    <Compile Include="Model\PHA_DispenseWay.cs" />
+    <Compile Include="Model\PHA_DosageForm.cs" />
+    <Compile Include="Model\PHA_Orgin.cs" />
+    <Compile Include="Model\PHA_PhaAttr.cs" />
+    <Compile Include="Model\PHA_Repository.cs" />
+    <Compile Include="Model\PHA_StockDetail.cs" />
+    <Compile Include="Model\PHA_StorageCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\PSS_ExWarehouse.cs" />
+    <Compile Include="Model\PSS_ExWarehouseDetail.cs" />
+    <Compile Include="Model\PSS_ExWarehouseMode.cs" />
+    <Compile Include="Model\PSS_InWarehouse.cs" />
+    <Compile Include="Model\PSS_InWarehouseDetail.cs" />
+    <Compile Include="Model\PSS_InWarehouseMode.cs" />
+    <Compile Include="Model\PSS_PurchaseCompany.cs" />
+    <Compile Include="Model\PSS_PurchasePlan.cs" />
+    <Compile Include="Model\PSS_PurchasePlanDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

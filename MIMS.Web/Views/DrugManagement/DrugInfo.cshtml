@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    @*<meta name="viewport" content="width=device-width" />*@
+    <meta name="viewport" content="width=device-width" />
     <meta charset="UTF-8">
     <title>DrugInfo</title>
     @*Easyui需要引入的文件*@
@@ -14,7 +14,7 @@
         $(function () {
             //初始化datagrid
             InitGrid();
-            //分页
+            InitWindow();
 
         });
 
@@ -34,7 +34,7 @@
                 sortName: 'YPXH',    //根据某个字段给easyUI排序
                 sortOrder: 'asc',
                 remoteSort: true,
-                loadMsg:'加载中，请等待',
+                loadMsg: '加载中，请等待',
                 queryParams: ({
                     query: $('#itemid').val()
                 }),  //异步查询的参数
@@ -42,22 +42,22 @@
                      { title: '药品名称', field: 'YPMC', width: 200, sortable: true },
                      { title: '药品规格', field: 'YPGG', width: 80, sortable: true },
                      { title: '药品单位', field: 'YPDW', width: 80, sortable: true },
-                     { title: '剂型', field: 'YPSX', width: 80, sortable: true },
+                     { title: '剂型', field: 'SXMC', width: 80, sortable: true },
                      { title: '拼音码', field: 'PYDM', width: 100 },
-                     { title: '药品编码', field: 'YPDM', width: 100},
-                     { title: '特殊药品', field: 'TSYP', width: 100},
+                     { title: '药品编码', field: 'YPDM', width: 100 },
+                     { title: '特殊药品', field: 'TSYP', width: 100 },
                      { title: '五笔码', field: 'WBDM', width: 100 },
                      { title: '角型码', field: 'JXDM', width: 100 }
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    alert(rowIndex);
+                    $('#win').window('open');
                 }
             })
             var p = $('#grid').datagrid('getPager');
             $(p).pagination({
                 pageSize: 20,
-                pageList: [10,20, 40, 60,100,200],
+                pageList: [10, 20, 40, 60, 100, 200],
                 beforePageText: '第',
                 afterPageText: '页   共 {pages} 页',
                 displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
@@ -66,7 +66,25 @@
                 $("#grid").datagrid("reload");
             });
         };
+
+
+        function InitWindow() {
+            $('#win').window({
+                width: 800,
+                height: 400,
+                top: ($(window).height() - 400) * 0.5,      //居中
+                left: ($(window).width() - 800) * 0.5,
+                modal: true,
+                closed: true,
+                iconCls: 'icon-saveic'
+            });
+        }
     </script>
+    <style>
+        fieldset {
+            border-color: #E0ECFF;
+        }
+    </style>
 </head>
 <body style="margin:0">
     <div>
@@ -88,6 +106,47 @@
                 </div>
             </div>
             <div title="价格管理" style="padding:10px">
+            </div>
+        </div>
+    </div>
+
+    <div id="win" class="easyui-window" title="Modal Window">
+        <div class="easyui-panel" style="padding:5px;">
+            <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
+            <a href="#" class="easyui-linkbutton" data-options="plain:true">上一个</a>
+            <a href="#" class="easyui-linkbutton" data-options="plain:true">下一个</a>
+            <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存</a>
+            <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-help'">帮助</a>
+            <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-cancel'">关闭</a>
+            <div>
+                <fieldset>
+                    <legend>基本属性</legend>
+                    <table>
+                        <tr>
+                            <td>标识符：</td>
+                            <td><input type="text" name="name" value=" " /></td>
+                            <td>商品名：</td>
+                            <td><input type="text" name="name" value=" " /></td>
+                            <td>规格：</td>
+                            <td><input type="text" name="name" value=" " /></td>
+                        </tr>
+                        <tr>
+                            <td>标识符：</td>
+                            <td><input type="text" name="name" value=" " /></td>
+                            <td>商品名：</td>
+                            <td><input type="text" name="name" value=" " /></td>
+                            <td>规格：</td>
+                            <td><input type="text" name="name" value=" " /></td>
+                        </tr>
+
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend>药品包装</legend>
+                </fieldset>
+                <fieldset>
+                    <legend>其他</legend>
+                </fieldset>
             </div>
         </div>
     </div>
