@@ -13,7 +13,7 @@ namespace MIMS.Web.Controllers
 {
     public class DrugManagementController : Controller
     {
-        IMIMS_TYPK_BLL bll = new MIMS_TYPK_BLL();
+        IPHA_BaseInfoBLL bll = new PHA_BaseInfoBLL();
 
         // GET: DrugManagement
         public ActionResult DrugInfo()

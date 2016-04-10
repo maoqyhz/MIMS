@@ -44,8 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MIMS_BMSZ_DAL.cs" />
-    <Compile Include="MIMS_TYPK_DAL.cs" />
+    <Compile Include="PHA_BaseInfoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

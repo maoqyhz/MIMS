@@ -1,17 +1,13 @@
-﻿using MIMS.Entity;
-using System;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MIMS.IBusiness
 {
-    /// <summary>
-    /// 药品基本库表的业务逻辑
-    /// </summary>
-
-    public interface IMIMS_TYPK_BLL
+    public interface IPHA_BaseInfoBLL
     {
         /// <summary>
         /// 分页获取数据列表
@@ -23,6 +19,6 @@ namespace MIMS.IBusiness
         /// <param name="pageSize">页大小</param>
         /// <param name="count">总条数</param>
         /// <returns></returns>
-        IList GetPageList(string query, string orderField,string orderType, int pageIndex, int pageSize, ref int count);
+        IList GetPageList(string query, string orderField, string orderType, int pageIndex, int pageSize, ref int count);
     }
 }

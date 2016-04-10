@@ -34,9 +34,17 @@ namespace MIMS.Entity.Model
         /// </summary>		
         public int DosageForm { get; set; }
         /// <summary>
+        /// DosageForm(FK)
+        /// </summary>		
+        public string DosageName { get; set; }
+        /// <summary>
         /// Repo
         /// </summary>		
         public string Repo { get; set; }
+        /// <summary>
+        /// Repo(FK)
+        /// </summary>		
+        public string RepoName { get; set; }
         /// <summary>
         /// IsSpecial
         /// </summary>		
@@ -101,6 +109,10 @@ namespace MIMS.Entity.Model
         /// PhaAttr
         /// </summary>		
         public int PhaAttr { get; set; }
+        /// <summary>
+        /// PhaAttr(FK)
+        /// </summary>		
+        public string PhaAttrName { get; set; }
         /// <summary>
         /// StorageCondition
         /// </summary>		

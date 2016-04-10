@@ -1,23 +1,16 @@
-﻿using System;
+﻿using MIMS.IBusiness;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MIMS.IBusiness;
-using MIMS.Entity;
 using System.Collections;
 using MIMS.Service;
-
 namespace MIMS.Business
 {
-    public class MIMS_TYPK_BLL : IMIMS_TYPK_BLL
+    public class PHA_BaseInfoBLL : IPHA_BaseInfoBLL
     {
-        private static readonly MIMS_TYPK_DAL dal = new MIMS_TYPK_DAL();
-        //public IList<MIMS_TYPK> GetList()
-        //{
-        //    return dal.GetList();
-        //}
-
+        private static readonly PHA_BaseInfoDAL dal = new PHA_BaseInfoDAL();
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -34,12 +27,10 @@ namespace MIMS.Business
             Dictionary<string, object> prams = new Dictionary<string, object>();
             if (!string.IsNullOrEmpty(query))
             {
-                prams.Add("@PYDM", "%" + query + "%");
-                where = " AND PYDM like @PYDM";
+                prams.Add("@PinyinCode", "%" + query + "%");
+                where = " AND PinyinCode like @PinyinCode";
             }
             return dal.GetPageListWhere(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
         }
     }
-
-
 }

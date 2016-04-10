@@ -31,7 +31,7 @@
                 pageSize: 20,
                 fitColumns: true,       //自适应列宽
                 rownumbers: true,
-                sortName: 'YPXH',    //根据某个字段给easyUI排序
+                sortName: 'PhaCode',    //根据某个字段给easyUI排序
                 sortOrder: 'asc',
                 remoteSort: true,
                 loadMsg: '加载中，请等待',
@@ -39,16 +39,35 @@
                     query: $('#itemid').val()
                 }),  //异步查询的参数
                 columns: [[
-                     { title: '药品名称', field: 'YPMC', width: 200, sortable: true },
-                     { title: '药品规格', field: 'YPGG', width: 80, sortable: true },
-                     { title: '药品单位', field: 'YPDW', width: 80, sortable: true },
-                     { title: '剂型', field: 'SXMC', width: 80, sortable: true },
-                     { title: '拼音码', field: 'PYDM', width: 100 },
-                     { title: '药品编码', field: 'YPDM', width: 100 },
-                     { title: '特殊药品', field: 'TSYP', width: 100 },
-                     { title: '五笔码', field: 'WBDM', width: 100 },
-                     { title: '角型码', field: 'JXDM', width: 100 }
+                     { title: '药品编号', field: 'PhaCode', hidden: true },
+                     { title: '药品名称', field: 'PhaName', width: 120, sortable: true },
+                     { title: '药品规格', field: 'Spec', width: 80, sortable: true },
+                     { title: '药品单位', field: 'Unit', width: 60, sortable: true, align: 'center' },
+                     { title: '剂型', field: 'DosageName', width: 60, sortable: true, align: 'center' },
+                     {
+                         title: '特殊药品', field: 'IsSpecial', width: 60, sortable: true,
+                         formatter: function (value, row, index) {
+                             if (value) {
+                                 return "是";
+                             } else {
+                                 return "否";
+                             }
+                         }
+                     },
+                     { title: '所属仓库', field: 'RepoName', width: 80, sortable: true },
+                     { title: '药品属性', field: 'PhaAttrName', width: 80, sortable: true },
+                     { title: '拼音码', field: 'PinyinCode', width: 90 },
+                     { title: '五笔码', field: 'WubiCode', width: 90 },
                 ]],
+                onLoadSuccess: function (data) {
+                    if (data) {
+                        $.each(data.rows, function (index, item) {
+                            if (item.checked) {
+                                $('#dg').datagrid('checkRow', index);
+                            }
+                        });
+                    }
+                },
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
                     $('#win').window('open');
@@ -57,7 +76,7 @@
             var p = $('#grid').datagrid('getPager');
             $(p).pagination({
                 pageSize: 20,
-                pageList: [10, 20, 40, 60, 100, 200],
+                pageList: [10,12, 20, 40, 60, 100, 200],
                 beforePageText: '第',
                 afterPageText: '页   共 {pages} 页',
                 displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
