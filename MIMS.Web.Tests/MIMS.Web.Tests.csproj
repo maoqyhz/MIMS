@@ -55,34 +55,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MIMS.Business\MIMS.Business.csproj">
-      <Project>{5EE9C33D-5E42-426F-8A1B-200B485AB383}</Project>
-      <Name>MIMS.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIMS.Entity\MIMS.Entity.csproj">
-      <Project>{6eb934ef-77d9-4a84-a001-deef096814a6}</Project>
-      <Name>MIMS.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIMS.IBusiness\MIMS.IBusiness.csproj">
-      <Project>{3ecaf333-807b-48ea-acb6-c1404335d01b}</Project>
-      <Name>MIMS.IBusiness</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIMS.Service\MIMS.Service.csproj">
-      <Project>{add37f07-9f39-43f1-8ba1-28908b4652c5}</Project>
-      <Name>MIMS.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIMS.Utilities\MIMS.Utilities.csproj">
-      <Project>{139d048f-379a-4627-8bc2-d94ab1df1221}</Project>
-      <Name>MIMS.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIMS.Web\MIMS.Web.csproj">
-      <Project>{0F19C98B-F028-4B0B-9723-586982EB080D}</Project>
-      <Name>MIMS.Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

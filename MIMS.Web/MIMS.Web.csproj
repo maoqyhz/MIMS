@@ -845,6 +845,7 @@
     <Compile Include="Controllers\PSS_InWarehouseModeController.cs" />
     <Compile Include="Controllers\DrugManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PSS_PurchaseCompanyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -878,6 +879,7 @@
     <Content Include="Content\jquery-easyui-1.4.5\themes\material\images\Thumbs.db" />
     <Content Include="Views\PSS_InWarehouseMode\Index.cshtml" />
     <Content Include="Views\PSS_ExWarehouseMode\Index.cshtml" />
+    <Content Include="Views\PSS_PurchaseCompany\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

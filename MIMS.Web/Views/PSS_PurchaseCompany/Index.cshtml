@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -15,7 +14,7 @@
     <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
     <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/messages_zh.js"></script>
+    @*<script src="~/Scripts/messages_zh.js"></script>*@
     <script type="text/javascript" src="~/Content/Site.js"></script>
 
     <script type="text/javascript">
@@ -28,6 +27,7 @@
             });
             //ajax提交修改表单
             $('#ok').click(function () {
+                $('#errdiv').removeClass('dis');
                 $('#form').submit();
             });
             $('#cancel').click(function () {
@@ -35,24 +35,24 @@
             });
             $('#add').click(function () {
                 $('#form')[0].reset();
-                $('#ID').val("此字段自动生成。");
+                $('#CompanyID').val("此字段自动生成。");
                 $('#dd').dialog('open');
             });
             $('#del').click(function () {
-                getAjax("../PSS_ExWarehouseMode/Del", { id: $('#del_id').val() }, function (data) {
+                getAjax("../PSS_PurchaseCompany/Del", { id: $('#del_id').val() }, function (data) {
                     if ($('#del_id').val() == null || $('#del_id').val() == "")
                         return false;
-                        if (data) {
-                            //此处可以优化，提示消息可更美观。
-                            alert("操作成功！");
-                            $('#dd').dialog('close');
-                            $("#grid").datagrid("reload");
-                            return true;
-                        }
-                        else {
-                            alert("操作失败！");
-                            return false;
-                        }
+                    if (data) {
+                        //此处可以优化，提示消息可更美观。
+                        alert("操作成功！");
+                        $('#dd').dialog('close');
+                        $("#grid").datagrid("reload");
+                        return true;
+                    }
+                    else {
+                        alert("操作失败！");
+                        return false;
+                    }
                 });
             });
         });
@@ -60,7 +60,7 @@
         //实现对DataGird控件的绑定操作
         function InitGrid() {
             $('#grid').datagrid({
-                url: '../PSS_ExWarehouseMode/LoadExWarehouseModeList',
+                url: '../PSS_PurchaseCompany/LoadInWarehouseModeList',
                 height: 470,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
@@ -71,21 +71,25 @@
                 fitColumns: true,       //自适应列宽
                 rownumbers: true,
                 columns: [[
-                     { title: '编号', field: 'ID', hidden: true },
-                     { title: '出库方式', field: 'Name', width: 10 },
-                     { title: '对应方式', field: 'Way', width: 10 },
+                     { title: '编号', field: 'CompanyID', hidden: true },
+                     { title: '公司名', field: 'CompanyName', width: 60 },
+                     { title: '拼音代码', field: 'PinyinCode', width: 20 },
+                     { title: '联系人', field: 'Contact', width: 20 },
+                     { title: '电话', field: 'Tel', width: 30 },
+                     { title: '地址', field: 'Address', width: 120 },
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    getAjax("../PSS_ExWarehouseMode/LoadExWarehouseModeForm",
-                        { id: rowData['ID'] }, function (data) {
+                    $('#errdiv').attr('class', 'dis');
+                    getAjax("../PSS_PurchaseCompany/LoadInWarehouseModeForm",
+                        { id: rowData['CompanyID'] }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
                         });
                     $('#dd').dialog('open');
                 },
                 onClickRow: function (index, row) {
-                    $('#del_id').val(row['ID']);
+                    $('#del_id').val(row['CompanyID']);
                 }
             })
             var p = $('#grid').datagrid('getPager');
@@ -99,10 +103,10 @@
         function InitDialog() {
             $('#dd').dialog({
                 title: '修改信息',
-                width: 400,
-                height: 180,
-                top: ($(window).height() - 200) * 0.5,      //居中
-                left: ($(window).width() - 400) * 0.5,
+                width: 520,
+                height: 230,
+                top: ($(window).height() - 230) * 0.5,      //居中
+                left: ($(window).width() - 520) * 0.5,
                 closed: true,
                 cache: false,
                 modal: true,
@@ -117,13 +121,22 @@
         $(function () {
             $('#form').validate({
                 rules: {
-                    Name: {
+                    CompanyName: {
+                        required: true
+                    },
+                    PinyinCode: {
                         required: true
                     }
                 },
+                messages: {  
+                    CompanyName: "公司名不能为空！",
+                    PinyinCode: "拼音代码不能为空！"
+                },
+                errorLabelContainer: '#errdiv>ul',
+                wrapper: 'li',
                 submitHandler: function (form) {
                     var postData = GetWebControls("#form");
-                    getAjax("/PSS_ExWarehouseMode/AcceptClick",
+                    getAjax("/PSS_PurchaseCompany/AcceptClick",
                         postData, function (data) {
                             if (data) {
                                 //此处可以优化，提示消息可更美观。
@@ -139,18 +152,15 @@
                 },
                 invalidHandler: function (form, validator) {  //不通过回调
                     return false;
-                },
-                showErrors: function (errorMap, errorList) {
-                    this.defaultShowErrors();
-                    for (var i = 0; i < errorList.length; i++) {
-                        $(errorList[i].element).one("blur", function () {
-                            $("label.error[for='" + (this.id ? this.id : this.name) + "']").remove();
-                        });
-                    }
                 }
             });
         });
     </script>
+    <style>
+        .dis{
+            display:none;
+        }
+    </style>
 </head>
 <body style="margin:2px;padding:0">
     <div>
@@ -167,17 +177,32 @@
             <table style="margin:8px">
                 <tr>
                     <td>编号:</td>
-                    <td><input type="text" id="ID" name="ID" value=" " disabled="disabled" /></td>
+                    <td><input type="text" id="CompanyID" name="CompanyID" value=" " disabled="disabled" /></td>
+                    <td>公司名:</td>
+                    <td><input type="text" id="CompanyName" name="CompanyName" value=" " class="required" /></td>
                 </tr>
                 <tr>
-                    <td>出库方式:</td>
-                    <td><input type="text" id="Name" name="Name" value=" " class="required" /></td>
+                    <td>拼音代码:</td>
+                    <td><input type="text" id="PinyinCode" name="PinyinCode" value=" " /></td>
+                    <td>开户银行:</td>
+                    <td><input type="text" id="Bank" name="Bank" value=" " /></td>
                 </tr>
                 <tr>
-                    <td>对应方式:</td>
-                    <td><input type="text" id="Way" name="Way" value=" " /></td>
+                    <td>银行账号:</td>
+                    <td><input type="text" id="BankNo" name="BankNo" value=" " /></td>
+                    <td>联系人:</td>
+                    <td><input type="text" id="Contact" name="Contact" value=" " /></td>
                 </tr>
+                <tr>
+                    <td>电话:</td>
+                    <td><input type="text" id="Tel" name="Tel" value=" " /></td>
+                    <td>地址:</td>
+                    <td><input type="text" id="Address" name="Address" value=" " /></td>
+                </tr>   
             </table>
+            <div class="errdiv" id="errdiv">
+                <ul></ul>
+            </div>   
             <div id="dlg-buttons">
                 <a id="ok" href="#" class="easyui-linkbutton" iconcls="icon-ok">确定</a>
                 <a id="cancel" href="#" class="easyui-linkbutton" iconcls="icon-cancel">取消</a>
