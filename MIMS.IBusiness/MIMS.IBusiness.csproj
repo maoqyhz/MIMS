@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPHA_BaseInfoBLL.cs" />
+    <Compile Include="IPSS_ExWarehouseModeBLL.cs" />
     <Compile Include="IPSS_InWarehouseModeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

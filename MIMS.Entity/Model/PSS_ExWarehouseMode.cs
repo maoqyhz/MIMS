@@ -17,6 +17,10 @@ namespace MIMS.Entity.Model
         /// Name
         /// </summary>		
         public string Name { get; set; }
+        /// <summary>
+        /// Way
+        /// </summary>		
+        public string Way { get; set; }
 
     }
 }

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="PHA_BaseInfoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSS_ExWarehouseModeDAL.cs" />
     <Compile Include="PSS_InWarehouseModeDAL.cs" />
   </ItemGroup>
   <ItemGroup>

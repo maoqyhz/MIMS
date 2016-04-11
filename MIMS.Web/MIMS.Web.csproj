@@ -841,7 +841,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BaseInfoMaintenanceController.cs" />
+    <Compile Include="Controllers\PSS_ExWarehouseModeController.cs" />
+    <Compile Include="Controllers\PSS_InWarehouseModeController.cs" />
     <Compile Include="Controllers\DrugManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -875,10 +876,8 @@
     <Content Include="Content\jquery-easyui-1.4.5\demo\tree\tree_data1.json" />
     <Content Include="Content\jquery-easyui-1.4.5\demo\tree\tree_data2.json" />
     <Content Include="Content\jquery-easyui-1.4.5\themes\material\images\Thumbs.db" />
-    <Content Include="Views\BaseInfoMaintenance\InWarehouseMode.cshtml" />
-    <Content Include="Views\BaseInfoMaintenance\ExWarehouseMode.cshtml" />
-    <Content Include="Views\BaseInfoMaintenance\PurchaseCompany.cshtml" />
-    <Content Include="Views\BaseInfoMaintenance\Orgin.cshtml" />
+    <Content Include="Views\PSS_InWarehouseMode\Index.cshtml" />
+    <Content Include="Views\PSS_ExWarehouseMode\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
