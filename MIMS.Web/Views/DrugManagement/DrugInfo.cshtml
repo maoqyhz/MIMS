@@ -15,14 +15,16 @@
             //初始化datagrid
             InitGrid();
             InitWindow();
-
+            $('#print').click(function () {
+                window.print();
+            });
         });
 
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
             $('#grid').datagrid({
                 url: '../DrugManagement/LoadList',
-                height: 406,
+                height: 402,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
@@ -45,7 +47,7 @@
                      { title: '药品单位', field: 'Unit', width: 60, sortable: true, align: 'center' },
                      { title: '剂型', field: 'DosageName', width: 60, sortable: true, align: 'center' },
                      {
-                         title: '特殊药品', field: 'IsSpecial', width: 60, sortable: true,
+                         title: '特殊药品', field: 'IsSpecial', width: 60, sortable: true,align: 'center',
                          formatter: function (value, row, index) {
                              if (value) {
                                  return "是";
@@ -54,8 +56,8 @@
                              }
                          }
                      },
-                     { title: '所属仓库', field: 'RepoName', width: 80, sortable: true },
-                     { title: '药品属性', field: 'PhaAttrName', width: 80, sortable: true },
+                     { title: '所属仓库', field: 'RepoName', width: 80, sortable: true, align: 'center' },
+                     { title: '药品属性', field: 'PhaAttrName', width: 80, sortable: true, align: 'center' },
                      { title: '拼音码', field: 'PinyinCode', width: 90 },
                      { title: '五笔码', field: 'WubiCode', width: 90 },
                 ]],
@@ -105,13 +107,11 @@
         }
     </style>
 </head>
-<body style="margin:0">
+<body style="margin:2px;padding:0">
     <div>
         <div class="easyui-panel" style="padding:5px;">
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'">打印</a>
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">关闭</a>
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'"></a>
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'"></a>
+            <a id="print" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'">打印</a>
+            <a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('help');"></a>
         </div>
         <div class="easyui-tabs">
             <div title="基本属性">

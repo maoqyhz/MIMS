@@ -94,3 +94,18 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
+.icon-setup{
+	background:url(../../image/setup.png) no-repeat center center;
+}
+.icon-Inventory{
+	background:url(../../image/Inventory.png) no-repeat center center;
+}
+.icon-information{
+	background:url(../../image/information.png) no-repeat center center;
+}
+.icon-buy{
+	background:url(../../image/buy.png) no-repeat center center;
+}
+.icon-pill{
+	background:url(../../image/pill.png) no-repeat center center;
+}

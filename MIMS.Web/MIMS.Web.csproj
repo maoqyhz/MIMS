@@ -88,7 +88,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\image\buy.png" />
+    <Content Include="Content\image\document_setting.gif" />
+    <Content Include="Content\image\information.png" />
+    <Content Include="Content\image\Inventory.png" />
     <Content Include="Content\image\Medicine.png" />
+    <Content Include="Content\image\pill.png" />
+    <Content Include="Content\image\setup.png" />
     <Content Include="Content\image\welcome.png" />
     <Content Include="Content\jquery-easyui-1.4.5\changelog.txt" />
     <Content Include="Content\jquery-easyui-1.4.5\demo-mobile\accordion\basic.html" />
@@ -820,13 +826,22 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Site.js" />
+    <Content Include="Content\validate.js" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\messages_zh.js" />
     <Content Include="Web.config" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseInfoMaintenanceController.cs" />
     <Compile Include="Controllers\DrugManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -860,6 +875,10 @@
     <Content Include="Content\jquery-easyui-1.4.5\demo\tree\tree_data1.json" />
     <Content Include="Content\jquery-easyui-1.4.5\demo\tree\tree_data2.json" />
     <Content Include="Content\jquery-easyui-1.4.5\themes\material\images\Thumbs.db" />
+    <Content Include="Views\BaseInfoMaintenance\InWarehouseMode.cshtml" />
+    <Content Include="Views\BaseInfoMaintenance\ExWarehouseMode.cshtml" />
+    <Content Include="Views\BaseInfoMaintenance\PurchaseCompany.cshtml" />
+    <Content Include="Views\BaseInfoMaintenance\Orgin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

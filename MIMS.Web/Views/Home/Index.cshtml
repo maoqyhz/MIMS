@@ -25,19 +25,24 @@
         <h1 id="title">XX医院药库管理系统</h1>
     </div>
     <div region="west" class="easyui-panel" title="导航菜单" split="true" style="width:220px">
-        <div class="easyui-accordion" style="width:100%;">
-            <div title="药品信息维护" data-options="iconCls:'icon-edit'" style="overflow:auto;padding:10px;">
+        <div class="easyui-accordion" style="height:480px">
+            <div title="基本信息管理" data-options="iconCls:'icon-information'" style="overflow:auto;padding:10px;">
                 <ul class="easyui-tree">
-                    <li><a href="#" onclick="addTab('药品信息', '../DrugManagement/DrugInfo')">药品信息</a></li>
-                    <li><a href="#" onclick="addTab('药品信息', '../DrugManagement/DrugInfo')">药品信息</a></li>
-                    <li><a href="#" onclick="addTab('药品信息', '../DrugManagement/DrugInfo')">药品信息</a></li>
-                    <li><a href="#" onclick="addTab('药品信息', '../DrugManagement/DrugInfo')">药品信息</a></li>
+                    <li><a href="#" onclick="addTab('入库方式维护', '../BaseInfoMaintenance/InWarehouseMode')">入库方式维护</a></li>
+                    <li><a href="#" onclick="addTab('出库方式维护', '../BaseInfoMaintenance/ExWarehouseMode')">出库方式维护</a></li>
+                    <li><a href="#" onclick="addTab('进货单位维护', '../BaseInfoMaintenance/PurchaseCompany')">进货单位维护</a></li>
+                    <li><a href="#" onclick="addTab('药品产地维护', '../BaseInfoMaintenance/Orgin')">药品产地维护</a></li>
+                    <li><a href="#" onclick="addTab('药库维护', '../BaseInfoMaintenance/DrugInfo')">药库维护</a></li>
                 </ul>
             </div>
-            <div title="药品入库" data-options="iconCls:'icon-edit'" style="padding:10px;"></div>
-            <div title="药品出库" data-options="iconCls:'icon-edit'" style="padding:10px;"></div>
-            <div title="药品查询" data-options="iconCls:'icon-edit'" style="padding:10px;"></div>
-            <div title="系统设置" data-options="iconCls:'icon-edit'" style="padding:10px;"></div>
+            <div title="药品管理" data-options="iconCls:'icon-pill'" style="padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('药品基本信息', '../DrugManagement/DrugInfo')">药品基本信息</a></li>
+                </ul>
+            </div>
+            <div title="进销存管理" data-options="iconCls:'icon-buy'" style="padding:10px;"></div>
+            <div title="盘查询管理" data-options="iconCls:'icon-Inventory'" style="padding:10px;"></div>
+            <div title="系统设置" data-options="iconCls:'icon-setup'" style="padding:10px;"></div>
         </div>
     </div>
     <div region="center" class="easyui-tabs" id="tabs">
