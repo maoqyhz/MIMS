@@ -841,6 +841,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\PHA_OrginController.cs" />
     <Compile Include="Controllers\PSS_ExWarehouseModeController.cs" />
     <Compile Include="Controllers\PSS_InWarehouseModeController.cs" />
     <Compile Include="Controllers\DrugManagementController.cs" />
@@ -880,6 +881,7 @@
     <Content Include="Views\PSS_InWarehouseMode\Index.cshtml" />
     <Content Include="Views\PSS_ExWarehouseMode\Index.cshtml" />
     <Content Include="Views\PSS_PurchaseCompany\Index.cshtml" />
+    <Content Include="Views\PHA_Orgin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

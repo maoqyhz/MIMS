@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PHA_BaseInfoBLL.cs" />
+    <Compile Include="PHA_OrginBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSS_ExWarehouseModeBLL.cs" />
     <Compile Include="PSS_InWarehouseModeBLL.cs" />

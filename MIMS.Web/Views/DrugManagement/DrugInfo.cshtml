@@ -61,15 +61,6 @@
                      { title: '拼音码', field: 'PinyinCode', width: 90 },
                      { title: '五笔码', field: 'WubiCode', width: 90 },
                 ]],
-                onLoadSuccess: function (data) {
-                    if (data) {
-                        $.each(data.rows, function (index, item) {
-                            if (item.checked) {
-                                $('#dg').datagrid('checkRow', index);
-                            }
-                        });
-                    }
-                },
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
                     $('#win').window('open');

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPHA_OrginBLL.cs" />
     <Compile Include="IPSS_PurchaseCompanyBLL.cs" />
     <Compile Include="IPHA_BaseInfoBLL.cs" />
     <Compile Include="IPSS_ExWarehouseModeBLL.cs" />

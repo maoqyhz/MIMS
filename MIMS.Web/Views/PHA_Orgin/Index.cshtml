@@ -38,7 +38,7 @@
                 $('#dd').dialog('open');
             });
             $('#del').click(function () {
-                getAjax("../PSS_PurchaseCompany/Del", { id: $('#del_id').val() }, function (data) {
+                getAjax("../PHA_Orgin/Del", { id: $('#del_id').val() }, function (data) {
                     if ($('#del_id').val() == null || $('#del_id').val() == "")
                         return false;
                     if (data) {
@@ -59,54 +59,59 @@
         //实现对DataGird控件的绑定操作
         function InitGrid() {
             $('#grid').datagrid({
-                url: '../PSS_PurchaseCompany/LoadInWarehouseModeList',
+                url: '../PHA_Orgin/LoadList',
                 height: 470,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
                 collapsible: true,      //可折叠
                 pagination: true,
+                sortName: 'OrginID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
                 pageSize: 20,
                 fitColumns: true,       //自适应列宽
                 rownumbers: true,
+                queryParams: ({
+                    query: $('#itemid').val()
+                }),  //异步查询的参数
                 columns: [[
-                     { title: '编号', field: 'CompanyID', hidden: true },
-                     { title: '公司名', field: 'CompanyName', width: 60 },
-                     { title: '拼音代码', field: 'PinyinCode', width: 20 },
-                     { title: '联系人', field: 'Contact', width: 20 },
-                     { title: '电话', field: 'Tel', width: 30 },
-                     { title: '地址', field: 'Address', width: 120 },
+                     { title: '编号', field: 'OrginID', hidden: true },
+                     { title: '产地', field: 'OrginName', width: 10 },
+                     { title: '拼音代码', field: 'PinyinCode', width: 10 },
+                     { title: '生产厂家', field: 'Manufacturer', width: 60 },
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
                     $('#errdiv').attr('class', 'dis');
-                    getAjax("../PSS_PurchaseCompany/LoadInWarehouseModeForm",
-                        { id: rowData['CompanyID'] }, function (data) {
+                    getAjax("../PHA_Orgin/LoadForm",
+                        { id: rowData['OrginID'] }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
                         });
                     $('#dd').dialog('open');
                 },
                 onClickRow: function (index, row) {
-                    $('#del_id').val(row['CompanyID']);
+                    $('#del_id').val(row['OrginID']);
                 }
             })
             var p = $('#grid').datagrid('getPager');
             $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
                 beforePageText: '第',
                 afterPageText: '页   共 {pages} 页',
                 displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
             });
         };
 
-        //初始化对话框 
+        //初始化对话框
         function InitDialog() {
             $('#dd').dialog({
                 title: '修改信息',
-                width: 520,
+                width: 320,
                 height: 230,
                 top: ($(window).height() - 230) * 0.5,      //居中
-                left: ($(window).width() - 520) * 0.5,
+                left: ($(window).width() - 300) * 0.5,
                 closed: true,
                 cache: false,
                 modal: true,
@@ -119,22 +124,22 @@
         $(function () {
             $('#form').validate({
                 rules: {
-                    CompanyName: {
+                    OrginName: {
                         required: true
                     },
                     PinyinCode: {
                         required: true
                     }
                 },
-                messages: {  
-                    CompanyName: "公司名不能为空！",
+                messages: {
+                    OrginName: "产地名不能为空！",
                     PinyinCode: "拼音代码不能为空！"
                 },
                 errorLabelContainer: '#errdiv>ul',
                 wrapper: 'li',
                 submitHandler: function (form) {
                     var postData = GetWebControls("#form");
-                    getAjax("/PSS_PurchaseCompany/AcceptClick",
+                    getAjax("/PHA_Orgin/AcceptClick",
                         postData, function (data) {
                             if (data) {
                                 //此处可以优化，提示消息可更美观。
@@ -155,8 +160,11 @@
         });
     </script>
     <style>
-        .dis{
-            display:none;
+        .dis {
+            display: none;
+        }
+        form input{
+            width:200px;
         }
     </style>
 </head>
@@ -168,6 +176,9 @@
             <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
             <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
             <a id="btnReload" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">刷新</a>
+            <span>拼音码</span>
+            <input id="itemid" style="border:1px solid #ccc">
+            <a href="#" class="easyui-linkbutton" plain="true" onclick="InitGrid()">查找</a>
         </div>
     </div>
     <div id="dd" class="easyui-dialog">
@@ -175,32 +186,24 @@
             <table style="margin:8px">
                 <tr>
                     <td>编号:</td>
-                    <td><input type="text" id="CompanyID" name="CompanyID" value=" " disabled="disabled" /></td>
-                    <td>公司名:</td>
-                    <td><input type="text" id="CompanyName" name="CompanyName" value=" " class="required" /></td>
+                    <td><input type="text" id="OrginID" name="OrginID" value=" " disabled="disabled" /></td>
+                </tr>
+                <tr>
+                    <td>产地:</td>
+                    <td><input type="text" id="OrginName" name="OrginName" value=" " class="required" /></td>
                 </tr>
                 <tr>
                     <td>拼音代码:</td>
                     <td><input type="text" id="PinyinCode" name="PinyinCode" value=" " /></td>
-                    <td>开户银行:</td>
-                    <td><input type="text" id="Bank" name="Bank" value=" " /></td>
                 </tr>
                 <tr>
-                    <td>银行账号:</td>
-                    <td><input type="text" id="BankNo" name="BankNo" value=" " /></td>
-                    <td>联系人:</td>
-                    <td><input type="text" id="Contact" name="Contact" value=" " /></td>
+                    <td>生产厂家:</td>
+                    <td><input type="text" id="Manufacturer" name="Manufacturer" value=" " /></td>
                 </tr>
-                <tr>
-                    <td>电话:</td>
-                    <td><input type="text" id="Tel" name="Tel" value=" " /></td>
-                    <td>地址:</td>
-                    <td><input type="text" id="Address" name="Address" value=" " /></td>
-                </tr>   
             </table>
             <div class="errdiv" id="errdiv">
                 <ul></ul>
-            </div>   
+            </div>
             <div id="dlg-buttons">
                 <a id="ok" href="#" class="easyui-linkbutton" iconcls="icon-ok">确定</a>
                 <a id="cancel" href="#" class="easyui-linkbutton" iconcls="icon-cancel">取消</a>
