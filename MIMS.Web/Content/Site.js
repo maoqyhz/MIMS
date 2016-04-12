@@ -36,15 +36,15 @@ function GetWebControls(element) {
 		var value = $(this).val();
 		var type = $(this).attr('type');
 		switch (type) {
-			case "checkbox":
-				if ($(this).attr("checked")) {
-				    reVal += '"' + id + '"' + ':' + '"1",';
+		    case "checkbox":
+			    if ($(this).is(':checked')) {
+					reVal += '"' + id + '"' + ':' + '"1",';
 				} else {
-				    reVal += '"' + id + '"' + ':' + '"0",';
-				}
+					reVal += '"' + id + '"' + ':' + '"0",';
+			    }
 				break;
 			default:
-			    reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",';
+				reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",';
 				break;
 		}
 	});
@@ -78,21 +78,21 @@ function SetWebControls(data) {
 
 
 function ClearWebControls(data) {
-    for (var key in data) {
-        var id = $('#' + key);
-        var value = $.trim(data[key]).replace("&nbsp;", "");
-        var type = id.attr('type');
-        switch (type) {
-            case "checkbox":
-                if (value == 1) {
-                    id.attr("checked", 'checked');
-                } else {
-                    id.removeAttr("checked");
-                }
-                break;
-            default:
-                id.val(value);
-                break;
-        }
-    }
+	for (var key in data) {
+		var id = $('#' + key);
+		var value = $.trim(data[key]).replace("&nbsp;", "");
+		var type = id.attr('type');
+		switch (type) {
+			case "checkbox":
+				if (value == 1) {
+					id.attr("checked", 'checked');
+				} else {
+					id.removeAttr("checked");
+				}
+				break;
+			default:
+				id.val(value);
+				break;
+		}
+	}
 }
