@@ -19,11 +19,11 @@ namespace MIMS.Web.Controllers
         {
             return View();
         }
-        public ActionResult LoadExWarehouseModeList()
+        public ActionResult LoadList()
         {
             return Json(ipss_exwarehousemodebll.GetList());
         }
-        public ActionResult LoadExWarehouseModeForm(string id)
+        public ActionResult LoadForm(string id)
         {
             if (!string.IsNullOrEmpty(id))
                 return Json(ipss_exwarehousemodebll.GetEntity(id));

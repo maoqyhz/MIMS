@@ -12,11 +12,15 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// StorageConditionId
         /// </summary>		
-        public int StorageConditionId { get; set; }
+        public int StorageConditionID { get; set; }
         /// <summary>
-        /// StorageCondition
+        /// StorageConditionName
         /// </summary>		
-        public string StorageCondition { get; set; }
+        public string StorageConditionName { get; set; }
+        /// <summary>
+        /// PinyinCode
+        /// </summary>
+        public string PinyinCode { get; set; }
 
     }
 }

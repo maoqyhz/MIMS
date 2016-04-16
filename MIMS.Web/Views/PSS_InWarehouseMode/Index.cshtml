@@ -41,17 +41,17 @@
                 getAjax("../PSS_InWarehouseMode/Del", { id: $('#del_id').val() }, function (data) {
                     if ($('#del_id').val() == null || $('#del_id').val() == "")
                         return false;
-                        if (data) {
-                            //此处可以优化，提示消息可更美观。
-                            alert("操作成功！");
-                            $('#dd').dialog('close');
-                            $("#grid").datagrid("reload");
-                            return true;
-                        }
-                        else {
-                            alert("操作失败！");
-                            return false;
-                        }
+                    if (data) {
+                        //此处可以优化，提示消息可更美观。
+                        alert("操作成功！");
+                        $('#dd').dialog('close');
+                        $("#grid").datagrid("reload");
+                        return true;
+                    }
+                    else {
+                        alert("操作失败！");
+                        return false;
+                    }
                 });
             });
         });
@@ -59,7 +59,7 @@
         //实现对DataGird控件的绑定操作
         function InitGrid() {
             $('#grid').datagrid({
-                url: '../PSS_InWarehouseMode/LoadInWarehouseModeList',
+                url: '../PSS_InWarehouseMode/LoadList',
                 height: 470,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
@@ -77,7 +77,7 @@
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    getAjax("../PSS_InWarehouseMode/LoadInWarehouseModeForm",
+                    getAjax("../PSS_InWarehouseMode/LoadForm",
                         { id: rowData['ID'] }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);

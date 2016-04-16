@@ -54,6 +54,10 @@ namespace MIMS.Entity.Model
         /// </summary>		
         public int DispenseWay { get; set; }
         /// <summary>
+        /// DispenseWayName
+        /// </summary>
+        public string DispenseWayName { get; set; }
+        /// <summary>
         /// PinyinCode
         /// </summary>		
         public string PinyinCode { get; set; }
@@ -117,6 +121,10 @@ namespace MIMS.Entity.Model
         /// StorageCondition
         /// </summary>		
         public int StorageCondition { get; set; }
+        /// <summary>
+        /// StorageConditionName
+        /// </summary>
+        public string StorageConditionName { get; set; }
 
     }
 }

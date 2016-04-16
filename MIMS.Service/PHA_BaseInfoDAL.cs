@@ -79,5 +79,58 @@ namespace MIMS.Service
             }
 
         }
+        /// <summary>
+        /// 根据主键值获得一个对象
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PHA_BaseInfo GetEntity(string id)
+        {
+            using (Conn)
+            {
+                string query = @"SELECT B.*,
+                                        D.DosageName,
+                                        R.RepoName,
+                                        DW.DispenseWayName,
+                                        P.PhaAttrName,
+                                        S.StorageConditionName
+                                         FROM PHA_BaseInfo B
+                                        LEFT JOIN PHA_DosageForm D ON B.DosageForm = D.DosageID
+                                        LEFT JOIN PHA_Repository R ON B.Repo = R.RepoID
+                                        LEFT JOIN PHA_DispenseWay DW ON B.DispenseWay = DW.DispenseWayID
+                                        LEFT JOIN PHA_PhaAttr P ON B.PhaAttr = P.PhaAttrID
+                                        LEFT JOIN PHA_StorageCondition S ON B.StorageCondition = S.StorageConditionId
+                                        WHERE PhaCode = @PhaCode";
+                return Conn.Query<PHA_BaseInfo>(query, new { PhaCode = id }).SingleOrDefault();
+            }
+        }
+
+        public int Update(PHA_BaseInfo obj)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE PHA_BaseInfo 
+                                    SET  OrginName=@OrginName,PinyinCode=@PinyinCode,Manufacturer=@Manufacturer
+                                       WHERE OrginID =@OrginID";
+                return Conn.Execute(query, obj);
+            }
+        }
+        public int Insert(PHA_BaseInfo obj)
+        {
+            using (Conn)
+            {
+                string query = @"INSERT INTO PHA_BaseInfo 
+                                    VALUES(@OrginName,@PinyinCode,@Manufacturer)";
+                return Conn.Execute(query, obj);
+            }
+        }
+        public int Delete(PHA_BaseInfo obj)
+        {
+            using (Conn)
+            {
+                string query = @"DELETE FROM PHA_BaseInfo WHERE OrginID = @OrginID";
+                return Conn.Execute(query, obj);
+            }
+        }
     }
 }

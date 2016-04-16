@@ -25,6 +25,10 @@ namespace MIMS.Entity.Model
         /// IsValid
         /// </summary>		
         public int IsValid { get; set; }
+        /// <summary>
+        /// PinyinCode
+        /// </summary>
+        public string PinyinCode { get; set; }
 
     }
 }

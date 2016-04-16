@@ -59,7 +59,7 @@
         //实现对DataGird控件的绑定操作
         function InitGrid() {
             $('#grid').datagrid({
-                url: '../PSS_PurchaseCompany/LoadInWarehouseModeList',
+                url: '../PSS_PurchaseCompany/LoadList',
                 height: 470,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
@@ -80,7 +80,7 @@
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
                     $('#errdiv').attr('class', 'dis');
-                    getAjax("../PSS_PurchaseCompany/LoadInWarehouseModeForm",
+                    getAjax("../PSS_PurchaseCompany/LoadForm",
                         { id: rowData['CompanyID'] }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
@@ -99,7 +99,7 @@
             });
         };
 
-        //初始化对话框 
+        //初始化对话框
         function InitDialog() {
             $('#dd').dialog({
                 title: '修改信息',
@@ -126,7 +126,7 @@
                         required: true
                     }
                 },
-                messages: {  
+                messages: {
                     CompanyName: "公司名不能为空！",
                     PinyinCode: "拼音代码不能为空！"
                 },
@@ -155,8 +155,8 @@
         });
     </script>
     <style>
-        .dis{
-            display:none;
+        .dis {
+            display: none;
         }
     </style>
 </head>
@@ -196,11 +196,11 @@
                     <td><input type="text" id="Tel" name="Tel" value=" " /></td>
                     <td>地址:</td>
                     <td><input type="text" id="Address" name="Address" value=" " /></td>
-                </tr>   
+                </tr>
             </table>
             <div class="errdiv" id="errdiv">
                 <ul></ul>
-            </div>   
+            </div>
             <div id="dlg-buttons">
                 <a id="ok" href="#" class="easyui-linkbutton" iconcls="icon-ok">确定</a>
                 <a id="cancel" href="#" class="easyui-linkbutton" iconcls="icon-cancel">取消</a>

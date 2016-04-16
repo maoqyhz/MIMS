@@ -75,24 +75,3 @@ function SetWebControls(data) {
 		}
 	}
 }
-
-
-function ClearWebControls(data) {
-	for (var key in data) {
-		var id = $('#' + key);
-		var value = $.trim(data[key]).replace("&nbsp;", "");
-		var type = id.attr('type');
-		switch (type) {
-			case "checkbox":
-				if (value == 1) {
-					id.attr("checked", 'checked');
-				} else {
-					id.removeAttr("checked");
-				}
-				break;
-			default:
-				id.val(value);
-				break;
-		}
-	}
-}

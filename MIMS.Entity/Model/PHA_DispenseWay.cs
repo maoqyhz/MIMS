@@ -17,6 +17,10 @@ namespace MIMS.Entity.Model
         /// DispenseWayName
         /// </summary>		
         public string DispenseWayName { get; set; }
+        /// <summary>
+        /// PinyinCode
+        /// </summary>
+        public string PinyinCode { get; set; }
 
     }
 }

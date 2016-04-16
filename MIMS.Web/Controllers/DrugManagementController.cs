@@ -13,8 +13,12 @@ namespace MIMS.Web.Controllers
 {
     public class DrugManagementController : Controller
     {
-        IPHA_BaseInfoBLL bll = new PHA_BaseInfoBLL();
-
+        IPHA_BaseInfoBLL ipha_baseinfobll = new PHA_BaseInfoBLL();
+        IPHA_DosageFormBLL ipha_dosageformbll = new PHA_DosageFormBLL();
+        IPHA_RepositoryBLL ipha_repositorybll = new PHA_RepositoryBLL();
+        IPHA_StorageConditionBLL ipha_storageconditionbll = new PHA_StorageConditionBLL();
+        IPHA_PhaAttrBLL ipha_phaattrbll = new PHA_PhaAttrBLL();
+        IPHA_DispenseWayBLL ipha_dispensewaybll = new PHA_DispenseWayBLL();
         // GET: DrugManagement
         public ActionResult DrugInfo()
         {
@@ -33,12 +37,41 @@ namespace MIMS.Web.Controllers
         public ActionResult LoadList(string rows, string page, string sort, string order, string query)
         {
             int count = default(int);
-            IList list = bll.GetPageList(query, sort, order, int.Parse(page), int.Parse(rows), ref count);
+            IList list = ipha_baseinfobll.GetPageList(query, sort, order, int.Parse(page), int.Parse(rows), ref count);
             return Content(JsonConvert.SerializeObject(new
             {
                 total = count,
                 rows = list
             }));
+        }
+        public ActionResult LoadForm(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+                return Json(ipha_baseinfobll.GetEntity(id));
+            else
+                return null;
+        }
+
+        public ActionResult LoadSelectDosageForm()
+        {
+            return Json(ipha_dosageformbll.GetList());
+        }
+        public ActionResult LoadSelectRepo()
+        {
+            return Json(ipha_repositorybll.GetList());
+        }
+        public ActionResult LoadSelectPhaAttr()
+        {
+            return Json(ipha_phaattrbll.GetList());
+        }
+        public ActionResult LoadSelecSc()
+        {
+            return Json(ipha_storageconditionbll.GetList());
+        }
+
+        public ActionResult LoadSelecDispenseWay()
+        {
+            return Json(ipha_dispensewaybll.GetList());
         }
 
     }

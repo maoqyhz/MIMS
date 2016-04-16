@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using MIMS.Service;
+using MIMS.Entity.Model;
 namespace MIMS.Business
 {
     public class PHA_BaseInfoBLL : IPHA_BaseInfoBLL
@@ -31,6 +32,10 @@ namespace MIMS.Business
                 where = " AND PinyinCode like @PinyinCode";
             }
             return dal.GetPageListWhere(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
+        }
+        public PHA_BaseInfo GetEntity(string id)
+        {
+            return dal.GetEntity(id);
         }
     }
 }

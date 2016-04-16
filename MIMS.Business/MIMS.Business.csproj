@@ -44,8 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PHA_BaseInfoBLL.cs" />
+    <Compile Include="PHA_DispenseWayBLL.cs" />
+    <Compile Include="PHA_DosageFormBLL.cs" />
     <Compile Include="PHA_OrginBLL.cs" />
+    <Compile Include="PHA_PhaAttrBLL.cs" />
     <Compile Include="PHA_RepositoryBLL.cs" />
+    <Compile Include="PHA_StorageConditionBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSS_ExWarehouseModeBLL.cs" />
     <Compile Include="PSS_InWarehouseModeBLL.cs" />
