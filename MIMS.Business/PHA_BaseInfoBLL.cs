@@ -37,5 +37,25 @@ namespace MIMS.Business
         {
             return dal.GetEntity(id);
         }
+
+
+        public int Update(PHA_BaseInfo obj)
+        {
+            return dal.Update(obj);
+        }
+
+
+
+
+        public int Delete(PHA_BaseInfo obj)
+        {
+            return dal.Delete(obj);
+        }
+
+
+        public int Insert(PHA_BaseInfo obj)
+        {
+            return dal.Insert(obj);
+        }
     }
 }

@@ -8,6 +8,7 @@ using MIMS.Business;
 using MIMS.Entity;
 using Newtonsoft.Json;
 using System.Collections;
+using MIMS.Entity.Model;
 
 namespace MIMS.Web.Controllers
 {
@@ -74,5 +75,22 @@ namespace MIMS.Web.Controllers
             return Json(ipha_dispensewaybll.GetList());
         }
 
+        public ActionResult AcceptClick(PHA_BaseInfo obj)
+        {
+            int isOk = default(int);
+            PHA_BaseInfo temp = ipha_baseinfobll.GetEntity(obj.PhaCode);
+            if (temp == null)
+                isOk = ipha_baseinfobll.Insert(obj);
+            else
+            isOk = ipha_baseinfobll.Update(obj);
+            return Content(isOk.ToString());
+        }
+        public ActionResult Del(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+                return Content(ipha_baseinfobll.Delete(new PHA_BaseInfo { PhaCode = id }).ToString());
+            else
+                return null;
+        }
     }
 }

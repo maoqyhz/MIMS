@@ -109,9 +109,31 @@ namespace MIMS.Service
         {
             using (Conn)
             {
-                string query = @"UPDATE PHA_BaseInfo 
-                                    SET  OrginName=@OrginName,PinyinCode=@PinyinCode,Manufacturer=@Manufacturer
-                                       WHERE OrginID =@OrginID";
+                string query = @"UPDATE PHA_BaseInfo SET 
+                                                            PhaName=@PhaName,
+                                                            CommonName=@CommonName,
+                                                            Spec=@Spec,
+                                                            Unit=@Unit,
+                                                            DosageForm=@DosageForm,
+                                                            Repo=@Repo,
+                                                            IsSpecial=@IsSpecial,
+                                                            DispenseWay=@DispenseWay,
+                                                            PinyinCode=@PinyinCode,
+                                                            WubiCode=@WubiCode,
+                                                            IsAntibiotic=@IsAntibiotic,
+                                                            IsEmergency=@IsEmergency,
+                                                            IsValid=@IsValid,
+                                                            MinUnit=@MinUnit,
+                                                            PharmacySpec=@PharmacySpec,
+                                                            PharmacyUnit=@PharmacyUnit,
+                                                            PharmacyPack=@PharmacyPack,
+                                                            MinPack=@MinPack,
+                                                            WardSpec=@WardSpec,
+                                                            WardUnit=@WardUnit,
+                                                            WardPack=@WardPack,
+                                                            PhaAttr=@PhaAttr,
+                                                            StorageCondition=@StorageCondition
+                                                     WHERE PhaCode=@PhaCode";
                 return Conn.Execute(query, obj);
             }
         }
@@ -120,7 +142,31 @@ namespace MIMS.Service
             using (Conn)
             {
                 string query = @"INSERT INTO PHA_BaseInfo 
-                                    VALUES(@OrginName,@PinyinCode,@Manufacturer)";
+                                    VALUES(
+                                            @PhaCode,
+                                            @PhaName,
+                                            @CommonName,
+                                            @Spec,
+                                            @Unit,
+                                            @DosageForm,
+                                            @Repo,
+                                            @IsSpecial,
+                                            @DispenseWay,
+                                            @PinyinCode,
+                                            @WubiCode,
+                                            @IsAntibiotic,
+                                            @IsEmergency,
+                                            @IsValid,
+                                            @MinUnit,
+                                            @PharmacySpec,
+                                            @PharmacyUnit,
+                                            @PharmacyPack,
+                                            @MinPack,
+                                            @WardSpec,
+                                            @WardUnit,
+                                            @WardPack,
+                                            @PhaAttr,
+                                            @StorageCondition)";
                 return Conn.Execute(query, obj);
             }
         }
@@ -128,7 +174,7 @@ namespace MIMS.Service
         {
             using (Conn)
             {
-                string query = @"DELETE FROM PHA_BaseInfo WHERE OrginID = @OrginID";
+                string query = @"DELETE FROM PHA_BaseInfo WHERE PhaCode=@PhaCode";
                 return Conn.Execute(query, obj);
             }
         }

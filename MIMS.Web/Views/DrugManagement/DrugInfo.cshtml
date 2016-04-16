@@ -14,7 +14,6 @@
     <script type="text/javascript" src="~/Content/Site.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('#select').val('21');
             //初始化datagrid
             InitGrid();
             InitDialog();
@@ -32,7 +31,7 @@
             });
             $('#add').click(function () {
                 $('#form')[0].reset();
-                // $('#CompanyID').val("此字段自动生成。");
+                $('#PhaCode').removeAttr("disabled");
                 $('#dd').dialog('open');
             });
             $('#del').click(function () {
@@ -104,7 +103,11 @@
                             SetWebControls(data);
                         });
                     $('#dd').window('open');
+                },
+                onClickRow: function (index, row) {
+                    $('#del_id').val(row['PhaCode']);
                 }
+
             })
             var p = $('#grid').datagrid('getPager');
             $(p).pagination({
@@ -175,16 +178,12 @@
         $(function () {
             $('#form').validate({
                 rules: {
-                    CompanyName: {
-                        required: true
-                    },
-                    PinyinCode: {
+                    PhaName: {
                         required: true
                     }
                 },
                 messages: {
-                    CompanyName: "公司名不能为空！",
-                    PinyinCode: "拼音代码不能为空！"
+                    PhaName: "药品名不能为空！",
                 },
                 errorLabelContainer: '#errdiv>ul',
                 wrapper: 'li',
@@ -278,11 +277,11 @@
     </style>
 </head>
 <body style="margin:2px;padding:0">
-    <select id="select"></select>
     <div>
         <div class="easyui-tabs">
             <div title="基本属性">
                 <table id="grid"></table>
+                <input id="del_id" type="hidden" name="del_id" value=" " />
                 <div id="tb" style="padding:3px">
                     <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
                     <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
@@ -305,7 +304,7 @@
             <fieldset>
                 <legend>基本属性</legend>
                 <div class="tb-line">
-                    <span>药品编码：</span><input type="text" id="PhaCode" class="tb-col-120" name="PhaCode" value=" " />
+                    <span>药品编码：</span><input type="text" id="PhaCode" class="tb-col-120" name="PhaCode" value=" " disabled="disabled" />
                     <span>药品名：</span><input type="text" id="PhaName" class="tb-col-160" name="PhaName" value=" " />
                     <span>常用名：</span><input type="text" id="CommonName" class="tb-col-160" name="CommonName" value=" " />
                 </div>

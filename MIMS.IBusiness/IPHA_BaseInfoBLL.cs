@@ -27,5 +27,10 @@ namespace MIMS.IBusiness
         /// <param name="id"></param>
         /// <returns></returns>
         PHA_BaseInfo GetEntity(string id);
+
+        int Update(PHA_BaseInfo obj);
+        int Delete(PHA_BaseInfo obj);
+        int Insert(PHA_BaseInfo obj);
+
     }
 }
