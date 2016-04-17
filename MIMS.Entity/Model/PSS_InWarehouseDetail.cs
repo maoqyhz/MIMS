@@ -40,15 +40,15 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// InWarehouseCount
         /// </summary>		
-        public decimal InWarehouseCount { get; set; }
+        public double InWarehouseCount { get; set; }
         /// <summary>
         /// InWarehousePrice
         /// </summary>		
-        public decimal InWarehousePrice { get; set; }
+        public double InWarehousePrice { get; set; }
         /// <summary>
         /// InWarehouseSum
         /// </summary>		
-        public decimal InWarehouseSum { get; set; }
+        public double InWarehouseSum { get; set; }
         /// <summary>
         /// PayNo
         /// </summary>		

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPHA_AccountsBLL.cs" />
     <Compile Include="IPHA_DispenseWayBLL.cs" />
     <Compile Include="IPHA_DosageFormBLL.cs" />
     <Compile Include="IPHA_OrginBLL.cs" />

@@ -841,6 +841,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\PHA_AccountsController.cs" />
     <Compile Include="Controllers\PHA_OrginController.cs" />
     <Compile Include="Controllers\PHA_RepositoryController.cs" />
     <Compile Include="Controllers\PSS_ExWarehouseModeController.cs" />
@@ -884,6 +885,7 @@
     <Content Include="Views\PSS_PurchaseCompany\Index.cshtml" />
     <Content Include="Views\PHA_Orgin\Index.cshtml" />
     <Content Include="Views\PHA_Repository\Index.cshtml" />
+    <Content Include="Views\PHA_Accounts\PhaAccounts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

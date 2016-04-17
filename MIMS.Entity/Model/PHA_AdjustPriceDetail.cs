@@ -32,27 +32,27 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// NewRetailPrice
         /// </summary>		
-        public decimal NewRetailPrice { get; set; }
+        public double NewRetailPrice { get; set; }
         /// <summary>
         /// OldRetailPrice
         /// </summary>		
-        public decimal OldRetailPrice { get; set; }
+        public double OldRetailPrice { get; set; }
         /// <summary>
         /// NewWholesalePrice
         /// </summary>		
-        public decimal NewWholesalePrice { get; set; }
+        public double NewWholesalePrice { get; set; }
         /// <summary>
         /// OldWholesalePrice
         /// </summary>		
-        public decimal OldWholesalePrice { get; set; }
+        public double OldWholesalePrice { get; set; }
         /// <summary>
         /// RetailFloat
         /// </summary>		
-        public decimal RetailFloat { get; set; }
+        public double RetailFloat { get; set; }
         /// <summary>
         /// WholesaleFloat
         /// </summary>		
-        public decimal WholesaleFloat { get; set; }
+        public double WholesaleFloat { get; set; }
 
     }
 }

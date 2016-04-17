@@ -57,7 +57,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../DrugManagement/LoadList',
-                height: 440,
+                height: 470,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
@@ -208,34 +208,6 @@
                 }
             });
         });
-
-        //$(function () {
-        //    var input = $('#DosageName')[0];
-        //    var ui = $('#ulSelect')[0];
-        //    var div = $('#select')[0];
-
-        //    input.onkeyup = function () {
-        //        if (this.value) {
-        //            getAjax("/DrugManagement/GetDosageFormList", { pinyinCode: input.value },
-        //            function (data) {
-        //                var data = eval("(" + data + ")");
-        //                if (data.length) {
-        //                    ui.innerHTML = '';
-        //                    for (var i = 0; i < data.length ; ++i) {
-        //                        var oLi = document.createElement('li');
-        //                        oLi.innerHTML = data[i].DosageName;
-        //                        ui.appendChild(oLi);
-        //                    }
-        //                    div.style.display = 'block';
-        //                }
-        //                else div.style.display = 'none';
-        //            });
-        //        }
-        //        else
-        //            div.style.display = 'none';
-        //    }
-        //});
-
     </script>
 
     <style>
@@ -262,44 +234,23 @@
         .tb-col-80 {
             width: 80px;
         }
-
-        #ulSelect {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            background: #ffffff;
-        }
-
-            #ulSelect li {
-                padding: 3px;
-                list-style: none;
-            }
     </style>
 </head>
 <body style="margin:2px;padding:0">
     <div>
-        <div class="easyui-tabs">
-            <div title="基本属性">
-                <table id="grid"></table>
-                <input id="del_id" type="hidden" name="del_id" value=" " />
-                <div id="tb" style="padding:3px">
-                    <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
-                    <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
-                    <a id="btnReload" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">刷新</a>
-                    <span>拼音码:</span>
-                    <input id="itemid" style="border:1px solid #ccc">
-                    <a href="#" class="easyui-linkbutton" plain="true" onclick="InitGrid()">查找</a>
-                </div>
-            </div>
-            <div title="价格管理" style="padding:10px">
-            </div>
+        <table id="grid"></table>
+        <input id="del_id" type="hidden" name="del_id" value=" " />
+        <div id="tb" style="padding:3px">
+            <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
+            <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
+            <a id="btnReload" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">刷新</a>
+            <span>拼音码:</span>
+            <input id="itemid" style="border:1px solid #ccc">
+            <a href="#" class="easyui-linkbutton" plain="true" onclick="InitGrid()">查找</a>
         </div>
     </div>
 
     <div id="dd" class="easyui-dialog" style="position:relative">
-        @*<div id="select" style="position:absolute;z-index:30;width:80px;border:1px solid #a9a9a9;top:64px;left:320px;display:none">
-                <ul id="ulSelect"></ul>
-            </div>*@
         <form id="form" name="form" method="post">
             <fieldset>
                 <legend>基本属性</legend>
