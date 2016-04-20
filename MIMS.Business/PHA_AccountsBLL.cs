@@ -30,5 +30,21 @@ namespace MIMS.Business
         {
             return dal.GetEntity(phaCode,orginID);
         }
+
+
+        public int Update(PHA_Accounts obj)
+        {
+            return dal.Update(obj);
+        }
+
+        public int Delete(PHA_Accounts obj)
+        {
+            return dal.Delete(obj);
+        }
+
+        public int Insert(PHA_Accounts obj)
+        {
+            return dal.Insert(obj);
+        }
     }
 }

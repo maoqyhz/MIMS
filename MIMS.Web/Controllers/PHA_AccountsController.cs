@@ -16,7 +16,7 @@ namespace MIMS.Web.Controllers
     {
         IPHA_AccountsBLL ipha_accountsbll = new PHA_AccountsBLL();
         IPSS_PurchaseCompanyBLL ipss_purchasecompanybll = new PSS_PurchaseCompanyBLL();
-        
+
 
         // GET: PHA_Accounts
         public ActionResult PhaAccounts()
@@ -51,6 +51,25 @@ namespace MIMS.Web.Controllers
         public ActionResult LoadSelectComPany()
         {
             return Json(ipss_purchasecompanybll.GetList());
+        }
+
+        public ActionResult AcceptClick(PHA_Accounts obj)
+        {
+            int isOk = default(int);
+            PHA_Accounts temp = ipha_accountsbll.GetEntity(obj.PhaCode, obj.OrginID.ToString());
+            if (temp == null)
+                isOk = ipha_accountsbll.Insert(obj);
+            else
+                isOk = ipha_accountsbll.Update(obj);
+            return Content(isOk.ToString());
+        }
+        public ActionResult Del(string phaCode, string orginID)
+        {
+            return Content(ipha_accountsbll.Delete(new PHA_Accounts
+            {
+                PhaCode = phaCode,
+                OrginID = int.Parse(orginID)
+            }).ToString());
         }
 
     }

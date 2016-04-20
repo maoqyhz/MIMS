@@ -27,5 +27,8 @@ namespace MIMS.IBusiness
         /// <param name="id"></param>
         /// <returns></returns>
         PHA_Accounts GetEntity(string phaCode, string orginID);
+        int Update(PHA_Accounts obj);
+        int Delete(PHA_Accounts obj);
+        int Insert(PHA_Accounts obj);
     }
 }

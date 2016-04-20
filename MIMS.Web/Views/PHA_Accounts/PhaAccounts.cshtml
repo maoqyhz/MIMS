@@ -30,8 +30,20 @@
             });
             //ajax提交修改表单
             $('#ok').click(function () {
-                $('#errdiv').removeClass('dis');
-                $('#form').submit();
+                var postData = GetWebControls("#form");
+                getAjax("/PHA_Accounts/AcceptClick",
+                    postData, function (data) {
+                        if (data) {
+                            //此处可以优化，提示消息可更美观。
+                            alert("操作成功！");
+                            $('#dd').dialog('close');
+                            $("#grid").datagrid("reload");
+                            return true;
+                        }
+                        else {
+                            alert("操作失败！"); return false;
+                        }
+                    });
             });
             $('#cancel').click(function () {
                 $('#dd').dialog('close');
@@ -39,6 +51,8 @@
             $('#add').click(function () {
                 $('#form')[0].reset();
                 $('#PhaCode').removeAttr("disabled");
+                $('#editpha').removeAttr("disabled");
+                $('#editori').removeAttr("disabled");
                 $('#dd').dialog('open');
             });
             $('#editori').click(function () {
@@ -48,8 +62,8 @@
                 $('#phaselect').dialog('open');
             });
             $('#del').click(function () {
-                getAjax("../DrugManagement/Del", { id: $('#del_id').val() }, function (data) {
-                    if ($('#del_id').val() == null || $('#del_id').val() == "")
+                getAjax("../PHA_Accounts/Del", { phaCode: $('#del_pha').val(), orginID: $('#del_ori').val() }, function (data) {
+                    if ($('#del_ori').val() == null || $('#del_pha').val() == "")
                         return false;
                     if (data) {
                         //此处可以优化，提示消息可更美观。
@@ -70,6 +84,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../PHA_Accounts/LoadList',
+                singleSelect:true,
                 height: 470,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
@@ -95,7 +110,7 @@
                      { title: '产地', field: 'OrginName', width: 100, sortable: true, align: 'center' },
                      { title: '库存', field: 'Stock', width: 80, sortable: true, align: 'center' },
                      { title: '进货价格', field: 'InWarehousePrice', width: 80, sortable: true, align: 'center' },
-                     { title: '批发价格', field: 'WholesaleSum', width: 80, sortable: true, align: 'center' },
+                     { title: '批发价格', field: 'WholesalePrice', width: 80, sortable: true, align: 'center' },
                      { title: '零售价格', field: 'RetailPrice', width: 90, sortable: true, align: 'center' },
                      { title: '进货金额', field: 'InWarehouseSum', width: 80, sortable: true, align: 'center' },
                      { title: '批发金额', field: 'WholesaleSum', width: 90, sortable: true, align: 'center' },
@@ -104,7 +119,8 @@
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    $('#errdiv').attr('class', 'dis');
+                    $('#editpha').attr('disabled', 'disabled');
+                    $('#editori').attr('disabled', 'disabled');
                     getAjax("../PHA_Accounts/LoadForm",
                         { phaCode: rowData['PhaCode'], orginID: rowData['OrginID'] }, function (data) {
                             var data = eval("(" + data + ")");
@@ -113,7 +129,8 @@
                     $('#dd').window('open');
                 },
                 onClickRow: function (index, row) {
-                    $('#del_id').val(row['PhaCode']);
+                    $('#del_pha').val(row['PhaCode']);
+                    $('#del_ori').val(row['OrginID']);
                 }
 
             })
@@ -150,6 +167,7 @@
                 autoRowHeight: false,
                 striped: false,     //斑马纹
                 collapsible: true,      //可折叠
+                singleSelect: true,
                 pagination: true,
                 sortName: 'OrginID',    //根据某个字段给easyUI排序
                 sortOrder: 'asc',
@@ -170,6 +188,7 @@
                     $('#OrginName').val(rowData['OrginName']);
                     $('#OrginID').val(rowData['OrginID']);
                     $('#oriselect').dialog('close');
+
                 }
 
             });
@@ -200,10 +219,11 @@
         //药品选择器
         function InitPhaDialoggrid() {
             $('#phagrid').datagrid({
-                url: '../DrugManagement/LoadList',
+                url: '../PHA_Accounts/LoadList',
                 height: 410,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
+                singleSelect: true,
                 striped: false,     //斑马纹
                 collapsible: true,      //可折叠
                 pagination: true,
@@ -269,47 +289,6 @@
         }
 
     </script>
-    <script>
-        //表单验证和提交
-        $(function () {
-            $('#form').validate({
-                rules: {
-                    PhaName: {
-                        required: true
-                    },
-                    OrginName: {
-                        required: true
-                    },
-                },
-                messages: {
-                    PhaName: "药品名不能为空！",
-                    OrginName: "产地不能为空!"
-                },
-                errorLabelContainer: '#errdiv>ul',
-                wrapper: 'li',
-                submitHandler: function (form) {
-                    var postData = GetWebControls("#form");
-                    getAjax("/DrugManagement/AcceptClick",
-                        postData, function (data) {
-                            if (data) {
-                                //此处可以优化，提示消息可更美观。
-                                alert("操作成功！");
-                                $('#dd').dialog('close');
-                                $("#grid").datagrid("reload");
-                                return true;
-                            }
-                            else {
-                                alert("操作失败！"); return false;
-                            }
-                        });
-                },
-                invalidHandler: function (form, validator) {  //不通过回调
-                    return false;
-                }
-            });
-        });
-
-    </script>
 
     <style>
         .dis {
@@ -347,24 +326,13 @@
         .tb-col-40 {
             width: 40px;
         }
-
-        #ulSelect {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            background: #ffffff;
-        }
-
-            #ulSelect li {
-                padding: 3px;
-                list-style: none;
-            }
     </style>
 </head>
 <body style="margin:2px;padding:0">
     <div>
         <table id="grid"></table>
-        <input id="del_id" type="hidden" name="del_id" value=" " />
+        <input id="del_pha" type="hidden" name="del_pha" value=" " />
+        <input id="del_ori" type="hidden" name="del_ori" value=" " />
         <div id="tb" style="padding:3px">
             <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
             <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
@@ -397,7 +365,7 @@
 
                 <div class="tb-line">
                     <span>进货价格：</span><input type="text" id="InWarehousePrice" name="InWarehousePrice" class="tb-col-120" value=" " />
-                    <span>批发价格：</span><input type="text" id="WholesaleSum" name="WholesaleSum" class="tb-col-120" value=" " />
+                    <span>批发价格：</span><input type="text" id="WholesalePrice" name="WholesalePrice" class="tb-col-120" value=" " />
                     <span>零售价格：</span><input type="text" id="RetailPrice" name="RetailPrice" class="tb-col-120" value=" " />
                 </div>
                 <div class="tb-line">
@@ -405,9 +373,6 @@
                     <span>批发金额：</span><input type="text" id="WholesaleSum" name="WholesaleSum" class="tb-col-120" value=" " disabled="disabled" />
                     <span>零售金额：</span><input type="text" id="RetailSum" name="RetailSum" class="tb-col-120" value=" " disabled="disabled" />
                 </div>
-            </div>
-            <div class="errdiv" id="errdiv">
-                <ul></ul>
             </div>
             <div id="dlg-buttons">
                 <a id="ok" href="#" class="easyui-linkbutton" iconcls="icon-ok">确定</a>

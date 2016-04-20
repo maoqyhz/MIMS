@@ -100,6 +100,56 @@ namespace MIMS.Service
             }
         }
 
+        public int Update(PHA_Accounts obj)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE PHA_Accounts SET 
+                                                            PhaCode = @PhaCode,
+                                                            OrginID = @OrginID,
+                                                            CompanyID = @CompanyID,
+                                                            Stock = @Stock,
+                                                            InWarehousePrice = @InWarehousePrice,
+                                                            RetailPrice = @RetailPrice,
+                                                            WholesalePrice = @WholesalePrice,
+                                                            InWarehouseSum = @InWarehouseSum,
+                                                            RetailSum = @RetailSum,
+                                                            WholesaleSum = @WholesaleSum
+                                                      WHERE 
+                                                            PhaCode = @PhaCode AND
+                                                            OrginID = @OrginID";
+                return Conn.Execute(query, obj);
+            }
+        }
+        public int Insert(PHA_Accounts obj)
+        {
+            using (Conn)
+            {
+                string query = @"INSERT INTO PHA_Accounts VALUES(
+                                                                    @PhaCode,
+                                                                    @OrginID,
+                                                                    @CompanyID,
+                                                                    @InWarehousePrice,
+                                                                    @Stock,
+                                                                    @RetailSum,
+                                                                    @WholesaleSum,
+                                                                    @RetailPrice,
+                                                                    @WholesalePrice,
+                                                                    @InWarehouseSum
+                                                                 )";
+                return Conn.Execute(query, obj);
+            }
+        }
+
+        public int Delete(PHA_Accounts obj)
+        {
+            using (Conn)
+            {
+                string query = @"DELETE FROM PHA_Accounts WHERE PhaCode=@PhaCode AND OrginID = @OrginID";
+                return Conn.Execute(query, obj);
+            }
+        }
+
 
     }
 }
