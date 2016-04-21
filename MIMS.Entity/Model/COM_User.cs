@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace MIMS.Entity.Model.Model
+namespace MIMS.Entity.Model
 {
     //COM_User
     public class COM_User
@@ -13,6 +13,14 @@ namespace MIMS.Entity.Model.Model
         /// Code
         /// </summary>		
         public string Code { get; set; }
+        /// <summary>
+        /// Username
+        /// </summary>
+        public string Username { get; set; }
+        /// <summary>
+        /// Password
+        /// </summary>
+        public string Password { get; set; }
         /// <summary>
         /// Name
         /// </summary>		

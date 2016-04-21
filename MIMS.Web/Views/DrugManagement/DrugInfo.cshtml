@@ -57,7 +57,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../DrugManagement/LoadList',
-                height: 470,
+                height: 482,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
@@ -180,10 +180,14 @@
                 rules: {
                     PhaName: {
                         required: true
+                    },
+                    PhaCode: {
+                        required: true
                     }
                 },
                 messages: {
                     PhaName: "药品名不能为空！",
+                    PhaCode: "药品编号不能为空！"
                 },
                 errorLabelContainer: '#errdiv>ul',
                 wrapper: 'li',
@@ -239,7 +243,7 @@
 <body style="margin:2px;padding:0">
     <div>
         <table id="grid"></table>
-        <input id="del_id" type="hidden" name="del_id" value=" " />
+        <input id="del_id" type="hidden" name="del_id" value="" />
         <div id="tb" style="padding:3px">
             <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
             <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
@@ -255,37 +259,37 @@
             <fieldset>
                 <legend>基本属性</legend>
                 <div class="tb-line">
-                    <span>药品编码：</span><input type="text" id="PhaCode" class="tb-col-120" name="PhaCode" value=" " disabled="disabled" />
-                    <span>药品名：</span><input type="text" id="PhaName" class="tb-col-160" name="PhaName" value=" " />
-                    <span>常用名：</span><input type="text" id="CommonName" class="tb-col-160" name="CommonName" value=" " />
+                    <span>药品编码：</span><input type="text" id="PhaCode" class="tb-col-120" name="PhaCode" value="" disabled="disabled" />
+                    <span>药品名：</span><input type="text" id="PhaName" class="tb-col-160" name="PhaName" value="" />
+                    <span>常用名：</span><input type="text" id="CommonName" class="tb-col-160" name="CommonName" value="" />
                 </div>
                 <div class="tb-line">
-                    <span>规 格：</span><input type="text" id="Spec" name="Spec" class="tb-col-80" value=" " />
-                    <span>单 位：</span><input type="text" id="Unit" name="Unit" class="tb-col-80" value=" " />
+                    <span>规 格：</span><input type="text" id="Spec" name="Spec" class="tb-col-80" value="" />
+                    <span>单 位：</span><input type="text" id="Unit" name="Unit" class="tb-col-80" value="" />
                     <span>剂 型：</span><select id="DosageForm" name="DosageForm" class="tb-col-80"></select>
                     <span>所属药库：</span><select id="Repo" name="Repo" class="tb-col-80"></select>
                 </div>
                 <div class="tb-line">
-                    <span>拼音代码：</span><input type="text" id="PinyinCode" name="PinyinCode" class="tb-col-80" value=" " />
-                    <span>五笔代码：</span><input type="text" id="WubiCode" name="WubiCode" class="tb-col-80" value=" " />
-                    <span>特殊药品：</span><input type="checkbox" id="IsSpecial" name="IsSpecial" value=" " />
-                    <span>抗生素：</span><input type="checkbox" id="IsAntibiotic" name="IsAntibiotic" value=" " />
-                    <span>急诊用药：</span><input type="checkbox" id="IsEmergency" name="IsEmergency" value=" " />
+                    <span>拼音代码：</span><input type="text" id="PinyinCode" name="PinyinCode" class="tb-col-80" value="" />
+                    <span>五笔代码：</span><input type="text" id="WubiCode" name="WubiCode" class="tb-col-80" value="" />
+                    <span>特殊药品：</span><input type="checkbox" id="IsSpecial" name="IsSpecial" value="" />
+                    <span>抗生素：</span><input type="checkbox" id="IsAntibiotic" name="IsAntibiotic" value="" />
+                    <span>急诊用药：</span><input type="checkbox" id="IsEmergency" name="IsEmergency" value="" />
                 </div>
             </fieldset>
             <fieldset>
                 <legend>药品包装</legend>
                 <div class="tb-line">
-                    <span>最小单位：</span><input type="text" id="MinUnit" class="tb-col-80" name="MinUnit" value=" " />
-                    <span>药房规格：</span><input type="text" id="PharmacySpec" class="tb-col-80" name="PharmacySpec" value=" " />
-                    <span>药房单位：</span><input type="text" id="PharmacyUnit" class="tb-col-80" name="PharmacyUnit" value=" " />
-                    <span>药房包装：</span><input type="text" id="PharmacyPack" class="tb-col-80" name="PharmacyPack" value=" " />
+                    <span>最小单位：</span><input type="text" id="MinUnit" class="tb-col-80" name="MinUnit" value="" />
+                    <span>药房规格：</span><input type="text" id="PharmacySpec" class="tb-col-80" name="PharmacySpec" value="" />
+                    <span>药房单位：</span><input type="text" id="PharmacyUnit" class="tb-col-80" name="PharmacyUnit" value="" />
+                    <span>药房包装：</span><input type="text" id="PharmacyPack" class="tb-col-80" name="PharmacyPack" value="" />
                 </div>
                 <div class="tb-line">
-                    <span>最小包装：</span><input type="text" id="MinPack" class="tb-col-80" name="MinPack" value=" " />
-                    <span>病房规格：</span><input type="text" id="WardSpec" class="tb-col-80" name="WardSpec" value=" " />
-                    <span>病房单位：</span><input type="text" id="WardUnit" class="tb-col-80" name="WardUnit" value=" " />
-                    <span>病房包装：</span><input type="text" id="WardPack" class="tb-col-80" name="WardPack" value=" " />
+                    <span>最小包装：</span><input type="text" id="MinPack" class="tb-col-80" name="MinPack" value="" />
+                    <span>病房规格：</span><input type="text" id="WardSpec" class="tb-col-80" name="WardSpec" value="" />
+                    <span>病房单位：</span><input type="text" id="WardUnit" class="tb-col-80" name="WardUnit" value="" />
+                    <span>病房包装：</span><input type="text" id="WardPack" class="tb-col-80" name="WardPack" value="" />
                 </div>
             </fieldset>
             <fieldset>
@@ -294,7 +298,7 @@
                     <span>发药方式：</span><select id="DispenseWay" name="DispenseWay" class="tb-col-80"></select>
                     <span>药品属性：</span><select id="PhaAttr" name="PhaAttr" class="tb-col-80"></select>
                     <span>贮存条件：</span><select id="StorageCondition" name="StorageCondition" class="tb-col-80"></select>
-                    <span>是否有效：</span><input type="checkbox" id="IsValid" name="IsValid" value=" " />
+                    <span>是否有效：</span><input type="checkbox" id="IsValid" name="IsValid" value="" />
                 </div>
             </fieldset>
             <div class="errdiv" id="errdiv">

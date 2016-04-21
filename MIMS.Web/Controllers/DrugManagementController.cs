@@ -21,6 +21,7 @@ namespace MIMS.Web.Controllers
         IPHA_PhaAttrBLL ipha_phaattrbll = new PHA_PhaAttrBLL();
         IPHA_DispenseWayBLL ipha_dispensewaybll = new PHA_DispenseWayBLL();
         // GET: DrugManagement
+        [RoleActionFilter]
         public ActionResult DrugInfo()
         {
             return View();
@@ -35,6 +36,7 @@ namespace MIMS.Web.Controllers
         /// <param name="order">排序方式</param>
         /// <param name="query">条件</param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult LoadList(string rows, string page, string sort, string order, string query)
         {
             int count = default(int);
@@ -45,6 +47,8 @@ namespace MIMS.Web.Controllers
                 rows = list
             }));
         }
+
+        [HttpPost]
         public ActionResult LoadForm(string id)
         {
             if (!string.IsNullOrEmpty(id))
@@ -53,28 +57,38 @@ namespace MIMS.Web.Controllers
                 return null;
         }
 
+        [HttpPost]
         public ActionResult LoadSelectDosageForm()
         {
             return Json(ipha_dosageformbll.GetList());
         }
+
+        [HttpPost]
+
         public ActionResult LoadSelectRepo()
         {
             return Json(ipha_repositorybll.GetList());
         }
+
+        [HttpPost]
         public ActionResult LoadSelectPhaAttr()
         {
             return Json(ipha_phaattrbll.GetList());
         }
+
+        [HttpPost]
         public ActionResult LoadSelecSc()
         {
             return Json(ipha_storageconditionbll.GetList());
         }
 
+        [HttpPost]
         public ActionResult LoadSelecDispenseWay()
         {
             return Json(ipha_dispensewaybll.GetList());
         }
 
+        [HttpPost]
         public ActionResult AcceptClick(PHA_BaseInfo obj)
         {
             int isOk = default(int);
@@ -82,9 +96,11 @@ namespace MIMS.Web.Controllers
             if (temp == null)
                 isOk = ipha_baseinfobll.Insert(obj);
             else
-            isOk = ipha_baseinfobll.Update(obj);
+                isOk = ipha_baseinfobll.Update(obj);
             return Content(isOk.ToString());
         }
+
+        [HttpPost]
         public ActionResult Del(string id)
         {
             if (!string.IsNullOrEmpty(id))

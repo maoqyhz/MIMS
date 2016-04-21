@@ -15,14 +15,19 @@ namespace MIMS.Web.Controllers
     {
         IPSS_ExWarehouseModeBLL ipss_exwarehousemodebll = new PSS_ExWarehouseModeBLL();
         // GET: PSS_ExWarehouseMode
+        [RoleActionFilter]
         public ActionResult Index()
         {
             return View();
         }
+
+        [HttpPost]
         public ActionResult LoadList()
         {
             return Json(ipss_exwarehousemodebll.GetList());
         }
+
+        [HttpPost]
         public ActionResult LoadForm(string id)
         {
             if (!string.IsNullOrEmpty(id))
@@ -31,6 +36,8 @@ namespace MIMS.Web.Controllers
                 return null;
 
         }
+
+        [HttpPost]
         public ActionResult AcceptClick(PSS_ExWarehouseMode obj)
         {
             int isOk = default(int);
@@ -42,6 +49,7 @@ namespace MIMS.Web.Controllers
             return Content(isOk.ToString());
         }
 
+        [HttpPost]
         public ActionResult Del(string id)
         {
             if (!string.IsNullOrEmpty(id))

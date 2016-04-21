@@ -10,7 +10,8 @@ namespace MIMS.Web.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index()
+        [RoleActionFilter]
+        public ActionResult Index(string username, string password)
         {
             return View();
         }

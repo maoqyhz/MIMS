@@ -13,14 +13,19 @@ namespace MIMS.Web.Controllers
     public class PHA_RepositoryController : Controller
     {
         IPHA_RepositoryBLL ipha_repositorybll = new PHA_RepositoryBLL();
+        [RoleActionFilter]
         public ActionResult Index()
         {
             return View();
         }
+
+        [HttpPost]
         public ActionResult LoadList()
         {
             return Json(ipha_repositorybll.GetList());
         }
+
+        [HttpPost]
         public ActionResult LoadForm(string id)
         {
             if (!string.IsNullOrEmpty(id))
@@ -29,6 +34,8 @@ namespace MIMS.Web.Controllers
                 return null;
 
         }
+
+        [HttpPost]
         public ActionResult AcceptClick(PHA_Repository obj)
         {
             int isOk = default(int);
@@ -39,6 +46,8 @@ namespace MIMS.Web.Controllers
                 isOk = ipha_repositorybll.Update(obj);
             return Content(isOk.ToString());
         }
+
+        [HttpPost]
 
         public ActionResult Del(string id)
         {

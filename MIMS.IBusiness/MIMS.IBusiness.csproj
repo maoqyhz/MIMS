@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICOM_UserBLL.cs" />
     <Compile Include="IPHA_AccountsBLL.cs" />
     <Compile Include="IPHA_DispenseWayBLL.cs" />
     <Compile Include="IPHA_DosageFormBLL.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="IPHA_BaseInfoBLL.cs" />
     <Compile Include="IPSS_ExWarehouseModeBLL.cs" />
     <Compile Include="IPSS_InWarehouseModeBLL.cs" />
+    <Compile Include="IPSS_PurchasePlanBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,11 +15,13 @@ namespace MIMS.Web.Controllers
     public class PHA_OrginController : Controller
     {
         IPHA_OrginBLL ipha_orginbll = new PHA_OrginBLL();
+        [RoleActionFilter]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
         public ActionResult LoadList(string rows, string page, string sort, string order, string query)
         {
 
@@ -31,6 +33,8 @@ namespace MIMS.Web.Controllers
                 rows = list
             }));
         }
+
+        [HttpPost]
         public ActionResult LoadForm(string id)
         {
             if (!string.IsNullOrEmpty(id))
@@ -39,6 +43,8 @@ namespace MIMS.Web.Controllers
                 return null;
 
         }
+
+        [HttpPost]
         public ActionResult AcceptClick(PHA_Orgin obj)
         {
             int isOk = default(int);
@@ -50,6 +56,7 @@ namespace MIMS.Web.Controllers
             return Content(isOk.ToString());
         }
 
+        [HttpPost]
         public ActionResult Del(string id)
         {
             if (!string.IsNullOrEmpty(id))

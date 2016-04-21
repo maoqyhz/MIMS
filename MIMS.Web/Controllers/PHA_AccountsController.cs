@@ -19,6 +19,7 @@ namespace MIMS.Web.Controllers
 
 
         // GET: PHA_Accounts
+        [RoleActionFilter]
         public ActionResult PhaAccounts()
         {
             return View();
@@ -33,6 +34,7 @@ namespace MIMS.Web.Controllers
         /// <param name="order">排序方式</param>
         /// <param name="query">条件</param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult LoadList(string rows, string page, string sort, string order, string query)
         {
             int count = default(int);
@@ -43,16 +45,21 @@ namespace MIMS.Web.Controllers
                 rows = list
             }));
         }
+
+        [HttpPost]
         public ActionResult LoadForm(string phaCode, string orginID)
         {
             return Json(ipha_accountsbll.GetEntity(phaCode, orginID));
         }
 
+
+        [HttpPost]
         public ActionResult LoadSelectComPany()
         {
             return Json(ipss_purchasecompanybll.GetList());
         }
 
+        [HttpPost]
         public ActionResult AcceptClick(PHA_Accounts obj)
         {
             int isOk = default(int);
@@ -63,6 +70,9 @@ namespace MIMS.Web.Controllers
                 isOk = ipha_accountsbll.Update(obj);
             return Content(isOk.ToString());
         }
+
+
+        [HttpPost]
         public ActionResult Del(string phaCode, string orginID)
         {
             return Content(ipha_accountsbll.Delete(new PHA_Accounts

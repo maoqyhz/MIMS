@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="COM_UserDAL.cs" />
     <Compile Include="PHA_AccountsDAL.cs" />
     <Compile Include="PHA_BaseInfoDAL.cs" />
     <Compile Include="PHA_DispenseWayDAL.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="PSS_ExWarehouseModeDAL.cs" />
     <Compile Include="PSS_InWarehouseModeDAL.cs" />
     <Compile Include="PSS_PurchaseCompanyDAL.cs" />
+    <Compile Include="PSS_PurchasePlanDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

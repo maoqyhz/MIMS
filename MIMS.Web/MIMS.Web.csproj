@@ -92,6 +92,7 @@
     <Content Include="Content\image\document_setting.gif" />
     <Content Include="Content\image\information.png" />
     <Content Include="Content\image\Inventory.png" />
+    <Content Include="Content\image\logout.png" />
     <Content Include="Content\image\Medicine.png" />
     <Content Include="Content\image\pill.png" />
     <Content Include="Content\image\setup.png" />
@@ -836,7 +837,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\messages_zh.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -849,6 +850,8 @@
     <Compile Include="Controllers\DrugManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PSS_PurchaseCompanyController.cs" />
+    <Compile Include="Controllers\PSS_PurchasePlanController.cs" />
+    <Compile Include="Controllers\RoleActionFilterAttribute.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -886,6 +889,7 @@
     <Content Include="Views\PHA_Orgin\Index.cshtml" />
     <Content Include="Views\PHA_Repository\Index.cshtml" />
     <Content Include="Views\PHA_Accounts\PhaAccounts.cshtml" />
+    <Content Include="Views\PSS_PurchasePlan\PurchasePlan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -909,6 +913,10 @@
     <ProjectReference Include="..\MIMS.IBusiness\MIMS.IBusiness.csproj">
       <Project>{3ecaf333-807b-48ea-acb6-c1404335d01b}</Project>
       <Name>MIMS.IBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.Utilities\MIMS.Utilities.csproj">
+      <Project>{139d048f-379a-4627-8bc2-d94ab1df1221}</Project>
+      <Name>MIMS.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

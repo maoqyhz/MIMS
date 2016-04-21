@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="COM_UserBLL.cs" />
     <Compile Include="PHA_AccountsBLL.cs" />
     <Compile Include="PHA_BaseInfoBLL.cs" />
     <Compile Include="PHA_DispenseWayBLL.cs" />

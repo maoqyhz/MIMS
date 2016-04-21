@@ -5,6 +5,7 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\Dapper.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Business.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Entity.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.IBusiness.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Utilities.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\Newtonsoft.Json.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\System.Web.Helpers.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\System.Web.Mvc.dll
@@ -16,6 +17,7 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Service.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Business.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Entity.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.IBusiness.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\MIMS.Utilities.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\Dapper.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\Dapper.xml
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Web\bin\Newtonsoft.Json.xml
