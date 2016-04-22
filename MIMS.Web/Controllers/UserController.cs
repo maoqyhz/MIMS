@@ -41,6 +41,7 @@ namespace MIMS.Web.Controllers
                 cookie.Values.Add("Code", user.Code);
                 cookie.Values.Add("Name", user.Name);
                 cookie.Values.Add("Tel", user.Tel);
+                cookie.Values.Add("Role", user.Role);
                 cookie.Values.Add("Address", user.Address);
                 cookie.Values.Add("Department", user.Department);
                 cookie.Values.Add("IP", user.IP);
@@ -51,6 +52,7 @@ namespace MIMS.Web.Controllers
                 msg = "3";
             return Content(msg);
         }
+
         public ActionResult Logout()
         {
             HttpCookie cookie = Request.Cookies["user"];

@@ -32,7 +32,6 @@ namespace MIMS.Web.Controllers
                 return Json(ipha_repositorybll.GetEntity(id));
             else
                 return null;
-
         }
 
         [HttpPost]

@@ -83,8 +83,8 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../PHA_Accounts/LoadList',
-                singleSelect:true,
-                height: 482,
+                singleSelect: true,
+                fit: true,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
@@ -329,7 +329,9 @@
 </head>
 <body style="margin:2px;padding:0">
     <div>
-        <table id="grid"></table>
+        <div style="position:fixed;width:100%;height:100%">
+            <table id="grid"></table>
+        </div>
         <input id="del_pha" type="hidden" name="del_pha" value=" " />
         <input id="del_ori" type="hidden" name="del_ori" value=" " />
         <div id="tb" style="padding:3px">
