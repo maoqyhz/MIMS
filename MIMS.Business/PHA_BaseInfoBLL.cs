@@ -14,7 +14,7 @@ namespace MIMS.Business
     {
         private static readonly PHA_BaseInfoDAL dal = new PHA_BaseInfoDAL();
         /// <summary>
-        /// 分页获取数据列表
+        /// 分页获取数据列表(查找)
         /// </summary>
         /// <param name="query">搜索键值</param>
         /// <param name="orderField">排序字段</param>
@@ -57,6 +57,28 @@ namespace MIMS.Business
         public int Insert(PHA_BaseInfo obj)
         {
             return dal.Insert(obj);
+        }
+
+        /// <summary>
+        /// 根据供货单位获得列表（分页）
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="orderField"></param>
+        /// <param name="orderType"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public IList GetPageListByCompany(string query, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
+        {
+            string where = string.Empty;
+            Dictionary<string, object> prams = new Dictionary<string, object>();
+            if (!string.IsNullOrEmpty(query))
+            {
+                prams.Add("@CompanyID", query);
+                where = " AND CompanyID = @CompanyID";
+            }
+            return dal.GetPageListWhereByCompany(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
         }
     }
 }

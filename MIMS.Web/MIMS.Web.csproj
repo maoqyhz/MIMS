@@ -876,6 +876,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PSS_PurchaseCompanyController.cs" />
     <Compile Include="Controllers\PSS_PurchasePlanController.cs" />
+    <Compile Include="Controllers\PSS_PurchasePlanDetailController.cs" />
     <Compile Include="Controllers\RoleActionFilterAttribute.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -915,6 +916,7 @@
     <Content Include="Views\PHA_Repository\Index.cshtml" />
     <Content Include="Views\PHA_Accounts\PhaAccounts.cshtml" />
     <Content Include="Views\PSS_PurchasePlan\PurchasePlan.cshtml" />
+    <Content Include="Views\PSS_PurchasePlanDetail\PurchasePlanDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

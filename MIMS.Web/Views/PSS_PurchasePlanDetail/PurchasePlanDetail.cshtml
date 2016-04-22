@@ -1,0 +1,187 @@
+﻿@{
+    Layout = null;
+}
+@model MIMS.Entity.Model.PSS_PurchasePlan
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PurchasePlanDetail</title>
+    @*Easyui需要引入的文件*@
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="bookmark" href="/favicon.ico" />
+
+    @*本地css和js引入*@
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Content/Site.js"></script>
+    <script>
+        $(function () {
+            var status = @Model.PurchaseStatus;
+            var msg = "";
+            if(status==0)
+                msg = "未采购";
+            else if(status == 1)
+                msg = "采购中";
+            else
+                msg = "已采购";
+            $('#status').text(msg);
+            InitGrid();
+            InitPhaDialoggrid();
+
+        });
+
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid() {
+            $('#grid').datagrid({
+                url: '../PHA_Accounts/LoadList',
+                singleSelect: true,
+                fit: true,
+                nowrap: true,//单行显示
+                autoRowHeight: false,
+                striped: false,     //斑马纹
+                collapsible: true,      //可折叠
+                pagination: true,
+                pageSize: 20,
+                fitColumns: false,       //自适应列宽
+                rownumbers: true,
+                sortName: 'PhaCode',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: true,
+                loadMsg: '加载中，请等待',
+                queryParams: ({
+                    query: $('#itemid').val()
+                }),  //异步查询的参数
+                columns: [[
+                     { title: '药品编号', field: 'PhaCode', hidden: true },
+                     { title: '药品名称', field: 'PhaName', width: 120, sortable: true },
+                     { title: '规格', field: 'Spec', width: 80, sortable: true },
+                     { title: '单位', field: 'Unit', width: 60, sortable: true, align: 'center' },
+                     { title: '拼音代码', field: 'PinyinCode', width: 70, sortable: true, align: 'center' },
+                     { title: '产地', field: 'OrginName', width: 100, sortable: true, align: 'center' },
+                     { title: '库存', field: 'Stock', width: 80, sortable: true, align: 'center' },
+                     { title: '进货价格', field: 'InWarehousePrice', width: 80, sortable: true, align: 'center' },
+                     { title: '批发价格', field: 'WholesalePrice', width: 80, sortable: true, align: 'center' },
+                     { title: '零售价格', field: 'RetailPrice', width: 90, sortable: true, align: 'center' },
+                     { title: '进货金额', field: 'InWarehouseSum', width: 80, sortable: true, align: 'center' },
+                     { title: '批发金额', field: 'WholesaleSum', width: 90, sortable: true, align: 'center' },
+                     { title: '零售金额', field: 'RetailSum', width: 90, sortable: true, align: 'center' },
+                     { title: '供货单位', field: 'CompanyName', width: 160, sortable: true },
+                ]],
+                toolbar: '#tb',
+                onDblClickRow: function (rowIndex, rowData) {
+                    $('#editpha').attr('disabled', 'disabled');
+                    $('#editori').attr('disabled', 'disabled');
+                    getAjax("../PHA_Accounts/LoadForm",
+                        { phaCode: rowData['PhaCode'], orginID: rowData['OrginID'] }, function (data) {
+                            var data = eval("(" + data + ")");
+                            SetWebControls(data);
+                        });
+                    $('#dd').window('open');
+                },
+                onClickRow: function (index, row) {
+                    $('#del_pha').val(row['PhaCode']);
+                    $('#del_ori').val(row['OrginID']);
+                }
+
+            })
+            var p = $('#grid').datagrid('getPager');
+            $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
+                beforePageText: '第',
+                afterPageText: '页   共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+            });
+        };
+
+
+        //药品选择器
+        function InitPhaDialoggrid() {
+            $('#phagrid').datagrid({
+                url: '../PHA_Accounts/LoadList',
+                fit: true,
+                nowrap: true,//单行显示
+                autoRowHeight: false,
+                singleSelect: true,
+                striped: false,     //斑马纹
+                collapsible: true,      //可折叠
+                pagination: true,
+                pageSize: 20,
+                fitColumns: true,       //自适应列宽
+                rownumbers: true,
+                sortName: 'PhaCode',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: true,
+                loadMsg: '加载中，请等待',
+                queryParams: ({
+                    query: $('#phagrid_dir').val()
+                }),  //异步查询的参数
+                columns: [[
+                     { title: '编号', field: 'PhaCode', hidden: true },
+                     { title: '药名', field: 'PhaName', sortable: true },
+                     { title: '规格', field: 'Spec', sortable: true },
+                     { title: '单位', field: 'Unit', sortable: true, },
+                     { title: '拼音码', field: 'PinyinCode' }
+                ]],
+                toolbar: '#phagrid_tb',
+                onDblClickRow: function (rowIndex, rowData) {
+
+                }
+            })
+            var p = $('#phagrid').datagrid('getPager');
+            $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
+                beforePageText: '第',
+                afterPageText: '页   共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+            });
+        };
+    </script>
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'west'" style="float:left;width:330px;">
+        <div id="phaselect">
+            <div style="position:fixed;width:330px;height:100%">
+                <table id="phagrid"></table>
+            </div>
+            <div id="phagrid_tb" style="padding:3px">
+                <span>拼音码:</span>
+                <input id="phagrid_dir" style="border:1px solid #ccc">
+                <a href="#" class="easyui-linkbutton" plain="true" onclick="InitPhaDialoggrid()">查找</a>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center'" style="float:left">
+        <div data-options="region:'north'" style="height:25%;">
+            <h2 style="text-align:center;margin-top:20px;">中心医院药品采购单</h2>
+            <div>
+                <p style="font-weight:900;color:red;font-size:medium;text-align:right;margin-right:20%">
+                    No.<span id="PurchaseNo">@Model.PurchaseNo</span>
+                </p>
+                <div style="margin:10px 0 10px 20px ">
+                    <div style="display:inline-block;margin-right:10px">采购日期：<span id="PurchaseDate" style="color:red">@Model.PurchaseDate</span></div>
+                    <div style="display:inline-block;margin-right:10px">操作工号：<span id="OperateNo" style="color:red">@Model.OperateNo</span></div>
+                    <div style="display:inline-block;margin-right:10px">操作日期：<span id="OperateDate" style="color:red">@Model.OperateDate</span></div>
+                    <div style="display:inline-block;margin-right:10px">采购状态：<span id="status" style="color:red"></span></div>
+
+                </div>
+                <div style="margin:0 0 10px 20px">
+                    <p id="OperateNo">备注：@Model.Remark</p>
+                </div>
+            </div>
+        </div>
+        <div data-options="region:'south'" style="height:70%">
+            <table id="grid"></table>
+        </div>
+
+    </div>
+</body>
+</html>

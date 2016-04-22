@@ -2,7 +2,7 @@
 	if ($('#tabs').tabs('exists', title)) {
 		$('#tabs').tabs('select', title);
 	} else {
-	    var content = '<iframe scrolling="no" frameborder="0"  src="' + url + '" style="width:100%;height:99%;margin:0;padding:0"></iframe>';
+		var content = '<iframe scrolling="no" frameborder="0"  src="' + url + '" style="width:100%;height:99%;margin:0;padding:0"></iframe>';
 		$('#tabs').tabs('add', {
 			title: title,
 			content: content,
@@ -10,6 +10,7 @@
 		});
 	}
 }
+
 
 
 /* 请求Ajax 带返回值
@@ -36,12 +37,12 @@ function GetWebControls(element) {
 		var value = $(this).val();
 		var type = $(this).attr('type');
 		switch (type) {
-		    case "checkbox":
-			    if ($(this).is(':checked')) {
+			case "checkbox":
+				if ($(this).is(':checked')) {
 					reVal += '"' + id + '"' + ':' + '"1",';
 				} else {
 					reVal += '"' + id + '"' + ':' + '"0",';
-			    }
+				}
 				break;
 			default:
 				reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",';

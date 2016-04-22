@@ -62,6 +62,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../PSS_PurchasePlan/LoadList',
+                singleSelect: true,
                 fit: true,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
@@ -69,6 +70,7 @@
                 collapsible: true,      //可折叠
                 pagination: true,
                 pageSize: 20,
+                border: false,
                 fitColumns: true,       //自适应列宽
                 rownumbers: true,
                 columns: [[
@@ -91,14 +93,7 @@
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    $('#errdiv').attr('class', 'dis');
-                    $('#PurchaseDate').attr('disabled', 'disabled');
-                    getAjax("../PSS_PurchasePlan/LoadForm",
-                        { id: rowData['PurchaseNo'] }, function (data) {
-                            var data = eval("(" + data + ")");
-                            SetWebControls(data);
-                        });
-                    $('#dd').dialog('open');
+                    addTab('采购详单-' + rowData['PurchaseNo'], '../PSS_PurchasePlanDetail/PurchasePlanDetail?PurchaseNo=' + rowData['PurchaseNo']);
                 },
                 onClickRow: function (index, row) {
                     $('#del_id').val(row['PurchaseNo']);
@@ -181,7 +176,12 @@
     <div>
         <input id="del_id" type="hidden" name="del_id" value="" />
         <div style="position:fixed;width:100%;height:100%">
-            <table id="grid"></table>
+            <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+                <div title="采购单" style="text-align:center;">
+                    <table id="grid"></table>
+                </div>
+            </div>
+
         </div>
         <div id="tb" style="padding:3px">
             <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>

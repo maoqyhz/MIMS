@@ -31,6 +31,8 @@ namespace MIMS.IBusiness
         int Update(PHA_BaseInfo obj);
         int Delete(PHA_BaseInfo obj);
         int Insert(PHA_BaseInfo obj);
+        IList GetPageListByCompany(string query, string orderField, string orderType, int pageIndex, int pageSize, ref int count);
+
 
     }
 }

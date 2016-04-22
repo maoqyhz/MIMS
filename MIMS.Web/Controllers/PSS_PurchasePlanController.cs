@@ -41,7 +41,13 @@ namespace MIMS.Web.Controllers
             int isOk = default(int);
             PSS_PurchasePlan temp = ipss_purchaseplanbll.GetEntity(obj.PurchaseNo);
             if (temp == null)
+            {
+                HttpCookie cookie = Request.Cookies["user"];
+                obj.OperateNo = cookie.Values["Code"];
+                obj.OperateDate = DateTime.Now.ToString("G");
                 isOk = ipss_purchaseplanbll.Insert(obj);
+            }
+
             else
                 isOk = ipss_purchaseplanbll.Update(obj);
             return Content(isOk.ToString());
