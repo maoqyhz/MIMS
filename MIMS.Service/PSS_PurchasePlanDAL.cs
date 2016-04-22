@@ -61,7 +61,7 @@ namespace MIMS.Service
             {
                 string query = @"UPDATE PSS_PurchasePlan 
                                     SET  PurchaseNo=@PurchaseNo,PurchaseDate=@PurchaseDate,
-                                         Remark=@Bank,OperateNo=@OperateNo,OperateDate=@OperateDate,PurchaseStatus=@PurchaseStatus 
+                                         Remark=@Remark,OperateNo=@OperateNo,OperateDate=@OperateDate,PurchaseStatus=@PurchaseStatus 
                                        WHERE PurchaseNo =@PurchaseNo";
                 return Conn.Execute(query, obj);
             }

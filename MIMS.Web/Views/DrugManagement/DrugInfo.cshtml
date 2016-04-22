@@ -32,6 +32,7 @@
             $('#add').click(function () {
                 $('#form')[0].reset();
                 $('#PhaCode').removeAttr("disabled");
+                $('#PhaName').removeAttr("disabled");
                 $('#dd').dialog('open');
             });
             $('#del').click(function () {
@@ -96,6 +97,8 @@
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
+                    $('#PhaCode').attr('disabled', 'disabled');
+                    $('#PhaName').attr('disabled', 'disabled');
                     $('#errdiv').attr('class', 'dis');
                     getAjax("../DrugManagement/LoadForm",
                         { id: rowData['PhaCode'] }, function (data) {
@@ -262,7 +265,7 @@
                 <legend>基本属性</legend>
                 <div class="tb-line">
                     <span>药品编码：</span><input type="text" id="PhaCode" class="tb-col-120" name="PhaCode" value="" disabled="disabled" />
-                    <span>药品名：</span><input type="text" id="PhaName" class="tb-col-160" name="PhaName" value="" />
+                    <span>药品名：</span><input type="text" id="PhaName" class="tb-col-160" name="PhaName" value="" disabled="disabled" />
                     <span>常用名：</span><input type="text" id="CommonName" class="tb-col-160" name="CommonName" value="" />
                 </div>
                 <div class="tb-line">

@@ -15,7 +15,7 @@
     <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script type="text/javascript" src="~/Content/Site.js"></script>
-
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript">
         $(function () {
             //初始化datagrid
@@ -34,7 +34,9 @@
             });
             $('#add').click(function () {
                 $('#form')[0].reset();
-                $('#CompanyID').val("此字段自动生成。");
+                $('#PurchaseNo').attr('placeholder', '编号：C+日期+序号');
+                $('#PurchaseNo').removeAttr('disabled');
+                $('#PurchaseDate').removeAttr('disabled');
                 $('#dd').dialog('open');
             });
             $('#del').click(function () {
@@ -60,7 +62,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../PSS_PurchasePlan/LoadList',
-                fit:true,
+                fit: true,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
@@ -74,21 +76,32 @@
                      { title: '采购日期', field: 'PurchaseDate' },
                      { title: '操作工号', field: 'OperateNo' },
                      { title: '操作日期', field: 'OperateDate' },
-                     { title: '采购状态', field: 'PurchaseStatus' },
+                     {
+                         title: '采购状态', field: 'PurchaseStatus',
+                         formatter: function (value, row, index) {
+                             if (value == 0) {
+                                 return "未采购";
+                             } else if (value == 1) {
+                                 return "采购中";
+                             } else
+                                 return "已采购";
+                         }
+                     },
                      { title: '备注', field: 'Remark' },
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
                     $('#errdiv').attr('class', 'dis');
+                    $('#PurchaseDate').attr('disabled', 'disabled');
                     getAjax("../PSS_PurchasePlan/LoadForm",
-                        { id: rowData['CompanyID'] }, function (data) {
+                        { id: rowData['PurchaseNo'] }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
                         });
                     $('#dd').dialog('open');
                 },
                 onClickRow: function (index, row) {
-                    $('#del_id').val(row['CompanyID']);
+                    $('#del_id').val(row['PurchaseNo']);
                 }
             })
             var p = $('#grid').datagrid('getPager');
@@ -103,10 +116,10 @@
         function InitDialog() {
             $('#dd').dialog({
                 title: '修改信息',
-                width: 520,
-                height: 230,
-                top: ($(window).height() - 230) * 0.5,      //居中
-                left: ($(window).width() - 520) * 0.5,
+                width: 300,
+                height: 300,
+                top: ($(window).height() - 300) * 0.5,      //居中
+                left: ($(window).width() - 300) * 0.5,
                 closed: true,
                 cache: false,
                 modal: true,
@@ -119,16 +132,16 @@
         $(function () {
             $('#form').validate({
                 rules: {
-                    CompanyName: {
+                    PurchaseNo: {
                         required: true
                     },
-                    PinyinCode: {
+                    PurchaseDate: {
                         required: true
                     }
                 },
                 messages: {
-                    CompanyName: "公司名不能为空！",
-                    PinyinCode: "拼音代码不能为空！"
+                    PurchaseNo: "采购单号不能为空！",
+                    PurchaseDate: "采购日期不能为空！"
                 },
                 errorLabelContainer: '#errdiv>ul',
                 wrapper: 'li',
@@ -158,11 +171,15 @@
         .dis {
             display: none;
         }
+
+        .td_col-180 {
+            width: 180px;
+        }
     </style>
 </head>
 <body style="margin:2px;padding:0">
     <div>
-        <input id="del_id" type="hidden" name="del_id" value=" " />
+        <input id="del_id" type="hidden" name="del_id" value="" />
         <div style="position:fixed;width:100%;height:100%">
             <table id="grid"></table>
         </div>
@@ -176,28 +193,34 @@
         <form id="form" name="form" method="post">
             <table style="margin:8px">
                 <tr>
-                    <td>编号:</td>
-                    <td><input type="text" id="CompanyID" name="CompanyID" value=" " disabled="disabled" /></td>
-                    <td>公司名:</td>
-                    <td><input type="text" id="CompanyName" name="CompanyName" value=" " class="required" /></td>
+                    <td>采购单号:</td>
+                    <td><input type="text" id="PurchaseNo" name="PurchaseNo" class="td_col-180" value="" disabled="disabled" /></td>
                 </tr>
                 <tr>
-                    <td>拼音代码:</td>
-                    <td><input type="text" id="PinyinCode" name="PinyinCode" value=" " /></td>
-                    <td>开户银行:</td>
-                    <td><input type="text" id="Bank" name="Bank" value=" " /></td>
+                    <td>采购日期:</td>
+                    <td><input type="text" id="PurchaseDate" name="PurchaseDate" value=" " class="td_col-180" onclick="WdatePicker()" disabled="disabled" /></td>
                 </tr>
                 <tr>
-                    <td>银行账号:</td>
-                    <td><input type="text" id="BankNo" name="BankNo" value=" " /></td>
-                    <td>联系人:</td>
-                    <td><input type="text" id="Contact" name="Contact" value=" " /></td>
+                    <td>操作工号:</td>
+                    <td><input type="text" id="OperateNo" name="OperateNo" value="" class="td_col-180" disabled="disabled" /></td>
                 </tr>
                 <tr>
-                    <td>电话:</td>
-                    <td><input type="text" id="Tel" name="Tel" value=" " /></td>
-                    <td>地址:</td>
-                    <td><input type="text" id="Address" name="Address" value=" " /></td>
+                    <td>操作日期:</td>
+                    <td><input type="text" id="OperateDate" name="OperateDate" value="" class="td_col-180" disabled="disabled" /></td>
+                </tr>
+                <tr>
+                    <td>采购状态:</td>
+                    <td>
+                        <select id="PurchaseStatus" name="PurchaseStatus" class="td_col-180">
+                            <option value="0">未采购</option>
+                            <option value="1">采购中</option>
+                            <option value="2">已采购</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注:</td>
+                    <td><textarea id="Remark" name="Remark" class="td_col-180"></textarea></td>
                 </tr>
             </table>
             <div class="errdiv" id="errdiv">

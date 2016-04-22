@@ -16,7 +16,7 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// PurchaseDate
         /// </summary>		
-        public DateTime PurchaseDate { get; set; }
+        public string PurchaseDate { get; set; }
         /// <summary>
         /// Remark
         /// </summary>		
@@ -28,7 +28,7 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// OperateDate
         /// </summary>		
-        public DateTime OperateDate { get; set; }
+        public string OperateDate { get; set; }
         /// <summary>
         /// PurchaseStatus
         /// </summary>		

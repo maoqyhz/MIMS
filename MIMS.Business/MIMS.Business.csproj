@@ -56,6 +56,7 @@
     <Compile Include="PSS_ExWarehouseModeBLL.cs" />
     <Compile Include="PSS_InWarehouseModeBLL.cs" />
     <Compile Include="PSS_PurchaseCompanyBLL.cs" />
+    <Compile Include="PSS_PurchasePlanBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

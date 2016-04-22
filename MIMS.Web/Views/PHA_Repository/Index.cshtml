@@ -87,6 +87,7 @@
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
+                    $('#RepoID').attr('disabled', 'disabled');
                     $('#errdiv').attr('class', 'dis');
                     getAjax("../PHA_Repository/LoadForm",
                         { id: rowData['RepoID'] }, function (data) {
