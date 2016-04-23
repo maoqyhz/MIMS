@@ -38,17 +38,24 @@ namespace MIMS.Web.Controllers
         [HttpPost]
         public ActionResult AcceptClick(PSS_PurchasePlan obj)
         {
+            string key = Request["key"];
             int isOk = default(int);
-            PSS_PurchasePlan temp = ipss_purchaseplanbll.GetEntity(obj.PurchaseNo);
-            if (temp == null)
-            {
-                HttpCookie cookie = Request.Cookies["user"];
-                obj.OperateNo = cookie.Values["Code"];
-                obj.OperateDate = DateTime.Now.ToString("G");
-                isOk = ipss_purchaseplanbll.Insert(obj);
-            }
+            //key表示是否编辑的标识，1表示处于编辑状态 0表示增加状态
+            if (key == "1")
+                isOk = ipss_purchaseplanbll.Update(obj);
             else
-                isOk = -1;
+            {
+                PSS_PurchasePlan temp = ipss_purchaseplanbll.GetEntity(obj.PurchaseNo);
+                if (temp == null)
+                {
+                    HttpCookie cookie = Request.Cookies["user"];
+                    obj.OperateNo = cookie.Values["Code"];
+                    obj.OperateDate = DateTime.Now.ToString("G");
+                    isOk = ipss_purchaseplanbll.Insert(obj);
+                }
+                else
+                    isOk = -1;
+            }
             return Content(isOk.ToString());
         }
 

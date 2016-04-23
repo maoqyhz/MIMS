@@ -34,11 +34,22 @@
             });
             $('#add').click(function () {
                 $('#form')[0].reset();
+                $('#key').val(0);
                 $('#PurchaseNo').attr('placeholder', '编号：C+日期+序号');
                 $('#PurchaseNo').removeAttr('disabled');
                 $('#PurchaseDate').removeAttr('disabled');
                 $('#dd').dialog('open');
             });
+            $('#edit').click(function () {
+                getAjax("../PSS_PurchasePlan/LoadForm",
+                        { id: $('#del_id').val() }, function (data) {
+                            var data = eval("(" + data + ")");
+                            SetWebControls(data);
+                        });
+                $('#key').val(1);
+                $('#dd').dialog('open');
+            });
+
             $('#del').click(function () {
                 getAjax("../PSS_PurchasePlan/Del", { id: $('#del_id').val() }, function (data) {
                     if ($('#del_id').val() == null || $('#del_id').val() == "")
@@ -201,12 +212,14 @@
         </div>
         <div id="tb" style="padding:3px">
             <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
+            <a id="edit" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'">修改</a>
             <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
             <a id="btnReload" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">刷新</a>
         </div>
     </div>
     <div id="dd" class="easyui-dialog">
         <form id="form" name="form" method="post">
+            <input id="key" type="hidden" value="" />
             <table style="margin:8px">
                 <tr>
                     <td>采购单号:</td>
