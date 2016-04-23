@@ -75,9 +75,21 @@
                 rownumbers: true,
                 columns: [[
                      { title: '采购单号', field: 'PurchaseNo' },
-                     { title: '采购日期', field: 'PurchaseDate' },
+                     {
+                         title: '采购日期', field: 'PurchaseDate',
+                         formatter: function (value, row, index) {
+                             var date = value.split(' ');
+                             return date[0];
+                         }
+                     },
                      { title: '操作工号', field: 'OperateNo' },
-                     { title: '操作日期', field: 'OperateDate' },
+                     {
+                         title: '操作日期', field: 'OperateDate',
+                         formatter: function (value, row, index) {
+                             var date = value.split(' ');
+                             return date[0];
+                         }
+                     },
                      {
                          title: '采购状态', field: 'PurchaseStatus',
                          formatter: function (value, row, index) {

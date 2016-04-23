@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\Dto_PurchasePlanDetail.cs" />
     <Compile Include="Model\COM_User.cs" />
     <Compile Include="Model\PHA_Accounts.cs" />
     <Compile Include="Model\PHA_AdjustPrice.cs" />

@@ -852,7 +852,6 @@
     <Content Include="Content\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Site.js" />
-    <Content Include="Content\validate.js" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.4.js" />

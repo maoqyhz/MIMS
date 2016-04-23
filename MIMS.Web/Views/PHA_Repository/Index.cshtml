@@ -61,7 +61,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../PHA_Repository/LoadList',
-                fit:true,
+                fit: true,
                 nowrap: true,//单行显示
                 singleSelect: true,
                 autoRowHeight: false,
@@ -72,11 +72,11 @@
                 fitColumns: true,       //自适应列宽
                 rownumbers: true,
                 columns: [[
-                     { title: '编号', field: 'RepoID', hidden: true },
-                     { title: '药库名称', field: 'RepoName', width: 3 },
-                     { title: '药品数量', field: 'PhaNum', width: 3 },
+                     { title: '编号', field: 'RepoID' },
+                     { title: '药库名称', field: 'RepoName' },
+                     { title: '药品数量', field: 'PhaNum' },
                      {
-                         title: '是否可用', field: 'IsValid', width: 3,
+                         title: '是否可用', field: 'IsValid',
                          formatter: function (value, row, index) {
                              if (value) {
                                  return "是";
@@ -138,7 +138,7 @@
                     }
                 }, messages: {
                     RepoName: "药库名称不能为空！",
-                    PhaNum:"必须输入整数！"
+                    PhaNum: "必须输入整数！"
                 },
                 errorLabelContainer: '#errdiv>ul',
                 wrapper: 'li',

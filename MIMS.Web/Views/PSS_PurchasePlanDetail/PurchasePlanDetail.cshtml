@@ -16,7 +16,7 @@
     <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="bookmark" href="/favicon.ico" />
-
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     @*本地css和js引入*@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Content/Site.js"></script>
@@ -31,16 +31,31 @@
             else
                 msg = "已采购";
             $('#status').text(msg);
-            InitGrid();
-            InitPhaDialoggrid();
 
+            if(status != 0)
+            {
+                $('#body').layout('remove', 'west');
+            }
+            else
+            {
+                InitPhaDialoggrid();
+            }
+            InitGrid();
+            InitDialog();
+            $('#ok').click(function () {
+                $('#errdiv').removeClass('dis');
+                $('#form').submit();
+            });
+            $('#cancel').click(function () {
+                $('#dd').dialog('close');
+            });
         });
 
 
         //实现对DataGird控件的绑定操作
         function InitGrid() {
             $('#grid').datagrid({
-                url: '../PHA_Accounts/LoadList',
+                url: '../PSS_PurchasePlanDetail/LoadList',
                 singleSelect: true,
                 fit: true,
                 nowrap: true,//单行显示
@@ -49,45 +64,36 @@
                 collapsible: true,      //可折叠
                 pagination: true,
                 pageSize: 20,
-                fitColumns: false,       //自适应列宽
+                fitColumns: true,       //自适应列宽
                 rownumbers: true,
                 sortName: 'PhaCode',    //根据某个字段给easyUI排序
                 sortOrder: 'asc',
                 remoteSort: true,
                 loadMsg: '加载中，请等待',
                 queryParams: ({
-                    query: $('#itemid').val()
+                    query:'@Model.PurchaseNo'
                 }),  //异步查询的参数
                 columns: [[
+                     { title: '编号', field: 'ID', hidden: true },
                      { title: '药品编号', field: 'PhaCode', hidden: true },
-                     { title: '药品名称', field: 'PhaName', width: 120, sortable: true },
-                     { title: '规格', field: 'Spec', width: 80, sortable: true },
-                     { title: '单位', field: 'Unit', width: 60, sortable: true, align: 'center' },
-                     { title: '拼音代码', field: 'PinyinCode', width: 70, sortable: true, align: 'center' },
-                     { title: '产地', field: 'OrginName', width: 100, sortable: true, align: 'center' },
-                     { title: '库存', field: 'Stock', width: 80, sortable: true, align: 'center' },
-                     { title: '进货价格', field: 'InWarehousePrice', width: 80, sortable: true, align: 'center' },
-                     { title: '批发价格', field: 'WholesalePrice', width: 80, sortable: true, align: 'center' },
-                     { title: '零售价格', field: 'RetailPrice', width: 90, sortable: true, align: 'center' },
-                     { title: '进货金额', field: 'InWarehouseSum', width: 80, sortable: true, align: 'center' },
-                     { title: '批发金额', field: 'WholesaleSum', width: 90, sortable: true, align: 'center' },
-                     { title: '零售金额', field: 'RetailSum', width: 90, sortable: true, align: 'center' },
-                     { title: '供货单位', field: 'CompanyName', width: 160, sortable: true },
+                     { title: '采购单号', field: 'PurchaseNo', hidden: true },
+                     { title: '药品名称', field: 'PhaName', sortable: true},
+                     { title: '规格', field: 'Spec', sortable: true },
+                     { title: '单位', field: 'Unit',  sortable: true, align: 'center' },
+                     { title: '拼音代码', field: 'PinyinCode',sortable: true, align: 'center' },
+                     { title: '产地', field: 'OrginName', sortable: true, align: 'center' },
+                     { title: '采购价格', field: 'InWarehousePrice', sortable: true, align: 'center' },
+                     { title: '采购数量', field: 'PurchaseNum', sortable: true, align: 'center' },
+                     { title: '采购金额', field: 'InWarehouseSum', sortable: true, align: 'center' },
+                     { title: '库存', field: 'Stock',  sortable: true, align: 'center' },
+                     { title: '供货单位', field: 'CompanyName',sortable: true },
                 ]],
-                toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    $('#editpha').attr('disabled', 'disabled');
-                    $('#editori').attr('disabled', 'disabled');
-                    getAjax("../PHA_Accounts/LoadForm",
-                        { phaCode: rowData['PhaCode'], orginID: rowData['OrginID'] }, function (data) {
-                            var data = eval("(" + data + ")");
-                            SetWebControls(data);
-                        });
-                    $('#dd').window('open');
+
                 },
                 onClickRow: function (index, row) {
-                    $('#del_pha').val(row['PhaCode']);
-                    $('#del_ori').val(row['OrginID']);
+                    $('#del_id').val(row['ID']);
+                    console.log(row['PhaCode']);
                 }
 
             })
@@ -98,6 +104,31 @@
                 beforePageText: '第',
                 afterPageText: '页   共 {pages} 页',
                 displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+                buttons: [{
+                    iconCls:'icon-remove',
+                    handler:function(){
+                        if(@Model.PurchaseStatus == 0){
+                            getAjax("../PSS_PurchasePlanDetail/Del", { id: $('#del_id').val() }, function (data) {
+                                if ($('#del_id').val() == null || $('#del_id').val() == "")
+                                    return false;
+                                if (data) {
+                                    //此处可以优化，提示消息可更美观。
+                                    alert("操作成功！");
+                                    $('#dd').dialog('close');
+                                    $("#grid").datagrid("reload");
+                                    return true;
+                                }
+                                else {
+                                    alert("操作失败！");
+                                    return false;
+                                }
+                            });
+                        }
+                        else
+                            alert("当前采购状态下无法编辑！");
+                        
+                    }
+                }]
             });
         };
 
@@ -121,18 +152,24 @@
                 remoteSort: true,
                 loadMsg: '加载中，请等待',
                 queryParams: ({
-                    query: $('#phagrid_dir').val()
+                    query: $('#phagrid_dir').text()
                 }),  //异步查询的参数
                 columns: [[
                      { title: '编号', field: 'PhaCode', hidden: true },
                      { title: '药名', field: 'PhaName', sortable: true },
                      { title: '规格', field: 'Spec', sortable: true },
                      { title: '单位', field: 'Unit', sortable: true, },
-                     { title: '拼音码', field: 'PinyinCode' }
+                     { title: '产地', field: 'OrginName' }
                 ]],
                 toolbar: '#phagrid_tb',
                 onDblClickRow: function (rowIndex, rowData) {
-
+                    $('#errdiv').attr('class', 'dis');
+                    getAjax("../PHA_Accounts/LoadForm",
+                        { phaCode: rowData['PhaCode'], orginID: rowData['OrginID'] }, function (data) {
+                            var data = eval("(" + data + ")");
+                            SetWebControls(data);
+                        });
+                    $('#dd').dialog('open');
                 }
             })
             var p = $('#phagrid').datagrid('getPager');
@@ -144,12 +181,81 @@
                 displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
             });
         };
+
+        //初始化对话框
+        function InitDialog() {
+            $('#dd').dialog({
+                title: '添加药品',
+                width: 700,
+                height: 160,
+                top: ($(window).height() - 160) * 0.5,      //居中
+                left: ($(window).width() - 700) * 0.5,
+                closed: true,
+                cache: false,
+                modal: true,
+                buttons: '#dlg-buttons'
+            });
+        }
     </script>
+    <script>
+        //表单验证和提交
+        $(function () {
+            $('#form').validate({
+                rules: {
+                    PurchaseNum: {
+                        required: true
+                    }
+                },
+                messages: {
+                    PurchaseNum: "采购数量不能为空！"
+                },
+                errorLabelContainer: '#errdiv>ul',
+                wrapper: 'li',
+                submitHandler: function (form) {
+                    var postData = GetWebControls("#form");
+                    getAjax("/PSS_PurchasePlanDetail/AcceptClick",
+                        postData, function (data) {
+                            if (data) {
+                                //此处可以优化，提示消息可更美观。
+                                alert("操作成功！");
+                                $('#dd').dialog('close');
+                                $("#grid").datagrid("reload");
+                                return true;
+                            }
+                            else {
+                                alert("操作失败！"); return false;
+                            }
+                        });
+                },
+                invalidHandler: function (form, validator) {  //不通过回调
+                    return false;
+                }
+            });
+        });
+    </script>
+    <style>
+        .dis {
+            display: none;
+        }
+
+        .tb-col-120 {
+            width: 120px;
+        }
+
+        .tb-col-80 {
+            width: 80px;
+        }
+
+        #errdiv {
+            margin-left: 5px;
+        }
+    </style>
+
 </head>
-<body class="easyui-layout">
-    <div data-options="region:'west'" style="float:left;width:330px;">
+<body class="easyui-layout" id="body">
+    <div id="left_part" data-options="region:'west'" style="float:left;width:340px;">
         <div id="phaselect">
-            <div style="position:fixed;width:330px;height:100%">
+            <div style="position:fixed;width:340px;height:100%;">
                 <table id="phagrid"></table>
             </div>
             <div id="phagrid_tb" style="padding:3px">
@@ -167,11 +273,10 @@
                     No.<span id="PurchaseNo">@Model.PurchaseNo</span>
                 </p>
                 <div style="margin:10px 0 10px 20px ">
-                    <div style="display:inline-block;margin-right:10px">采购日期：<span id="PurchaseDate" style="color:red">@Model.PurchaseDate</span></div>
+                    <div style="display:inline-block;margin-right:10px">采购日期：<span id="PurchaseDate" style="color:red">@Model.PurchaseDate.Split(' ')[0]</span></div>
                     <div style="display:inline-block;margin-right:10px">操作工号：<span id="OperateNo" style="color:red">@Model.OperateNo</span></div>
-                    <div style="display:inline-block;margin-right:10px">操作日期：<span id="OperateDate" style="color:red">@Model.OperateDate</span></div>
+                    <div style="display:inline-block;margin-right:10px">操作日期：<span id="OperateDate" style="color:red">@Model.OperateDate.Split(' ')[0]</span></div>
                     <div style="display:inline-block;margin-right:10px">采购状态：<span id="status" style="color:red"></span></div>
-
                 </div>
                 <div style="margin:0 0 10px 20px">
                     <p id="OperateNo">备注：@Model.Remark</p>
@@ -180,8 +285,54 @@
         </div>
         <div data-options="region:'south'" style="height:70%">
             <table id="grid"></table>
+            <input id="del_id" type="hidden" name="del_id" value=" " />
         </div>
-
     </div>
+
+    <div id="dd" class="easyui-dialog">
+        <form id="form" name="form" method="post">
+            <input type="hidden" id="PurchaseNo" name="PurchaseNo" value="@Model.PurchaseNo" />
+            <input type="hidden" id="PhaCode" name="PhaCode" value=" " />
+            <input type="hidden" id="OrginID" name="OrginID" value=" " />
+            <table style="margin:8px">
+                <tr>
+                    <td>药品名:</td>
+                    <td><input type="text" id="PhaName" name="PhaName" class="tb-col-120" value=" " disabled="disabled" /></td>
+
+                    <td>规格:</td>
+                    <td><input type="text" id="Spec" name="Spec" class="tb-col-80" value=" " disabled="disabled" /></td>
+
+                    <td>单位:</td>
+                    <td><input type="text" id="Unit" name="Unit" class="tb-col-80" value=" " disabled="disabled" /></td>
+
+                    <td>产地:</td>
+                    <td><input type="text" id="OrginName" name="OrginName" class="tb-col-80" value=" " disabled="disabled" /></td>
+                </tr>
+                <tr>
+                    <td>进货价格:</td>
+                    <td><input type="text" id="InWarehousePrice" name="InWarehousePrice" class="tb-col-120" value=" " disabled="disabled" /></td>
+
+                    <td>采购数量:</td>
+                    <td><input type="text" id="PurchaseNum" name="PurchaseNum" class="tb-col-80" value=" " /></td>
+                    <td>生产厂家:</td>
+                    <td colspan="3"><input type="text" id="CompanyName" name="CompanyName" value=" " disabled="disabled" /></td>
+                </tr>
+            </table>
+            <div class="errdiv" id="errdiv">
+                <ul></ul>
+            </div>
+            <div id="dlg-buttons">
+                <a id="ok" href="#" class="easyui-linkbutton" iconcls="icon-ok">确定</a>
+                <a id="cancel" href="#" class="easyui-linkbutton" iconcls="icon-cancel">取消</a>
+            </div>
+
+        </form>
+    </div>
+
+
+
+
+
+
 </body>
 </html>

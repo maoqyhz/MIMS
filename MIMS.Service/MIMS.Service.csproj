@@ -58,6 +58,7 @@
     <Compile Include="PSS_InWarehouseModeDAL.cs" />
     <Compile Include="PSS_PurchaseCompanyDAL.cs" />
     <Compile Include="PSS_PurchasePlanDAL.cs" />
+    <Compile Include="PSS_PurchasePlanDetailDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

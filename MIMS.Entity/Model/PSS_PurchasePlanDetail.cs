@@ -28,7 +28,7 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// PurchaseNum
         /// </summary>		
-        public int PurchaseNum { get; set; }
+        public double PurchaseNum { get; set; }
 
     }
 }

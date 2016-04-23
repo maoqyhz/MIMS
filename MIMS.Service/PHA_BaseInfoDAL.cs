@@ -77,7 +77,6 @@ namespace MIMS.Service
                 count = Conn.Query<int>("Select Count(1) From (" + sql + ") As t", prams).Single();
                 return Conn.Query<PHA_BaseInfo>(strSql.ToString(), prams).ToList();
             }
-
         }
 
 
