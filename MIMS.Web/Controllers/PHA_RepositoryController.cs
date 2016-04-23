@@ -37,12 +37,19 @@ namespace MIMS.Web.Controllers
         [HttpPost]
         public ActionResult AcceptClick(PHA_Repository obj)
         {
+            string key = Request["key"];
             int isOk = default(int);
-            PHA_Repository temp = ipha_repositorybll.GetEntity(obj.RepoID);
-            if (temp == null)
-                isOk = ipha_repositorybll.Insert(obj);
-            else
+            //key表示是否编辑的标识，1表示处于编辑状态 0表示增加状态
+            if (key == "1")
                 isOk = ipha_repositorybll.Update(obj);
+            else
+            {
+                PHA_Repository temp = ipha_repositorybll.GetEntity(obj.RepoID);
+                if (temp == null)
+                    isOk = ipha_repositorybll.Insert(obj);
+                else
+                    isOk = -1;
+            }
             return Content(isOk.ToString());
         }
 

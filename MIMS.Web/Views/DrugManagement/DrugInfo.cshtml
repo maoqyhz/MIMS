@@ -31,6 +31,7 @@
             });
             $('#add').click(function () {
                 $('#form')[0].reset();
+                $('#key').val(0);
                 $('#PhaCode').removeAttr("disabled");
                 $('#PhaName').removeAttr("disabled");
                 $('#dd').dialog('open');
@@ -58,7 +59,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../DrugManagement/LoadList',
-                fit:true,
+                fit: true,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
@@ -106,6 +107,7 @@
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
                         });
+                    $('#key').val(1);
                     $('#dd').window('open');
                 },
                 onClickRow: function (index, row) {
@@ -197,17 +199,22 @@
                 wrapper: 'li',
                 submitHandler: function (form) {
                     var postData = GetWebControls("#form");
-                    getAjax("/DrugManagement/AcceptClick",
+                    getAjax("/DrugManagement/AcceptClick?key=" + $('#key').val(),
                         postData, function (data) {
-                            if (data) {
+                            if (data == 1) {
                                 //此处可以优化，提示消息可更美观。
                                 alert("操作成功！");
                                 $('#dd').dialog('close');
                                 $("#grid").datagrid("reload");
                                 return true;
                             }
+                            else if (data == -1) {
+                                alert("已存在该记录或单号重复，请重新填写！");
+                                return false;
+                            }
                             else {
-                                alert("操作失败！"); return false;
+                                alert("操作失败！");
+                                return false;
                             }
                         });
                 },
@@ -262,6 +269,7 @@
 
     <div id="dd" class="easyui-dialog" style="position:relative">
         <form id="form" name="form" method="post">
+            <input id="key" type="hidden" value="" />
             <fieldset>
                 <legend>基本属性</legend>
                 <div class="tb-line">

@@ -31,17 +31,22 @@
             //ajax提交修改表单
             $('#ok').click(function () {
                 var postData = GetWebControls("#form");
-                getAjax("/PHA_Accounts/AcceptClick",
+                getAjax("/PHA_Accounts/AcceptClick?key=" + $('#key').val(),
                     postData, function (data) {
-                        if (data) {
+                        if (data ==1 ) {
                             //此处可以优化，提示消息可更美观。
                             alert("操作成功！");
                             $('#dd').dialog('close');
                             $("#grid").datagrid("reload");
                             return true;
                         }
+                        else if(data == -1){
+                            alert("已存在该记录或单号重复，请重新填写！");
+                            return false;
+                        }
                         else {
-                            alert("操作失败！"); return false;
+                            alert("操作失败！");
+                            return false;
                         }
                     });
             });
@@ -50,6 +55,7 @@
             });
             $('#add').click(function () {
                 $('#form')[0].reset();
+                $('#key').val(0);
                 $('#editpha').removeAttr("disabled");
                 $('#editori').removeAttr("disabled");
                 $('#dd').dialog('open');
@@ -124,6 +130,7 @@
                         { phaCode: rowData['PhaCode'], orginID: rowData['OrginID'] }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
+                            $('#key').val(1);
                         });
                     $('#dd').window('open');
                 },
@@ -346,6 +353,7 @@
 
     <div id="dd" class="easyui-dialog" style="position:relative">
         <form id="form" name="form" method="post">
+            <input id="key" type="hidden" value="" />
             <div style="margin:10px">
                 <div class="tb-line">
                     <span>药品编码：</span><input type="text" id="PhaCode" class="tb-col-120" name="PhaCode" value=" " disabled="disabled" />

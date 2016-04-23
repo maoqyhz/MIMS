@@ -62,12 +62,19 @@ namespace MIMS.Web.Controllers
         [HttpPost]
         public ActionResult AcceptClick(PHA_Accounts obj)
         {
+            string key = Request["key"];
             int isOk = default(int);
-            PHA_Accounts temp = ipha_accountsbll.GetEntity(obj.PhaCode, obj.OrginID.ToString());
-            if (temp == null)
-                isOk = ipha_accountsbll.Insert(obj);
-            else
+            //key表示是否编辑的标识，1表示处于编辑状态 0表示增加状态
+            if (key == "1")
                 isOk = ipha_accountsbll.Update(obj);
+            else
+            {
+                PHA_Accounts temp = ipha_accountsbll.GetEntity(obj.PhaCode, obj.OrginID.ToString());
+                if (temp == null)
+                    isOk = ipha_accountsbll.Insert(obj);
+                else
+                    isOk = -1;         //存在相同的记录，出错。
+            }
             return Content(isOk.ToString());
         }
 

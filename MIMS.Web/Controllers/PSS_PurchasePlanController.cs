@@ -47,9 +47,8 @@ namespace MIMS.Web.Controllers
                 obj.OperateDate = DateTime.Now.ToString("G");
                 isOk = ipss_purchaseplanbll.Insert(obj);
             }
-
             else
-                isOk = ipss_purchaseplanbll.Update(obj);
+                isOk = -1;
             return Content(isOk.ToString());
         }
 

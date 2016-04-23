@@ -35,6 +35,7 @@
             });
             $('#add').click(function () {
                 $('#form')[0].reset();
+                $('#key').val(0);
                 $('#RepoID').removeAttr("disabled");
                 $('#dd').dialog('open');
             });
@@ -95,6 +96,7 @@
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
                         });
+                    $('#key').val(1);
                     $('#dd').dialog('open');
                 },
                 onClickRow: function (index, row) {
@@ -147,15 +149,20 @@
                     var postData = GetWebControls("#form");
                     getAjax("/PHA_Repository/AcceptClick",
                         postData, function (data) {
-                            if (data) {
+                            if (data == 1) {
                                 //此处可以优化，提示消息可更美观。
                                 alert("操作成功！");
                                 $('#dd').dialog('close');
                                 $("#grid").datagrid("reload");
                                 return true;
                             }
+                            else if (data == -1) {
+                                alert("已存在该记录或单号重复，请重新填写！");
+                                return false;
+                            }
                             else {
-                                alert("操作失败！"); return false;
+                                alert("操作失败！");
+                                return false;
                             }
                         });
                 },
@@ -186,6 +193,7 @@
     </div>
     <div id="dd" class="easyui-dialog">
         <form id="form" name="form" method="post">
+            <input id="key" type="hidden" value="" />
             <table style="margin:8px">
                 <tr>
                     <td>编号:</td>

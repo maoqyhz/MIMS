@@ -156,12 +156,16 @@
                     var postData = GetWebControls("#form");
                     getAjax("/PSS_PurchasePlan/AcceptClick",
                         postData, function (data) {
-                            if (data) {
+                            if (data == 1) {
                                 //此处可以优化，提示消息可更美观。
                                 alert("操作成功！");
                                 $('#dd').dialog('close');
                                 $("#grid").datagrid("reload");
                                 return true;
+                            }
+                            else if (data == -1) {
+                                alert("已存在该记录或单号重复，请重新填写！");
+                                return false;
                             }
                             else {
                                 alert("操作失败！"); return false;
