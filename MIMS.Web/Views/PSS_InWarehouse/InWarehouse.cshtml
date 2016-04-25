@@ -48,6 +48,8 @@
                         { id: $('#del_id').val() }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
+                            if ($('#IsIW').val() == 1)
+                                $('#IsIW').attr('disabled', 'disabled');
                         });
                 $('#key').val(1);
                 $('#dd').dialog('open');
@@ -240,7 +242,7 @@
         <input id="del_id" type="hidden" name="del_id" value="" />
         <div style="position:fixed;width:100%;height:100%">
             <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
-                <div title="采购单" style="text-align:center;">
+                <div title="入库单" style="text-align:center;">
                     <table id="grid"></table>
                 </div>
             </div>

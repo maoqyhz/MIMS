@@ -49,7 +49,6 @@ namespace MIMS.Web.Controllers
                     obj.IWDate = DateTime.Now.ToString("G");
                 isOk = ipss_inwarehousebll.Update(obj);
             }
-
             else
             {
                 PSS_InWarehouse temp = ipss_inwarehousebll.GetEntity(obj.IWID.ToString());
@@ -57,7 +56,7 @@ namespace MIMS.Web.Controllers
                 {
                     HttpCookie cookie = Request.Cookies["user"];
                     obj.OperateNo = cookie.Values["Code"];
-                    // to-do
+                    obj.OperateDate = DateTime.Now.ToString("G");
                     isOk = ipss_inwarehousebll.Insert(obj);
                 }
                 else

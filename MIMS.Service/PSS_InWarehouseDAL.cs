@@ -66,7 +66,7 @@ namespace MIMS.Service
             using (Conn)
             {
                 string query = @"UPDATE PSS_InWarehouse 
-                                    SET  IWWay=@IWWay,CompanyID=@CompanyID,
+                                    SET IWID=@IWID,IWWay=@IWWay,CompanyID=@CompanyID,
                                          Receipts=@Receipts,IWRemark=@IWRemark,IsIW=@IsIW,
                                          IWDate=@IWDate,OperateNo=@OperateNo,OperateDate=@OperateDate 
                                        WHERE IWID =@IWID";
@@ -78,7 +78,7 @@ namespace MIMS.Service
             using (Conn)
             {
                 string query = @"INSERT INTO PSS_InWarehouse 
-                                    VALUES(@CompanyID,@Receipts,@IWRemark,@IsIW,@PurchaseDate,@IWDate,@PurchaseNo,@OperateNo)";
+                                    VALUES(@IWID,@IWWay,@CompanyID,@Receipts,@IWRemark,@IsIW,@IWDate,@OperateNo,@OperateDate)";
                 return Conn.Execute(query, obj);
             }
         }
