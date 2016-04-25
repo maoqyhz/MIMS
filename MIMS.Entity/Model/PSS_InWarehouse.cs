@@ -12,15 +12,24 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// IWID
         /// </summary>		
-        public int IWID { get; set; }
+        public string IWID { get; set; }
         /// <summary>
         /// IWWay
         /// </summary>		
         public int IWWay { get; set; }
         /// <summary>
+        /// Name(FK)
+        /// </summary>		
+        public string Name { get; set; }
+
+        /// <summary>
         /// companyID
         /// </summary>		
-        public int companyID { get; set; }
+        public int CompanyID { get; set; }
+        /// <summary>
+        /// companyName(FK)
+        /// </summary>		
+        public string CompanyName { get; set; }
         /// <summary>
         /// Receipts
         /// </summary>		
@@ -33,22 +42,19 @@ namespace MIMS.Entity.Model
         /// IsIW
         /// </summary>		
         public int IsIW { get; set; }
-        /// <summary>
-        /// PurchaseDate
-        /// </summary>		
-        public DateTime PurchaseDate { get; set; }
+
         /// <summary>
         /// IWDate
         /// </summary>		
-        public DateTime IWDate { get; set; }
-        /// <summary>
-        /// PurchaseNo
-        /// </summary>		
-        public string PurchaseNo { get; set; }
+        public string IWDate { get; set; }
         /// <summary>
         /// OperateNo
         /// </summary>		
         public string OperateNo { get; set; }
+        /// <summary>
+        /// OperateDate
+        /// </summary>		
+        public string OperateDate { get; set; }
 
     }
 }

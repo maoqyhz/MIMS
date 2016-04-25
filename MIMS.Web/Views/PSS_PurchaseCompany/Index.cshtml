@@ -33,6 +33,7 @@
                 $('#dd').dialog('close');
             });
             $('#add').click(function () {
+                $('#errdiv').attr('class', 'dis');
                 $('#form')[0].reset();
                 $('#CompanyID').val("此字段自动生成。");
                 $('#dd').dialog('open');
@@ -60,7 +61,7 @@
         function InitGrid() {
             $('#grid').datagrid({
                 url: '../PSS_PurchaseCompany/LoadList',
-                fit:true,
+                fit: true,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
                 striped: false,     //斑马纹
@@ -180,11 +181,11 @@
                     <td>编号:</td>
                     <td><input type="text" id="CompanyID" name="CompanyID" value=" " disabled="disabled" /></td>
                     <td>公司名:</td>
-                    <td><input type="text" id="CompanyName" name="CompanyName" value=" " class="required" /></td>
+                    <td><input type="text" id="CompanyName" name="CompanyName" value="" class="required" /></td>
                 </tr>
                 <tr>
                     <td>拼音代码:</td>
-                    <td><input type="text" id="PinyinCode" name="PinyinCode" value=" " /></td>
+                    <td><input type="text" id="PinyinCode" name="PinyinCode" value="" /></td>
                     <td>开户银行:</td>
                     <td><input type="text" id="Bank" name="Bank" value=" " /></td>
                 </tr>

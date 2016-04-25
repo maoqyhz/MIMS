@@ -21,7 +21,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Content/Site.js"></script>
 </head>
-<body class="easyui-layout"> 
+<body class="easyui-layout">
     <div region="north" id="header">
         <img src="~/Content/image/Medicine.png" id="logo" />
         <h1 id="title">医院药库管理系统</h1>
@@ -46,7 +46,9 @@
             </div>
             <div title="进销存管理" data-options="iconCls:'icon-buy'" style="padding:10px;">
                 <ul class="easyui-tree">
-                    <li><a href="#" onclick="addTab('采购入库', '../PSS_PurchasePlan/PurchasePlan')">采购入库</a></li>
+                    <li><a href="#" onclick="addTab('采购计划', '../PSS_PurchasePlan/PurchasePlan')">采购计划</a></li>
+                    <li><a href="#" onclick="addTab('药品入库', '../PSS_InWarehouse/InWarehouse')">药品入库</a></li>
+                    <li><a href="#" onclick="addTab('药品出库', '../PSS_ExWarehouse/ExWarehouse')">药品出库</a></li>
                 </ul>
 
             </div>

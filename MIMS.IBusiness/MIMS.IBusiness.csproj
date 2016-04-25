@@ -51,6 +51,7 @@
     <Compile Include="IPHA_PhaAttrBLL.cs" />
     <Compile Include="IPHA_RepositoryBLL.cs" />
     <Compile Include="IPHA_StorageConditionBLL.cs" />
+    <Compile Include="IPSS_InWarehouseBLL.cs" />
     <Compile Include="IPSS_PurchaseCompanyBLL.cs" />
     <Compile Include="IPHA_BaseInfoBLL.cs" />
     <Compile Include="IPSS_ExWarehouseModeBLL.cs" />

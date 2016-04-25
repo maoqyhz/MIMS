@@ -870,6 +870,7 @@
     <Compile Include="Controllers\PHA_OrginController.cs" />
     <Compile Include="Controllers\PHA_RepositoryController.cs" />
     <Compile Include="Controllers\PSS_ExWarehouseModeController.cs" />
+    <Compile Include="Controllers\PSS_InWarehouseController.cs" />
     <Compile Include="Controllers\PSS_InWarehouseModeController.cs" />
     <Compile Include="Controllers\DrugManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -916,6 +917,7 @@
     <Content Include="Views\PHA_Accounts\PhaAccounts.cshtml" />
     <Content Include="Views\PSS_PurchasePlan\PurchasePlan.cshtml" />
     <Content Include="Views\PSS_PurchasePlanDetail\PurchasePlanDetail.cshtml" />
+    <Content Include="Views\PSS_InWarehouse\InWarehouse.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

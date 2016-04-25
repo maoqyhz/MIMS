@@ -33,6 +33,7 @@
                 $('#dd').dialog('close');
             });
             $('#add').click(function () {
+                $('#errdiv').attr('class', 'dis');
                 $('#form')[0].reset();
                 $('#OrginID').val("此字段自动生成。");
                 $('#dd').dialog('open');
@@ -83,7 +84,7 @@
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    $('#errdiv').attr('class', 'dis');
+                    //$('#errdiv').attr('class', 'dis');
                     getAjax("../PHA_Orgin/LoadForm",
                         { id: rowData['OrginID'] }, function (data) {
                             var data = eval("(" + data + ")");
@@ -172,7 +173,7 @@
 </head>
 <body style="margin:2px;padding:0">
     <div>
-        <input id="del_id" type="hidden" name="del_id" value=" " />
+        <input id="del_id" type="hidden" name="del_id" value="" />
         <div style="position:fixed;width:100%;height:100%">
             <table id="grid"></table>
         </div>
@@ -190,19 +191,19 @@
             <table style="margin:8px">
                 <tr>
                     <td>编号:</td>
-                    <td><input type="text" id="OrginID" name="OrginID" value=" " disabled="disabled" /></td>
+                    <td><input type="text" id="OrginID" name="OrginID" value="" disabled="disabled" /></td>
                 </tr>
                 <tr>
                     <td>产地:</td>
-                    <td><input type="text" id="OrginName" name="OrginName" value=" " class="required" /></td>
+                    <td><input type="text" id="OrginName" name="OrginName" value="" /></td>
                 </tr>
                 <tr>
                     <td>拼音代码:</td>
-                    <td><input type="text" id="PinyinCode" name="PinyinCode" value=" " /></td>
+                    <td><input type="text" id="PinyinCode" name="PinyinCode" value="" /></td>
                 </tr>
                 <tr>
                     <td>生产厂家:</td>
-                    <td><input type="text" id="Manufacturer" name="Manufacturer" value=" " /></td>
+                    <td><input type="text" id="Manufacturer" name="Manufacturer" value="" /></td>
                 </tr>
             </table>
             <div class="errdiv" id="errdiv">

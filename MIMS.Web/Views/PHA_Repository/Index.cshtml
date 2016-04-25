@@ -34,6 +34,7 @@
                 $('#dd').dialog('close');
             });
             $('#add').click(function () {
+                $('#errdiv').attr('class', 'dis');
                 $('#form')[0].reset();
                 $('#key').val(0);
                 $('#RepoID').removeAttr("disabled");
@@ -90,7 +91,7 @@
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
                     $('#RepoID').attr('disabled', 'disabled');
-                    $('#errdiv').attr('class', 'dis');
+                    //$('#errdiv').attr('class', 'dis');
                     getAjax("../PHA_Repository/LoadForm",
                         { id: rowData['RepoID'] }, function (data) {
                             var data = eval("(" + data + ")");
@@ -132,6 +133,9 @@
         $(function () {
             $('#form').validate({
                 rules: {
+                    RepoID: {
+                        required: true
+                    },
                     RepoName: {
                         required: true
                     },
@@ -139,6 +143,7 @@
                         digits: true
                     }
                 }, messages: {
+                    RepoID: "药库编号不能为空！",
                     RepoName: "药库名称不能为空！",
                     PhaNum: "必须输入整数！"
                 },

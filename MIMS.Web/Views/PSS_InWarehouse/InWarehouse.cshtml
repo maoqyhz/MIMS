@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>PurchasePlan</title>
+    <title>InWarehouse</title>
     @*Easyui需要引入的文件*@
     <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
     <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
@@ -21,6 +21,7 @@
             //初始化datagrid
             InitGrid();
             InitDialog();
+            InitControl();
             $('#btnReload').click(function () {
                 $("#grid").datagrid("reload");
             });
@@ -35,13 +36,15 @@
             $('#add').click(function () {
                 $('#form')[0].reset();
                 $('#key').val(0);
-                $('#PurchaseNo').attr('placeholder', '编号：C+日期+序号');
-                $('#PurchaseNo').removeAttr('disabled');
-                $('#PurchaseDate').removeAttr('disabled');
+                $('#IWID').attr('placeholder', '编号：R+日期+序号');
+                $('#IWID').removeAttr('disabled');
+                $('#IWWay').removeAttr('disabled');
+                $('#CompanyID').removeAttr('disabled');
+                $('#Receipts').removeAttr('disabled');
                 $('#dd').dialog('open');
             });
             $('#edit').click(function () {
-                getAjax("../PSS_PurchasePlan/LoadForm",
+                getAjax("../PSS_InWarehouse/LoadForm",
                         { id: $('#del_id').val() }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
@@ -51,7 +54,7 @@
             });
 
             $('#del').click(function () {
-                getAjax("../PSS_PurchasePlan/Del", { id: $('#del_id').val() }, function (data) {
+                getAjax("../PSS_InWarehouse/Del", { id: $('#del_id').val() }, function (data) {
                     if ($('#del_id').val() == null || $('#del_id').val() == "")
                         return false;
                     if (data) {
@@ -72,7 +75,7 @@
         //实现对DataGird控件的绑定操作
         function InitGrid() {
             $('#grid').datagrid({
-                url: '../PSS_PurchasePlan/LoadList',
+                url: '../PSS_InWarehouse/LoadList',
                 singleSelect: true,
                 fit: true,
                 nowrap: true,//单行显示
@@ -85,12 +88,29 @@
                 fitColumns: true,       //自适应列宽
                 rownumbers: true,
                 columns: [[
-                     { title: '采购单号', field: 'PurchaseNo' },
+                     { title: '入库单号', field: 'IWID' },
+                     { title: '入库方式', field: 'Name' },
+                     { title: '进货单位', field: 'CompanyName' },
                      {
-                         title: '采购日期', field: 'PurchaseDate',
+                         title: '入库状态', field: 'IsIW',
                          formatter: function (value, row, index) {
-                             var date = value.split(' ');
-                             return date[0];
+                             if (value == 1)
+                                 return "已入库";
+                             else
+                                 return "未入库";
+
+                         }
+                     },
+                     {
+                         title: '入库时间', field: 'IWDate',
+                         formatter: function (value, row, index) {
+                             if (value != null) {
+                                 var date = value.split(' ');
+                                 return date[0];
+                             }
+                             else
+                                 return "此单还未入库";
+
                          }
                      },
                      { title: '操作工号', field: 'OperateNo' },
@@ -101,25 +121,15 @@
                              return date[0];
                          }
                      },
-                     {
-                         title: '采购状态', field: 'PurchaseStatus',
-                         formatter: function (value, row, index) {
-                             if (value == 0) {
-                                 return "未采购";
-                             } else if (value == 1) {
-                                 return "采购中";
-                             } else
-                                 return "已采购";
-                         }
-                     },
-                     { title: '备注', field: 'Remark' },
+
+                     { title: '备注', field: 'IWRemark' },
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    addTab('采购详单-' + rowData['PurchaseNo'], '../PSS_PurchasePlanDetail/PurchasePlanDetail?PurchaseNo=' + rowData['PurchaseNo']);
+                    addTab('入库详单-' + rowData['IWID'], '../PSS_InWarehouseDetail/PurchasePlanDetail?PurchaseNo=' + rowData['IWID']);
                 },
                 onClickRow: function (index, row) {
-                    $('#del_id').val(row['PurchaseNo']);
+                    $('#del_id').val(row['IWID']);
                 }
             })
             var p = $('#grid').datagrid('getPager');
@@ -135,8 +145,8 @@
             $('#dd').dialog({
                 title: '修改信息',
                 width: 300,
-                height: 300,
-                top: ($(window).height() - 300) * 0.5,      //居中
+                height: 350,
+                top: ($(window).height() - 350) * 0.5,      //居中
                 left: ($(window).width() - 300) * 0.5,
                 closed: true,
                 cache: false,
@@ -144,28 +154,50 @@
                 buttons: '#dlg-buttons'
             });
         }
+
+        //绑定供货单位下拉框
+        function InitControl() {
+            var dataJson = "";
+            getAjax("/PHA_Accounts/LoadSelectComPany", null, function (data) {
+                datajson = eval("(" + data + ")");
+                $.each(datajson, function (i) {
+                    $("#CompanyID").append($("<option></option>").val(datajson[i].CompanyID).html(datajson[i].CompanyName));
+                });
+            })
+            dataJson = "";
+            getAjax("/PSS_InWarehouse/LoadSelectInwarehourseMode", null, function (data) {
+                datajson = eval("(" + data + ")");
+                $.each(datajson, function (i) {
+                    $("#IWWay").append($("<option></option>").val(datajson[i].ID).html(datajson[i].Name));
+                });
+            })
+        }
     </script>
     <script>
         //表单验证和提交
         $(function () {
             $('#form').validate({
                 rules: {
-                    PurchaseNo: {
+                    IWID: {
                         required: true
                     },
-                    PurchaseDate: {
+                    IWWay: {
+                        required: true
+                    },
+                    CompanyID: {
                         required: true
                     }
                 },
                 messages: {
-                    PurchaseNo: "采购单号不能为空！",
-                    PurchaseDate: "采购日期不能为空！"
+                    IWID: "入库单号不能为空！",
+                    IWWay: "入库方式不能为空！",
+                    CompanyID: "进货单位不能为空！",
                 },
                 errorLabelContainer: '#errdiv>ul',
                 wrapper: 'li',
                 submitHandler: function (form) {
                     var postData = GetWebControls("#form");
-                    getAjax("/PSS_PurchasePlan/AcceptClick",
+                    getAjax("/PSS_InWarehouse/AcceptClick",
                         postData, function (data) {
                             if (data == 1) {
                                 //此处可以优化，提示消息可更美观。
@@ -197,6 +229,10 @@
         .td_col-180 {
             width: 180px;
         }
+
+        .td_col-185 {
+            width: 185px;
+        }
     </style>
 </head>
 <body style="margin:2px;padding:0">
@@ -222,12 +258,33 @@
             <input id="key" type="hidden" value="" />
             <table style="margin:8px">
                 <tr>
-                    <td>采购单号:</td>
-                    <td><input type="text" id="PurchaseNo" name="PurchaseNo" class="td_col-180" value="" disabled="disabled" /></td>
+                    <td>入库单号:</td>
+                    <td><input type="text" id="IWID" name="IWID" class="td_col-180" value="" disabled="disabled" /></td>
                 </tr>
                 <tr>
-                    <td>采购日期:</td>
-                    <td><input type="text" id="PurchaseDate" name="PurchaseDate" value=" " class="td_col-180" onclick="WdatePicker()" disabled="disabled" /></td>
+                    <td>入库方式:</td>
+                    <td><select id="IWWay" name="IWWay" class="td_col-185" disabled="disabled" /></td>
+                </tr>
+                <tr>
+                    <td>进货单位:</td>
+                    <td><select id="CompanyID" name="CompanyID" class="td-col-185" disabled="disabled" /></td>
+                </tr>
+                <tr>
+                    <td>附单据数:</td>
+                    <td><input type="text" id="Receipts" name="Receipts" value="" class="td_col-180" disabled="disabled" /></td>
+                </tr>
+                <tr>
+                    <td>入库状态:</td>
+                    <td>
+                        <select id="IsIW" name="IsIW" class="td_col-185">
+                            <option value="0">未入库</option>
+                            <option value="1">已入库</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>入库日期:</td>
+                    <td><input type="text" id="IWDate" name="IWDate" value="" class="td_col-180" disabled="disabled" /></td>
                 </tr>
                 <tr>
                     <td>操作工号:</td>
@@ -238,18 +295,8 @@
                     <td><input type="text" id="OperateDate" name="OperateDate" value="" class="td_col-180" disabled="disabled" /></td>
                 </tr>
                 <tr>
-                    <td>采购状态:</td>
-                    <td>
-                        <select id="PurchaseStatus" name="PurchaseStatus" class="td_col-180">
-                            <option value="0">未采购</option>
-                            <option value="1">采购中</option>
-                            <option value="2">已采购</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
                     <td>备注:</td>
-                    <td><textarea id="Remark" name="Remark" class="td_col-180"></textarea></td>
+                    <td><textarea id="IWRemark" name="IWRemark" class="td_col-180"></textarea></td>
                 </tr>
             </table>
             <div class="errdiv" id="errdiv">
