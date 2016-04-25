@@ -16,6 +16,7 @@ namespace MIMS.IBusiness
         /// </summary>
         /// <returns></returns>
         IList GetList();
+
         /// <summary>
         /// 根据主键值获得一个对象
         /// </summary>

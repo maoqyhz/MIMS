@@ -16,7 +16,7 @@ namespace MIMS.Entity.Model
         /// <summary>
         /// IWID
         /// </summary>		
-        public int IWID { get; set; }
+        public string IWID { get; set; }
         /// <summary>
         /// IWWay
         /// </summary>		
@@ -49,15 +49,6 @@ namespace MIMS.Entity.Model
         /// InWarehouseSum
         /// </summary>		
         public double InWarehouseSum { get; set; }
-        /// <summary>
-        /// PayNo
-        /// </summary>		
-        public string PayNo { get; set; }
-        /// <summary>
-        /// PayDate
-        /// </summary>		
-        public DateTime PayDate { get; set; }
-
     }
 }
 

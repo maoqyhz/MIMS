@@ -38,6 +38,7 @@
                 $('#key').val(0);
                 $('#IWID').attr('placeholder', '编号：R+日期+序号');
                 $('#IWID').removeAttr('disabled');
+                $('#IsIW').removeAttr('disabled');
                 $('#IWWay').removeAttr('disabled');
                 $('#CompanyID').removeAttr('disabled');
                 $('#Receipts').removeAttr('disabled');
@@ -48,6 +49,7 @@
                         { id: $('#del_id').val() }, function (data) {
                             var data = eval("(" + data + ")");
                             SetWebControls(data);
+                            $('#old_isiw').val($('#IsIW').val());
                             if ($('#IsIW').val() == 1)
                                 $('#IsIW').attr('disabled', 'disabled');
                         });
@@ -128,7 +130,7 @@
                 ]],
                 toolbar: '#tb',
                 onDblClickRow: function (rowIndex, rowData) {
-                    addTab('入库详单-' + rowData['IWID'], '../PSS_InWarehouseDetail/PurchasePlanDetail?PurchaseNo=' + rowData['IWID']);
+                    addTab('入库详单-' + rowData['IWID'], '../PSS_InWarehouseDetail/InWarehouseDetail?IWID=' + rowData['IWID']);
                 },
                 onClickRow: function (index, row) {
                     $('#del_id').val(row['IWID']);
@@ -258,6 +260,7 @@
     <div id="dd" class="easyui-dialog">
         <form id="form" name="form" method="post">
             <input id="key" type="hidden" value="" />
+            <input id="old_isiw" type="hidden" value="" />
             <table style="margin:8px">
                 <tr>
                     <td>入库单号:</td>

@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSS_ExWarehouseModeBLL.cs" />
     <Compile Include="PSS_InWarehouseBLL.cs" />
+    <Compile Include="PSS_InWarehouseDetailBLL.cs" />
     <Compile Include="PSS_InWarehouseModeBLL.cs" />
     <Compile Include="PSS_PurchaseCompanyBLL.cs" />
     <Compile Include="PSS_PurchasePlanBLL.cs" />

@@ -14,21 +14,26 @@ namespace MIMS.Business
     {
         private static readonly PHA_AccountsDAL dal = new PHA_AccountsDAL();
 
-        public IList GetPageList(string query, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
+        public IList GetPageList(Hashtable ht, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
         {
-            string where = string.Empty;
+            StringBuilder where = new StringBuilder();
             Dictionary<string, object> prams = new Dictionary<string, object>();
-            if (!string.IsNullOrEmpty(query))
+            if (ht["CompanyID"] != null && !string.IsNullOrEmpty(ht["CompanyID"].ToString()))
             {
-                prams.Add("@PinyinCode", "%" + query + "%");
-                where = " AND PinyinCode like @PinyinCode";
+                where.Append(" AND CompanyID = @CompanyID");
+                prams.Add("@CompanyID", ht["CompanyID"]);
             }
-            return dal.GetPageListWhere(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
+            if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))
+            {
+                prams.Add("@PinyinCode", "%" + ht["PinyinCode"] + "%");
+                where.Append(" AND PinyinCode like @PinyinCode");
+            }
+            return dal.GetPageListWhere(where, prams, orderField, orderType, pageIndex, pageSize, ref count);
         }
 
         public PHA_Accounts GetEntity(string phaCode, string orginID)
         {
-            return dal.GetEntity(phaCode,orginID);
+            return dal.GetEntity(phaCode, orginID);
         }
 
 

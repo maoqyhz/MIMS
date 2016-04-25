@@ -35,10 +35,13 @@ namespace MIMS.Web.Controllers
         /// <param name="query">条件</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult LoadList(string rows, string page, string sort, string order, string query)
+        public ActionResult LoadList(string rows, string page, string sort, string order, string pinyin, string companyID)
         {
+            Hashtable ht = new Hashtable();
+            ht.Add("PinyinCode",pinyin);
+            ht.Add("CompanyID",companyID);
             int count = default(int);
-            IList list = ipha_accountsbll.GetPageList(query, sort, order, int.Parse(page), int.Parse(rows), ref count);
+            IList list = ipha_accountsbll.GetPageList(ht, sort, order, int.Parse(page), int.Parse(rows), ref count);
             return Content(JsonConvert.SerializeObject(new
             {
                 total = count,

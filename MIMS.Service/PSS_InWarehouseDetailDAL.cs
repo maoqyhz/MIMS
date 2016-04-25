@@ -13,8 +13,9 @@ using MIMS.Entity.Dtos;
 
 namespace MIMS.Service
 {
-    public class PSS_PurchasePlanDetailDAL
+    public class PSS_InWarehouseDetailDAL
     {
+
         #region init dbconnection
         private static readonly string connString = ConfigurationManager.ConnectionStrings["PharmacySystem"].ConnectionString;
         private IDbConnection _conn;
@@ -33,12 +34,14 @@ namespace MIMS.Service
         /// 获取一个list的数据
         /// </summary>
         /// <returns></returns>
-        public IList GetList()
+        public IList GetList(Dictionary<string, object> prams, string where = null)
         {
             using (Conn)
             {
-                string query = "SELECT * FROM PSS_PurchasePlanDetail";
-                return Conn.Query<PSS_PurchasePlanDetail>(query).ToList();
+                string query = "SELECT * FROM PSS_InWarehouseDetail WHERE 1=1 ";
+                if (!string.IsNullOrEmpty(where))
+                    query += where;
+                return Conn.Query<PSS_InWarehouseDetail>(query, prams).ToList();
             }
 
         }
@@ -61,33 +64,24 @@ namespace MIMS.Service
             {
                 StringBuilder strSql = new StringBuilder();
                 StringBuilder sql = new StringBuilder();
-                sql.Append(@"SELECT * FROM (SELECT 
+                sql.Append(@"SELECT * FROM (SELECT  I.*,
 													B.PinyinCode,
-													P.PhaCode,
-													P.OrginID,
-													P.ID,
-													P.PurchaseNum,
-													P.PurchaseNo,
-													A.InWarehousePrice,
-													A.WholesalePrice,
-													A.RetailPrice,
 													A.Stock,
 													B.PhaName,
 													B.Spec,
 													B.Unit,
 													O.OrginName,
 													C.CompanyName
-													 FROM PSS_PurchasePlanDetail P
-													LEFT JOIN PHA_Accounts A ON P.PhaCode = A.PhaCode AND P.OrginID = A.OrginID
-													LEFT JOIN PHA_BaseInfo B ON P.PhaCode = B.PhaCode
-													LEFT JOIN PHA_Orgin O ON P.OrginID = O.OrginID
+														FROM PSS_InWarehouseDetail I
+													LEFT JOIN PHA_Accounts A ON I.PhaCode = A.PhaCode AND I.OrginID = A.OrginID
+													LEFT JOIN PHA_BaseInfo B ON I.PhaCode = B.PhaCode
+													LEFT JOIN PHA_Orgin O ON I.OrginID = O.OrginID
 													LEFT JOIN PSS_PurchaseCompany C ON A.CompanyID = C.CompanyID) A WHERE 1=1 ");
-
                 sql.Append(where);
                 strSql.Append("Select * From (Select ROW_NUMBER() Over (Order By " + orderField + " " + orderType + "");
                 strSql.Append(") As rowNum, * From (" + sql + ") As T ) As N Where rowNum > " + num + " And rowNum <= " + num1 + "");
                 count = Conn.Query<int>("Select Count(1) From (" + sql + ") As t", prams).Single();
-                return Conn.Query<Dto_PurchasePlanDetail>(strSql.ToString(), prams).ToList();
+                return Conn.Query<Dto_InWarehouseDetail>(strSql.ToString(), prams).ToList();
             }
         }
 
@@ -96,40 +90,41 @@ namespace MIMS.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PSS_PurchasePlanDetail GetEntity(string id)
+        public PSS_InWarehouseDetail GetEntity(string id)
         {
             using (Conn)
             {
-                string query = "SELECT * FROM PSS_PurchasePlanDetail WHERE ID=@ID";
-                return Conn.Query<PSS_PurchasePlanDetail>(query, new { ID = id }).SingleOrDefault();
+                string query = "SELECT * FROM PSS_InWarehouseDetail WHERE ID=@ID";
+                return Conn.Query<PSS_InWarehouseDetail>(query, new { ID = id }).SingleOrDefault();
             }
         }
 
-        //        public int Update(PSS_PurchasePlanDetail obj)
+        //        public int Update(PSS_InWarehouseDetail obj)
         //        {
         //            using (Conn)
         //            {
-        //                string query = @"UPDATE PSS_PurchasePlanDetail 
+        //                string query = @"UPDATE PSS_InWarehouseDetail 
         //                                    SET  PurchaseNo=@PurchaseNo,PurchaseDate=@PurchaseDate,
         //                                         Remark=@Remark,OperateNo=@OperateNo,OperateDate=@OperateDate,PurchaseStatus=@PurchaseStatus 
         //                                       WHERE PurchaseNo =@PurchaseNo";
         //                return Conn.Execute(query, obj);
         //            }
         //        }
-        public int Insert(PSS_PurchasePlanDetail obj)
+        public int Insert(PSS_InWarehouseDetail obj)
         {
+            obj.InWarehouseSum = obj.InWarehousePrice * obj.InWarehouseCount;
             using (Conn)
             {
-                string query = @"INSERT INTO PSS_PurchasePlanDetail 
-                                    VALUES(@PurchaseNo,@PhaCode,@OrginID,@PurchaseNum)";
+                string query = @"INSERT INTO PSS_InWarehouseDetail 
+									VALUES(@IWID,@IWWay,@PhaCode,@OrginID,@PhaNo,@PhaExpiry,@InWarehouseCount,@InWarehousePrice,@InWarehouseSum)";
                 return Conn.Execute(query, obj);
             }
         }
-        public int Delete(PSS_PurchasePlanDetail obj)
+        public int Delete(PSS_InWarehouseDetail obj)
         {
             using (Conn)
             {
-                string query = @"DELETE FROM PSS_PurchasePlanDetail WHERE ID = @ID";
+                string query = @"DELETE FROM PSS_InWarehouseDetail WHERE ID = @ID";
                 return Conn.Execute(query, obj);
             }
         }

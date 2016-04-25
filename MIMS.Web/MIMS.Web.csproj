@@ -871,6 +871,7 @@
     <Compile Include="Controllers\PHA_RepositoryController.cs" />
     <Compile Include="Controllers\PSS_ExWarehouseModeController.cs" />
     <Compile Include="Controllers\PSS_InWarehouseController.cs" />
+    <Compile Include="Controllers\PSS_InWarehouseDetailController.cs" />
     <Compile Include="Controllers\PSS_InWarehouseModeController.cs" />
     <Compile Include="Controllers\DrugManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -918,6 +919,7 @@
     <Content Include="Views\PSS_PurchasePlan\PurchasePlan.cshtml" />
     <Content Include="Views\PSS_PurchasePlanDetail\PurchasePlanDetail.cshtml" />
     <Content Include="Views\PSS_InWarehouse\InWarehouse.cshtml" />
+    <Content Include="Views\PSS_InWarehouseDetail\InWarehouseDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -56,7 +56,13 @@ namespace MIMS.Service
         {
             using (Conn)
             {
-                string query = "SELECT * FROM PSS_InWarehouse WHERE IWID=@IWID";
+                string query = @"SELECT  I.*,
+                                        M.Name,
+                                        C.CompanyName
+                                        FROM PSS_InWarehouse I
+                                        LEFT JOIN PSS_InWarehouseMode M ON I.IWWay = M.ID
+                                        LEFT JOIN PSS_PurchaseCompany C ON I.CompanyID = C.CompanyID 
+                                        WHERE IWID=@IWID";
                 return Conn.Query<PSS_InWarehouse>(query, new { IWID = id }).SingleOrDefault();
             }
         }
