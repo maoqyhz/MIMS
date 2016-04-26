@@ -43,6 +43,9 @@
                 $('#dd').dialog('open');
             });
             $('#edit').click(function () {
+                $('#EWID').attr('disabled','disabled');
+                $('#IsEW').attr('disabled','disabled');
+                $('#EWWay').attr('disabled','disabled');
                 getAjax("../PSS_ExWarehouse/LoadForm",
                         { id: $('#del_id').val() }, function (data) {
                             var data = eval("(" + data + ")");

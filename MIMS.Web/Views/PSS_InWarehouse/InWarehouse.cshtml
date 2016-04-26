@@ -45,6 +45,11 @@
                 $('#dd').dialog('open');
             });
             $('#edit').click(function () {
+                $('#IWID').attr('disabled','disabled');
+                $('#IsIW').attr('disabled','disabled');
+                $('#IWWay').attr('disabled','disabled');
+                $('#CompanyID').attr('disabled','disabled');
+                $('#Receipts').attr('disabled','disabled');
                 getAjax("../PSS_InWarehouse/LoadForm",
                         { id: $('#del_id').val() }, function (data) {
                             var data = eval("(" + data + ")");
