@@ -894,6 +894,7 @@
     <Compile Include="Controllers\PSS_PurchasePlanController.cs" />
     <Compile Include="Controllers\PSS_PurchasePlanDetailController.cs" />
     <Compile Include="Controllers\RoleActionFilterAttribute.cs" />
+    <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -937,6 +938,9 @@
     <Content Include="Views\PSS_InWarehouseDetail\InWarehouseDetail.cshtml" />
     <Content Include="Views\PSS_ExWarehouse\ExWarehouse.cshtml" />
     <Content Include="Views\PSS_ExWarehouseDetail\ExWarehouseDetail.cshtml" />
+    <Content Include="Views\Setup\SqlConn.cshtml" />
+    <Content Include="Views\Setup\ModifyPsw.cshtml" />
+    <Content Include="Views\Setup\Help.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

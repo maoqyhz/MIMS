@@ -52,8 +52,16 @@
                 </ul>
 
             </div>
-            <div title="盘查询管理" data-options="iconCls:'icon-Inventory'" style="padding:10px;"></div>
-            <div title="系统设置" data-options="iconCls:'icon-setup'" style="padding:10px;"></div>
+            <div title="查询管理" data-options="iconCls:'icon-Inventory'" style="padding:10px;"></div>
+            <div title="系统设置" data-options="iconCls:'icon-setup'" style="padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('连接查看', '../Setup/SqlConn')">连接查看</a></li>
+                    <li><a href="#" onclick="addTab('密码修改', '../Setup/ModifyPsw')">密码修改</a></li>
+                    <li><a href="#" onclick="addTab('查看帮助', '../Setup/Help')">查看帮助</a></li>
+                    <li><a href="../User/Logout">退出系统</a></li>
+
+                </ul>
+            </div>
         </div>
     </div>
     <div data-options="region:'center'">
@@ -69,9 +77,9 @@
             @{
                 HttpCookie cookie = Request.Cookies["user"];
                 <span>工号：@cookie.Values["Code"]</span>
-                <span>姓名：@cookie.Values["Name"]</span>
-                <span>角色：@cookie.Values["Role"]</span>
-                <span>部门：@cookie.Values["Department"]</span>
+                <span>姓名：@HttpUtility.UrlDecode(cookie.Values["Name"])</span>
+                <span>角色：@HttpUtility.UrlDecode(cookie.Values["Role"])</span>
+                <span>部门：@HttpUtility.UrlDecode(cookie.Values["Department"])</span>
                 <span>IP：@cookie.Values["IP"]</span>
             }
         </p>

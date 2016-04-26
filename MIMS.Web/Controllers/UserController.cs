@@ -37,13 +37,13 @@ namespace MIMS.Web.Controllers
             else if (user.Password == EncryptUtils.MD5Encrypt(password))
             {
                 msg = "2";
-                cookie.Values.Add("Username", user.Username);
+                cookie.Values.Add("Username", HttpUtility.UrlEncode(user.Username));
                 cookie.Values.Add("Code", user.Code);
-                cookie.Values.Add("Name", user.Name);
+                cookie.Values.Add("Name", HttpUtility.UrlEncode(user.Name));
                 cookie.Values.Add("Tel", user.Tel);
-                cookie.Values.Add("Role", user.Role);
-                cookie.Values.Add("Address", user.Address);
-                cookie.Values.Add("Department", user.Department);
+                cookie.Values.Add("Role", HttpUtility.UrlEncode(user.Role));
+                cookie.Values.Add("Address", HttpUtility.UrlEncode(user.Address));
+                cookie.Values.Add("Department", HttpUtility.UrlEncode(user.Department));
                 cookie.Values.Add("IP", user.IP);
                 cookie.Expires = DateTime.Now.AddDays(7);
                 Response.SetCookie(cookie);
@@ -59,6 +59,21 @@ namespace MIMS.Web.Controllers
             cookie.Expires = DateTime.Now;
             Response.Cookies.Add(cookie);
             return RedirectToAction("Login", "User");
+        }
+        public ActionResult ModifyPassword(string Username, string Password, string newPassword)
+        {
+            int isOk = default(int);
+            COM_User user = icom_userbll.GetEntity(Username);
+            Password = EncryptUtils.MD5Encrypt(Password.Trim());
+
+            if (user.Password == Password)
+            {
+                user.Password = EncryptUtils.MD5Encrypt(newPassword.Trim());
+                isOk = icom_userbll.Update(user);
+            }
+            else
+                isOk = -1;
+            return Content(isOk.ToString());
         }
     }
 }

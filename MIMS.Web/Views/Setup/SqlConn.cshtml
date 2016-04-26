@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SqlConn</title>
+    @*Easyui需要引入的文件*@
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+</head>
+<body style="margin:0;padding:0">
+    <div style="position:fixed;width:100%;height:100%">
+        <div class="easyui-panel" title="查看连接" data-options="fit:true">
+            <div style="margin:20px 0 0 20px">
+                @Html.Raw(ViewBag.connString)
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -46,7 +46,7 @@ namespace MIMS.Service
             using (Conn)
             {
                 string query = @"UPDATE COM_User 
-                                    SET  Code=@Code,Name=@Name,Username=@Username,Password=Password,
+                                    SET  Code=@Code,Name=@Name,Username=@Username,Password=@Password,
                                          Role=@Role,Tel=@Tel,Address=@Address,Department=@Department,IP=@IP
                                        WHERE Username =@Username";
                 return Conn.Execute(query, obj);
