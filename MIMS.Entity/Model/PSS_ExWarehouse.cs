@@ -18,17 +18,30 @@ namespace MIMS.Entity.Model
         /// </summary>		
         public int EWWay { get; set; }
         /// <summary>
+        /// EWWayName(FK)
+        /// </summary>		
+        public string Name { get; set; }
+        /// <summary>
+        /// IsEW
+        /// </summary>
+        /// <returns></returns>
+        public int IsEW { get; set; }
+        /// <summary>
         /// Remark
         /// </summary>		
         public string Remark { get; set; }
         /// <summary>
         /// EWDate
         /// </summary>		
-        public DateTime EWDate { get; set; }
+        public string EWDate { get; set; }
         /// <summary>
         /// OperateNo
         /// </summary>		
         public string OperateNo { get; set; }
+        /// <summary>
+        /// OperateDate
+        /// </summary>		
+        public string OperateDate { get; set; }
 
     }
 }

@@ -29,26 +29,11 @@ namespace MIMS.Entity.Model
         /// OrginID
         /// </summary>		
         public int OrginID { get; set; }
+
         /// <summary>
-        /// InWarehousePrice
+        /// ExWarehouseNum
         /// </summary>		
-        public double InWarehousePrice { get; set; }
-        /// <summary>
-        /// WholesalePrice
-        /// </summary>		
-        public double WholesalePrice { get; set; }
-        /// <summary>
-        /// RetailPrice
-        /// </summary>		
-        public double RetailPrice { get; set; }
-        /// <summary>
-        /// ApplyNum
-        /// </summary>		
-        public int ApplyNum { get; set; }
-        /// <summary>
-        /// RealNum
-        /// </summary>		
-        public int RealNum { get; set; }
+        public double ExWarehouseNum { get; set; }
 
     }
 }
