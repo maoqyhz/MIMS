@@ -24,7 +24,12 @@ namespace MIMS.Business
                 where = " AND IWID = @IWID";
                 prams.Add("@IWID", ht["IWID"]);
             }
-            return dal.GetList(prams,where);
+            if (ht["PhaCode"] != null && !string.IsNullOrEmpty(ht["PhaCode"].ToString()))
+            {
+                where = " AND PhaCode = @PhaCode";
+                prams.Add("@PhaCode", ht["PhaCode"]);
+            }
+            return dal.GetList(prams, where);
         }
 
         public IList GetPageList(string query, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
@@ -55,6 +60,19 @@ namespace MIMS.Business
         public int Delete(PSS_InWarehouseDetail obj)
         {
             return dal.Delete(obj);
+        }
+
+        public IList SearchPhaListByDate(string startDate, string endDate, Hashtable ht, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
+        {
+            string where = string.Format(" AND IWDate >= '{0}' AND IWDate <= '{1}'",startDate,endDate);
+            Dictionary<string, object> prams = new Dictionary<string, object>();
+            if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))
+            {
+                where += " AND PinyinCode like @PinyinCode";
+                prams.Add("@PinyinCode", '%' + ht["PinyinCode"].ToString() + '%');
+            }
+            return dal.SearchInDatePha(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
+
         }
     }
 }

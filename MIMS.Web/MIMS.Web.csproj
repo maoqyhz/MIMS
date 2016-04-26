@@ -879,6 +879,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\InHistoryController.cs" />
     <Compile Include="Controllers\PHA_AccountsController.cs" />
     <Compile Include="Controllers\PHA_OrginController.cs" />
     <Compile Include="Controllers\PHA_RepositoryController.cs" />
@@ -941,6 +942,7 @@
     <Content Include="Views\Setup\SqlConn.cshtml" />
     <Content Include="Views\Setup\ModifyPsw.cshtml" />
     <Content Include="Views\Setup\Help.cshtml" />
+    <Content Include="Views\InHistory\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

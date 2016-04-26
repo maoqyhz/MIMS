@@ -25,5 +25,7 @@ namespace MIMS.IBusiness
         PSS_InWarehouseDetail GetEntity(string id);
         int Insert(PSS_InWarehouseDetail obj);
         int Delete(PSS_InWarehouseDetail obj);
+        IList SearchPhaListByDate(string startDate, string endDate, Hashtable ht, string orderField, string orderType, int pageIndex, int pageSize, ref int count);
+
     }
 }

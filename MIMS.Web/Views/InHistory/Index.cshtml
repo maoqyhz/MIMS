@@ -1,0 +1,154 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @*Easyui需要引入的文件*@
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="bookmark" href="/favicon.ico" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @*本地css和js引入*@
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Content/Site.js"></script>
+    <script>
+        $(function () {
+            InitPhaDialoggrid();
+            // InitGrid();
+        });
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid() {
+            $('#grid').datagrid({
+                url: '../InHistory/SearchDetailByPha',
+                singleSelect: true,
+                fit: true,
+                nowrap: true,//单行显示
+                autoRowHeight: false,
+                striped: false,     //斑马纹
+                collapsible: true,      //可折叠
+                pagination: true,
+                pageSize: 20,
+                fitColumns: true,       //自适应列宽
+                rownumbers: true,
+                sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: true,
+                loadMsg: '加载中，请等待',
+                queryParams: ({
+                    PhaCode:$('#PhaCode').val()
+                }),  //异步查询的参数
+                columns: [[
+                     { title: '编号', field: 'ID', hidden: true },
+                     { title: '入库单号', field: 'IWID'},
+                     { title: '入库方式', field: 'Name'},
+                     { title: '入库数量', field: 'InWarehouseCount', sortable: true, align: 'center' },
+                     { title: '采购金额', field: 'InWarehouseSum', sortable: true, align: 'center' },
+                     { title: '入库日期', field: 'IWDate', sortable: true, align: 'center' },
+                ]],
+                onDblClickRow: function (rowIndex, rowData) {
+
+                },
+                onClickRow: function (index, row) {
+                    
+                }
+
+            })
+            var p = $('#grid').datagrid('getPager');
+            $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
+                beforePageText: '第',
+                afterPageText: '页   共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+            });
+        };
+
+
+        //药品选择器
+        function InitPhaDialoggrid() {
+            $('#phagrid').datagrid({
+                url: '../InHistory/SearchPhaListByDate',
+                fit: true,
+                nowrap: true,//单行显示
+                autoRowHeight: false,
+                singleSelect: true,
+                striped: false,     //斑马纹
+                collapsible: true,      //可折叠
+                pagination: true,
+                pageSize: 20,
+                fitColumns: true,       //自适应列宽
+                rownumbers: true,
+                sortName: 'PhaCode',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: true,
+                loadMsg: '加载中，请等待',
+                queryParams: ({
+                    pinyin: $('#phagrid_dir').val(),
+                    startDate: $('#startDate').val(),
+                    endDate: $('#endDate').val()
+
+                }),  //异步查询的参数
+                columns: [[
+                     { title: '编号', field: 'PhaCode', hidden: true },
+                     { title: '药名', field: 'PhaName', sortable: true },
+                     { title: '规格', field: 'Spec', sortable: true },
+                     { title: '单位', field: 'Unit', sortable: true, },
+                     { title: '产地', field: 'OrginName' },
+                     { title: '入货数量', field: 'InWarehouseCount' }
+                ]],
+                toolbar: '#phagrid_tb',
+                onDblClickRow: function (rowIndex, rowData) {
+                    $('#PhaCode').val(rowData["PhaCode"]);
+                    InitGrid();
+                }
+            })
+            var p = $('#phagrid').datagrid('getPager');
+            $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
+                beforePageText: '第',
+                afterPageText: '页   共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+            });
+        };
+
+    </script>
+</head>
+<body class="easyui-layout" id="body">
+    <div data-options="region:'north',border:false" style="float:left;height:38px;">
+        <div class="easyui-panel" style="padding:5px;">
+            入库日期：
+            <input type="text" id="startDate" name="startDate" value="@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")" onclick="WdatePicker()" />
+            到
+            <input type="text" id="endDate" name="endDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" onclick="WdatePicker()" />
+            <a href="#" class="easyui-linkbutton" data-options="plain:true" onclick="InitPhaDialoggrid()">筛选</a>
+        </div>
+    </div>
+    <div id="left_part" data-options="region:'west',border:true" style="float:left;width:400px;">
+        <div id="phaselect">
+            <div style="position:fixed;width:400px;height:92%;">
+                <table id="phagrid"></table>
+            </div>
+            <div id="phagrid_tb" style="padding:3px">
+                <span>拼音码:</span>
+                <input id="phagrid_dir" style="border:1px solid #ccc">
+                <a href="#" class="easyui-linkbutton" plain="true" onclick="InitPhaDialoggrid()">查找</a>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:true" style="float:left">
+        <input type="hidden" id="PhaCode" value=""/>
+        <table id="grid"></table>
+    </div>
+</body>
+</html>

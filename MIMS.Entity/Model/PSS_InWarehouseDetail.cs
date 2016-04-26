@@ -22,6 +22,10 @@ namespace MIMS.Entity.Model
         /// </summary>		
         public int IWWay { get; set; }
         /// <summary>
+        /// Name
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
         /// PhaCode
         /// </summary>		
         public string PhaCode { get; set; }
@@ -49,6 +53,11 @@ namespace MIMS.Entity.Model
         /// InWarehouseSum
         /// </summary>		
         public double InWarehouseSum { get; set; }
+
+        /// <summary>
+        /// IWDate
+        /// </summary>
+        public string IWDate { get; set; }
     }
 }
 

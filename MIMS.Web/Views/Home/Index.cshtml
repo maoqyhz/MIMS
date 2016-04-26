@@ -24,7 +24,7 @@
 <body class="easyui-layout">
     <div region="north" id="header">
         <img src="~/Content/image/Medicine.png" id="logo" />
-        <h1 id="title">医院药库管理系统</h1>
+        <h1 id="title">医院药库管理系统(Beta)</h1>
         <a href="../User/Logout"><img style="float: right;margin-top: 50px;margin-right: 20px;" src="~/Content/image/logout.png" /></a>
     </div>
     <div region="west" class="easyui-panel" title="导航菜单" split="true" style="width:220px">
@@ -50,9 +50,13 @@
                     <li><a href="#" onclick="addTab('药品入库', '../PSS_InWarehouse/InWarehouse')">药品入库</a></li>
                     <li><a href="#" onclick="addTab('药品出库', '../PSS_ExWarehouse/ExWarehouse')">药品出库</a></li>
                 </ul>
-
             </div>
-            <div title="查询管理" data-options="iconCls:'icon-Inventory'" style="padding:10px;"></div>
+            <div title="查询管理" data-options="iconCls:'icon-Inventory'" style="padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('药品入库历史', '../InHistory/Index')">药品入库历史</a></li>
+                    <li><a href="#" onclick="addTab('药品出库历史', '../ExHistory/Index')">药品出库历史</a></li>
+                </ul>
+            </div>
             <div title="系统设置" data-options="iconCls:'icon-setup'" style="padding:10px;">
                 <ul class="easyui-tree">
                     <li><a href="#" onclick="addTab('连接查看', '../Setup/SqlConn')">连接查看</a></li>

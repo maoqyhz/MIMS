@@ -60,6 +60,7 @@ namespace MIMS.Web.Controllers
             Response.Cookies.Add(cookie);
             return RedirectToAction("Login", "User");
         }
+        [HttpPost]
         public ActionResult ModifyPassword(string Username, string Password, string newPassword)
         {
             int isOk = default(int);

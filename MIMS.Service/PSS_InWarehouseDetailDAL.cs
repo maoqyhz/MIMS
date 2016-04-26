@@ -38,7 +38,9 @@ namespace MIMS.Service
         {
             using (Conn)
             {
-                string query = "SELECT * FROM PSS_InWarehouseDetail WHERE 1=1 ";
+                string query = @"SELECT IW.*,M.Name,I.IWDate FROM PSS_InWarehouseDetail IW
+                                        LEFT JOIN PSS_InWarehouseMode M ON IW.IWWay = M.ID
+                                        LEFT JOIN PSS_InWarehouse I ON IW.IWID = I.IWID WHERE 1=1  ";
                 if (!string.IsNullOrEmpty(where))
                     query += where;
                 return Conn.Query<PSS_InWarehouseDetail>(query, prams).ToList();
@@ -98,18 +100,6 @@ namespace MIMS.Service
                 return Conn.Query<PSS_InWarehouseDetail>(query, new { ID = id }).SingleOrDefault();
             }
         }
-
-        //        public int Update(PSS_InWarehouseDetail obj)
-        //        {
-        //            using (Conn)
-        //            {
-        //                string query = @"UPDATE PSS_InWarehouseDetail 
-        //                                    SET  PurchaseNo=@PurchaseNo,PurchaseDate=@PurchaseDate,
-        //                                         Remark=@Remark,OperateNo=@OperateNo,OperateDate=@OperateDate,PurchaseStatus=@PurchaseStatus 
-        //                                       WHERE PurchaseNo =@PurchaseNo";
-        //                return Conn.Execute(query, obj);
-        //            }
-        //        }
         public int Insert(PSS_InWarehouseDetail obj)
         {
             obj.InWarehouseSum = obj.InWarehousePrice * obj.InWarehouseCount;
@@ -126,6 +116,47 @@ namespace MIMS.Service
             {
                 string query = @"DELETE FROM PSS_InWarehouseDetail WHERE ID = @ID";
                 return Conn.Execute(query, obj);
+            }
+        }
+
+
+        /// <summary>
+        /// 分页获取符合条件的入货药品记录
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="prams"></param>
+        /// <param name="orderField"></param>
+        /// <param name="orderType"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public IList SearchInDatePha(StringBuilder where, Dictionary<string, object> prams, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
+        {
+            int num = (pageIndex - 1) * pageSize;
+            int num1 = pageIndex * pageSize;
+            using (Conn)
+            {
+                StringBuilder strSql = new StringBuilder();
+                StringBuilder sql = new StringBuilder();
+                sql.Append(@"SELECT * FROM (SELECT IW.PhaCode,
+                                                    IW.OrginID,
+                                                    IW.InWarehouseCount,
+                                                    I.IWDate,
+                                                    B.PhaName,
+                                                    B.Spec,
+                                                    B.Unit,
+                                                    B.PinyinCode,
+                                                    O.OrginName
+                                                     FROM PSS_InWarehouseDetail IW
+                                                    LEFT JOIN PHA_BaseInfo B ON IW.PhaCode = B.PhaCode
+                                                    LEFT JOIN PHA_Orgin O ON IW.OrginID = O.OrginID
+                                                    LEFT JOIN PSS_InWarehouse I ON IW.IWID = I.IWID) A WHERE 1=1 ");
+                sql.Append(where);
+                strSql.Append("Select * From (Select ROW_NUMBER() Over (Order By " + orderField + " " + orderType + "");
+                strSql.Append(") As rowNum, * From (" + sql + ") As T ) As N Where rowNum > " + num + " And rowNum <= " + num1 + "");
+                count = Conn.Query<int>("Select Count(1) From (" + sql + ") As t", prams).Single();
+                return Conn.Query<Dto_InWarehouseDetail>(strSql.ToString(), prams).ToList();
             }
         }
     }
