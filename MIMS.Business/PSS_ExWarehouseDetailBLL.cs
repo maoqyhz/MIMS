@@ -11,7 +11,7 @@ using MIMS.Entity.Dtos;
 
 namespace MIMS.Business
 {
-    public class PSS_ExWarehouseDetailBLL:IPSS_ExWarehouseDetailBLL
+    public class PSS_ExWarehouseDetailBLL : IPSS_ExWarehouseDetailBLL
     {
         private static readonly PSS_ExWarehouseDetailDAL dal = new PSS_ExWarehouseDetailDAL();
 
@@ -23,6 +23,11 @@ namespace MIMS.Business
             {
                 where = " AND EWID = @EWID";
                 prams.Add("@EWID", ht["EWID"]);
+            }
+            if (ht["PhaCode"] != null && !string.IsNullOrEmpty(ht["PhaCode"].ToString()))
+            {
+                where = " AND PhaCode = @PhaCode";
+                prams.Add("@PhaCode", ht["PhaCode"]);
             }
             return dal.GetList(prams, where);
         }
@@ -53,6 +58,18 @@ namespace MIMS.Business
         public int Delete(PSS_ExWarehouseDetail obj)
         {
             return dal.Delete(obj);
+        }
+        public IList SearchPhaListByDate(string startDate, string endDate, Hashtable ht, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
+        {
+            string where = string.Format(" AND EWDate >= '{0}' AND EWDate <= '{1}'", startDate, endDate);
+            Dictionary<string, object> prams = new Dictionary<string, object>();
+            if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))
+            {
+                where += " AND PinyinCode like @PinyinCode";
+                prams.Add("@PinyinCode", '%' + ht["PinyinCode"].ToString() + '%');
+            }
+            IList list = dal.SearchInDatePha(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
+            return list;
         }
     }
 }

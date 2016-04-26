@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = null;
 }
 
@@ -7,8 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    @*Easyui需要引入的文件*@
+    <title>Index</title> @*Easyui需要引入的文件*@
     <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
     <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
     <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
         //实现对DataGird控件的绑定操作
         function InitGrid() {
             $('#grid').datagrid({
-                url: '../InHistory/SearchDetailByPha',
+                url: '../ExHistory/SearchDetailByPha',
                 singleSelect: true,
                 fit: true,
                 nowrap: true,//单行显示
@@ -49,20 +49,16 @@
                 }),  //异步查询的参数
                 columns: [[
                      { title: '编号', field: 'ID', hidden: true },
-                     { title: '入库单号', field: 'IWID'},
-                     { title: '入库方式', field: 'Name' },
-                     { title: '供货单位', field: 'CompanyName' },
-                     { title: '药品批次', field: 'PhaNo' },
-                     { title: '采购价格', field: 'InWarehousePrice' },
-                     { title: '入库数量', field: 'InWarehouseCount', sortable: true, align: 'center' },
-                     { title: '采购金额', field: 'InWarehouseSum', sortable: true, align: 'center' },
-                     { title: '入库日期', field: 'IWDate', sortable: true, align: 'center' },
+                     { title: '出库单号', field: 'EWID'},
+                     { title: '出库方式', field: 'Name'},
+                     { title: '出库数量', field: 'ExWarehouseNum', sortable: true, align: 'center' },
+                     { title: '出库日期', field: 'EWDate', sortable: true, align: 'center' },
                 ]],
                 onDblClickRow: function (rowIndex, rowData) {
 
                 },
                 onClickRow: function (index, row) {
-                    
+
                 }
 
             })
@@ -80,7 +76,7 @@
         //药品选择器
         function InitPhaDialoggrid() {
             $('#phagrid').datagrid({
-                url: '../InHistory/SearchPhaListByDate',
+                url: '../ExHistory/SearchPhaListByDate',
                 fit: true,
                 nowrap: true,//单行显示
                 autoRowHeight: false,
@@ -107,7 +103,7 @@
                      { title: '规格', field: 'Spec', sortable: true },
                      { title: '单位', field: 'Unit', sortable: true, },
                      { title: '产地', field: 'OrginName' },
-                     { title: '入货数量', field: 'InWarehouseCount' }
+                     { title: '入货数量', field: 'ExWarehouseNum' }
                 ]],
                 toolbar: '#phagrid_tb',
                 onDblClickRow: function (rowIndex, rowData) {
@@ -130,7 +126,7 @@
 <body class="easyui-layout" id="body">
     <div data-options="region:'north',border:false" style="float:left;height:38px;">
         <div class="easyui-panel" style="padding:5px;">
-            入库日期：
+            出库日期：
             <input type="text" id="startDate" name="startDate" value="@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")" onclick="WdatePicker()" />
             到
             <input type="text" id="endDate" name="endDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" onclick="WdatePicker()" />
@@ -150,7 +146,7 @@
         </div>
     </div>
     <div data-options="region:'center',border:true" style="float:left">
-        <input type="hidden" id="PhaCode" value=""/>
+        <input type="hidden" id="PhaCode" value="" />
         <table id="grid"></table>
     </div>
 </body>

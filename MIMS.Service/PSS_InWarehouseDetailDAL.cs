@@ -38,12 +38,14 @@ namespace MIMS.Service
         {
             using (Conn)
             {
-                string query = @"SELECT IW.*,M.Name,I.IWDate FROM PSS_InWarehouseDetail IW
+                string query = @"SELECT * FROM(SELECT IW.*,M.Name,I.IWDate,C.CompanyName FROM PSS_InWarehouseDetail IW
+                                        LEFT JOIN PHA_Accounts A ON IW.PhaCode = A.PhaCode AND IW.OrginID = A.OrginID
                                         LEFT JOIN PSS_InWarehouseMode M ON IW.IWWay = M.ID
-                                        LEFT JOIN PSS_InWarehouse I ON IW.IWID = I.IWID WHERE 1=1  ";
+                                        LEFT JOIN PSS_InWarehouse I ON IW.IWID = I.IWID
+                                        LEFT JOIN PSS_PurchaseCompany C ON A.CompanyID = C.CompanyID)A WHERE 1=1  ";
                 if (!string.IsNullOrEmpty(where))
                     query += where;
-                return Conn.Query<PSS_InWarehouseDetail>(query, prams).ToList();
+                return Conn.Query<Dto_InWarehouseDetail>(query, prams).ToList();
             }
 
         }

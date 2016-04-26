@@ -214,7 +214,7 @@
                 submitHandler: function (form) {
                     var stock = $('#Stock').val();
                     var get = $('#ExWarehouseNum').val();
-                    if(get > stock){
+                    if(parseFloat(get) > parseFloat(stock)){
                         alert("出库数量超过现有库存，请重新输入!");
                         $('#ExWarehouseNum').val('');
                         return false;

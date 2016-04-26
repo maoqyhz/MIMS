@@ -85,5 +85,6 @@ namespace MIMS.Entity.Dtos
         /// 药品有效期
         /// </summary>
         public string PhaExpiry { get; set; }
+        public string IWDate { get; set; }
     }
 }

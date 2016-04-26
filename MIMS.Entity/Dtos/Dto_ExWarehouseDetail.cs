@@ -13,15 +13,15 @@ namespace MIMS.Entity.Dtos
         /// </summary>		
         public int ID { get; set; }
         /// <summary>
-        /// 入库单号
+        /// 出库单号
         /// </summary>		
         public string EWID { get; set; }
         /// <summary>
-        /// 入库方式
+        /// 出库方式
         /// </summary>
         public int EWWay { get; set; }
         /// <summary>
-        /// 入库方式名称
+        /// 出库方式名称
         /// </summary>
         public string Name { get; set; }
         /// <summary>
@@ -68,5 +68,7 @@ namespace MIMS.Entity.Dtos
         /// 入货单位名称
         /// </summary>		
         public string CompanyName { get; set; }
+
+        public string EWDate { get; set; }
     }
 }
