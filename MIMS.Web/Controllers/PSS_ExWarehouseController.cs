@@ -9,6 +9,7 @@ using MIMS.Business;
 using MIMS.Entity;
 using Newtonsoft.Json;
 using MIMS.Entity.Model;
+using MIMS.Entity.Dtos;
 
 namespace MIMS.Web.Controllers
 {
@@ -59,7 +60,7 @@ namespace MIMS.Web.Controllers
                     ht.Add("EWID", obj.EWID);
                     IList list = ipss_exwarehousedetailbll.GetList(ht);
                     //减少对应的库存
-                    foreach (PSS_ExWarehouseDetail item in list)
+                    foreach (Dto_ExWarehouseDetail item in list)
                     {
                         PHA_Accounts a = ipha_accountsbll.GetEntity(item.PhaCode, item.OrginID.ToString());
                         a.Stock -= item.ExWarehouseNum;

@@ -9,6 +9,7 @@ using MIMS.Business;
 using MIMS.Entity;
 using Newtonsoft.Json;
 using MIMS.Entity.Model;
+using MIMS.Entity.Dtos;
 
 namespace MIMS.Web.Controllers
 {
@@ -60,7 +61,7 @@ namespace MIMS.Web.Controllers
                     ht.Add("IWID", obj.IWID);
                     IList list = ipss_inwarehousedetailbll.GetList(ht);
                     //添加对应的库存
-                    foreach (PSS_InWarehouseDetail item in list)
+                    foreach (Dto_InWarehouseDetail item in list)
                     {
                         PHA_Accounts a = ipha_accountsbll.GetEntity(item.PhaCode, item.OrginID.ToString());
                         a.Stock += item.InWarehouseCount;

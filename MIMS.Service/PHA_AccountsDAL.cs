@@ -129,12 +129,12 @@ namespace MIMS.Service
                                                                     @PhaCode,
                                                                     @OrginID,
                                                                     @CompanyID,
-                                                                    @InWarehousePrice,
                                                                     @Stock,
-                                                                    @RetailSum,
-                                                                    @WholesaleSum,
+                                                                    @InWarehousePrice,
                                                                     @RetailPrice,
                                                                     @WholesalePrice,
+                                                                    @RetailSum,
+                                                                    @WholesaleSum,
                                                                     @InWarehouseSum
                                                                  )";
                 return Conn.Execute(query, obj);

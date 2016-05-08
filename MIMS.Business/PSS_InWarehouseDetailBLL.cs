@@ -22,13 +22,24 @@ namespace MIMS.Business
             Dictionary<string, object> prams = new Dictionary<string, object>();
             if (ht["IWID"] != null && !string.IsNullOrEmpty(ht["IWID"].ToString()))
             {
-                where = " AND IWID = @IWID";
+                where += " AND IWID = @IWID";
                 prams.Add("@IWID", ht["IWID"]);
             }
             if (ht["PhaCode"] != null && !string.IsNullOrEmpty(ht["PhaCode"].ToString()))
             {
-                where = " AND PhaCode = @PhaCode";
+                where += " AND PhaCode = @PhaCode";
                 prams.Add("@PhaCode", ht["PhaCode"]);
+            }
+            if (ht["OrginID"] != null && !string.IsNullOrEmpty(ht["OrginID"].ToString()))
+            {
+                where += " AND OrginID = @OrginID";
+                prams.Add("@OrginID", ht["OrginID"]);
+            }
+            if ((ht["startDate"] != null && !string.IsNullOrEmpty(ht["startDate"].ToString())) ||
+                (ht["endDate"] != null && !string.IsNullOrEmpty(ht["endDate"].ToString())))
+            {
+                where += string.Format(" AND IWDate >= '{0}' AND IWDate <= '{1}'",
+                    ht["startDate"].ToString(), ht["endDate"].ToString());
             }
             return dal.GetList(prams, where);
         }
@@ -76,6 +87,7 @@ namespace MIMS.Business
                 item.PhaName = temp.PhaName;
                 item.Spec = temp.Spec;
                 item.Unit = temp.Unit;
+                item.OrginID = temp.OrginID;
                 item.OrginName = temp.OrginName;
             }
             if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))

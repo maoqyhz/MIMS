@@ -214,7 +214,7 @@
                     var postData = GetWebControls("#form");
                     getAjax("/DrugManagement/AcceptClick?key=" + $('#key').val(),
                         postData, function (data) {
-                            if (data == 1) {
+                            if (data) {
                                 //此处可以优化，提示消息可更美观。
                                 alert("操作成功！");
                                 $('#dd').dialog('close');

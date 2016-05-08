@@ -45,7 +45,10 @@
                 remoteSort: true,
                 loadMsg: '加载中，请等待',
                 queryParams: ({
-                    PhaCode:$('#PhaCode').val()
+                    PhaCode: $('#PhaCode').val(),
+                    OrginID: $('#OrginID').val(),
+                    startDate: $('#startDate').val(),
+                    endDate: $('#endDate').val()
                 }),  //异步查询的参数
                 columns: [[
                      { title: '编号', field: 'ID', hidden: true },
@@ -103,6 +106,7 @@
                 }),  //异步查询的参数
                 columns: [[
                      { title: '编号', field: 'PhaCode', hidden: true },
+                     { title: '产地编号', field: 'OrginID', hidden: true },
                      { title: '药名', field: 'PhaName', sortable: true },
                      { title: '规格', field: 'Spec', sortable: true },
                      { title: '单位', field: 'Unit', sortable: true, },
@@ -112,6 +116,7 @@
                 toolbar: '#phagrid_tb',
                 onDblClickRow: function (rowIndex, rowData) {
                     $('#PhaCode').val(rowData["PhaCode"]);
+                    $('#OrginID').val(rowData["OrginID"]);
                     InitGrid();
                 }
             })
@@ -150,7 +155,8 @@
         </div>
     </div>
     <div data-options="region:'center',border:true" style="float:left">
-        <input type="hidden" id="PhaCode" value=""/>
+        <input type="hidden" id="PhaCode" value="" />
+        <input type="hidden" id="OrginID" value="" />
         <table id="grid"></table>
     </div>
 </body>
