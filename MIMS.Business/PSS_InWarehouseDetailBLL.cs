@@ -14,6 +14,7 @@ namespace MIMS.Business
     public class PSS_InWarehouseDetailBLL : IPSS_InWarehouseDetailBLL
     {
         private static readonly PSS_InWarehouseDetailDAL dal = new PSS_InWarehouseDetailDAL();
+        private static readonly PHA_AccountsDAL accountsDal = new PHA_AccountsDAL();
 
         public IList GetList(Hashtable ht)
         {
@@ -64,15 +65,22 @@ namespace MIMS.Business
 
         public IList SearchPhaListByDate(string startDate, string endDate, Hashtable ht, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
         {
-            string where = string.Format(" AND IWDate >= '{0}' AND IWDate <= '{1}'",startDate,endDate);
+            string where = string.Format(" AND IWDate >= '{0}' AND IWDate <= '{1}'", startDate, endDate);
             Dictionary<string, object> prams = new Dictionary<string, object>();
-            if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))
+            IEnumerable<Dto_InWarehouseDetail> list = dal.SearchInDatePha(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
+            PHA_Accounts temp;
+            foreach (Dto_InWarehouseDetail item in list)
             {
-                where += " AND PinyinCode like @PinyinCode";
-                prams.Add("@PinyinCode", '%' + ht["PinyinCode"].ToString() + '%');
+                temp = accountsDal.GetEntity(item.PhaCode, item.OrginID.ToString());
+                item.PinyinCode = temp.PinyinCode;
+                item.PhaName = temp.PhaName;
+                item.Spec = temp.Spec;
+                item.Unit = temp.Unit;
+                item.OrginName = temp.OrginName;
             }
-            return dal.SearchInDatePha(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
-
+            if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))
+                list = list.Where(r => r.PinyinCode.Contains(ht["PinyinCode"].ToString()));
+            return list.ToList();
         }
     }
 }

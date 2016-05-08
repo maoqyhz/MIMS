@@ -14,6 +14,7 @@ namespace MIMS.Business
     public class PSS_ExWarehouseDetailBLL : IPSS_ExWarehouseDetailBLL
     {
         private static readonly PSS_ExWarehouseDetailDAL dal = new PSS_ExWarehouseDetailDAL();
+        private static readonly PHA_AccountsDAL accountsDal = new PHA_AccountsDAL();
 
         public IList GetList(Hashtable ht)
         {
@@ -63,13 +64,20 @@ namespace MIMS.Business
         {
             string where = string.Format(" AND EWDate >= '{0}' AND EWDate <= '{1}'", startDate, endDate);
             Dictionary<string, object> prams = new Dictionary<string, object>();
-            if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))
+            IEnumerable<Dto_ExWarehouseDetail> list = dal.SearchInDatePha(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
+            PHA_Accounts temp;
+            foreach (Dto_ExWarehouseDetail item in list)
             {
-                where += " AND PinyinCode like @PinyinCode";
-                prams.Add("@PinyinCode", '%' + ht["PinyinCode"].ToString() + '%');
+                temp = accountsDal.GetEntity(item.PhaCode, item.OrginID.ToString());
+                item.PinyinCode = temp.PinyinCode;
+                item.PhaName = temp.PhaName;
+                item.Spec = temp.Spec;
+                item.Unit = temp.Unit;
+                item.OrginName = temp.OrginName;
             }
-            IList list = dal.SearchInDatePha(new StringBuilder(where), prams, orderField, orderType, pageIndex, pageSize, ref count);
-            return list;
+            if (ht["PinyinCode"] != null && !string.IsNullOrEmpty(ht["PinyinCode"].ToString()))
+                list = list.Where(r => r.PinyinCode.Contains(ht["PinyinCode"].ToString()));
+            return list.ToList();
         }
     }
 }

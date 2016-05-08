@@ -1,0 +1,92 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>医院药库管理系统</title>
+
+    @*Easyui需要引入的文件*@
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="bookmark" href="/favicon.ico" />
+
+    @*本地css和js引入*@
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Content/Site.js"></script>
+</head>
+<body class="easyui-layout">
+    <div region="north" id="header">
+        <img src="~/Content/image/Medicine.png" id="logo" />
+        <h1 id="title">医院药库管理系统(Beta)</h1>
+        <a href="../User/Logout"><img style="float: right;margin-top: 50px;margin-right: 20px;" src="~/Content/image/logout.png" /></a>
+    </div>
+    <div region="west" class="easyui-panel" title="导航菜单" split="true" style="width:220px">
+        <div class="easyui-accordion" data-options="fit:true,border:true">
+            <div title="基本信息管理" data-options="iconCls:'icon-information'" style="overflow:auto;padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('入库方式维护', '../PSS_InWarehouseMode/Index')">入库方式维护</a></li>
+                    <li><a href="#" onclick="addTab('出库方式维护', '../PSS_ExWarehouseMode/Index')">出库方式维护</a></li>
+                    <li><a href="#" onclick="addTab('进货单位维护', '../PSS_PurchaseCompany/Index')">进货单位维护</a></li>
+                    <li><a href="#" onclick="addTab('药品产地维护', '../PHA_Orgin/Index')">药品产地维护</a></li>
+                    <li><a href="#" onclick="addTab('药库维护', '../PHA_Repository/Index')">药库维护</a></li>
+                </ul>
+            </div>
+            <div title="药品管理" data-options="iconCls:'icon-pill'" style="padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('药品基本信息', '../DrugManagement/DrugInfo')">药品基本信息</a></li>
+                    <li><a href="#" onclick="addTab('药品账册', '../PHA_Accounts/PhaAccounts')">药品账册</a></li>
+                </ul>
+            </div>
+            <div title="进销存管理" data-options="iconCls:'icon-buy'" style="padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('采购计划', '../PSS_PurchasePlan/PurchasePlan')">采购计划</a></li>
+                    <li><a href="#" onclick="addTab('药品入库', '../PSS_InWarehouse/InWarehouse')">药品入库</a></li>
+                    <li><a href="#" onclick="addTab('药品出库', '../PSS_ExWarehouse/ExWarehouse')">药品出库</a></li>
+                </ul>
+            </div>
+            <div title="查询管理" data-options="iconCls:'icon-Inventory'" style="padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('药品入库历史', '../InHistory/Index')">药品入库历史</a></li>
+                    <li><a href="#" onclick="addTab('药品出库历史', '../ExHistory/Index')">药品出库历史</a></li>
+                </ul>
+            </div>
+            <div title="系统设置" data-options="iconCls:'icon-setup'" style="padding:10px;">
+                <ul class="easyui-tree">
+                    <li><a href="#" onclick="addTab('连接查看', '../Setup/SqlConn')">连接查看</a></li>
+                    <li><a href="#" onclick="addTab('密码修改', '../Setup/ModifyPsw')">密码修改</a></li>
+                    <li><a href="#" onclick="addTab('查看帮助', '../Setup/Help')">查看帮助</a></li>
+                    <li><a href="../User/Logout">退出系统</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center'">
+        <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+            <div title="欢迎使用" style="padding:0 10px 0 10px;text-align:center;">
+                <img id="welcomeimg" src="~/Content/image/welcome.png" />
+            </div>
+        </div>
+    </div>
+    <div region="south" id="footer">
+        <p id="foot">
+            版权所有：药库管理系统 浙江农林大学 Kontinue maoqyzj@outlook.com
+            @{
+                HttpCookie cookie = Request.Cookies["user"];
+                <span>工号：@cookie.Values["Code"]</span>
+                <span>姓名：@HttpUtility.UrlDecode(cookie.Values["Name"])</span>
+                <span>角色：@HttpUtility.UrlDecode(cookie.Values["Role"])</span>
+                <span>部门：@HttpUtility.UrlDecode(cookie.Values["Department"])</span>
+                <span>IP：@cookie.Values["IP"]</span>
+            }
+        </p>
+    </div>
+</body>
+</html>

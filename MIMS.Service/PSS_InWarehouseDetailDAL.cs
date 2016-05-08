@@ -133,31 +133,23 @@ namespace MIMS.Service
         /// <param name="pageSize"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public IList SearchInDatePha(StringBuilder where, Dictionary<string, object> prams, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
+        public IEnumerable<Dto_InWarehouseDetail> SearchInDatePha(StringBuilder where, Dictionary<string, object> prams, string orderField, string orderType, int pageIndex, int pageSize, ref int count)
         {
             int num = (pageIndex - 1) * pageSize;
             int num1 = pageIndex * pageSize;
             using (Conn)
             {
+                StringBuilder phaGroupSql = new StringBuilder();
                 StringBuilder strSql = new StringBuilder();
-                StringBuilder sql = new StringBuilder();
-                sql.Append(@"SELECT * FROM (SELECT IW.PhaCode,
-                                                    IW.OrginID,
-                                                    IW.InWarehouseCount,
-                                                    I.IWDate,
-                                                    B.PhaName,
-                                                    B.Spec,
-                                                    B.Unit,
-                                                    B.PinyinCode,
-                                                    O.OrginName
-                                                     FROM PSS_InWarehouseDetail IW
-                                                    LEFT JOIN PHA_BaseInfo B ON IW.PhaCode = B.PhaCode
-                                                    LEFT JOIN PHA_Orgin O ON IW.OrginID = O.OrginID
-                                                    LEFT JOIN PSS_InWarehouse I ON IW.IWID = I.IWID) A WHERE 1=1 ");
-                sql.Append(where);
+                phaGroupSql.AppendFormat(@"SELECT * FROM (
+                                                            SELECT PhaCode,OrginID,SUM(InWarehouseCount) AS InWarehouseCount
+                                                            FROM PSS_InWarehouseDetail
+                                                            LEFT JOIN PSS_InWarehouse ON 
+                                                            PSS_InWarehouseDetail.IWID = PSS_InWarehouse.IWID WHERE 1=1 {0}
+                                                            GROUP BY PhaCode,OrginID) A WHERE 1=1", where);
                 strSql.Append("Select * From (Select ROW_NUMBER() Over (Order By " + orderField + " " + orderType + "");
-                strSql.Append(") As rowNum, * From (" + sql + ") As T ) As N Where rowNum > " + num + " And rowNum <= " + num1 + "");
-                count = Conn.Query<int>("Select Count(1) From (" + sql + ") As t", prams).Single();
+                strSql.Append(") As rowNum, * From (" + phaGroupSql + ") As T ) As N Where rowNum > " + num + " And rowNum <= " + num1 + "");
+                count = Conn.Query<int>("Select Count(1) From (" + phaGroupSql + ") As t", prams).Single();
                 return Conn.Query<Dto_InWarehouseDetail>(strSql.ToString(), prams).ToList();
             }
         }

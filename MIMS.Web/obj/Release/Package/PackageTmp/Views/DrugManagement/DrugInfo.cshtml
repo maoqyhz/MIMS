@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <title>DrugInfo</title>
+    @*Easyui需要引入的文件*@
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Content/Site.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //初始化datagrid
+            InitGrid();
+            InitDialog();
+            InitControl();
+            $('#btnReload').click(function () {
+                $("#grid").datagrid("reload");
+            });
+            //ajax提交修改表单
+            $('#ok').click(function () {
+                $('#errdiv').removeClass('dis');
+                $('#form').submit();
+            });
+            $('#cancel').click(function () {
+                $('#dd').dialog('close');
+            });
+            $('#add').click(function () {
+                $('#errdiv').attr('class', 'dis');
+                $('#form')[0].reset();
+                $('#key').val(0);
+                $('#PhaCode').removeAttr("disabled");
+                $('#PhaName').removeAttr("disabled");
+                $('#dd').dialog('open');
+            });
+            $('#del').click(function () {
+                getAjax("../DrugManagement/Del", { id: $('#del_id').val() }, function (data) {
+                    if ($('#del_id').val() == null || $('#del_id').val() == "")
+                        return false;
+                    if (data) {
+                        //此处可以优化，提示消息可更美观。
+                        alert("操作成功！");
+                        $('#dd').dialog('close');
+                        $("#grid").datagrid("reload");
+                        return true;
+                    }
+                    else {
+                        alert("操作失败！");
+                        return false;
+                    }
+                });
+            });
+        });
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid() {
+            $('#grid').datagrid({
+                url: '../DrugManagement/LoadList',
+                fit: true,
+                nowrap: true,//单行显示
+                autoRowHeight: false,
+                striped: false,     //斑马纹
+                collapsible: true,      //可折叠
+                singleSelect: true,
+                pagination: true,
+                pageSize: 20,
+                fitColumns: true,       //自适应列宽
+                rownumbers: true,
+                sortName: 'PhaCode',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: true,
+                loadMsg: '加载中，请等待',
+                queryParams: ({
+                    query: $('#itemid').val()
+                }),  //异步查询的参数
+                columns: [[
+                     { title: '药品编号', field: 'PhaCode', hidden: true },
+                     { title: '药品名称', field: 'PhaName', width: 120, sortable: true },
+                     { title: '药品规格', field: 'Spec', width: 80, sortable: true },
+                     { title: '药品单位', field: 'Unit', width: 60, sortable: true, align: 'center' },
+                     { title: '剂型', field: 'DosageName', width: 60, sortable: true, align: 'center' },
+                     {
+                         title: '特殊药品', field: 'IsSpecial', width: 60, sortable: true, align: 'center',
+                         formatter: function (value, row, index) {
+                             if (value) {
+                                 return "是";
+                             } else {
+                                 return "否";
+                             }
+                         }
+                     },
+                     { title: '所属仓库', field: 'RepoName', width: 80, sortable: true, align: 'center' },
+                     { title: '药品属性', field: 'PhaAttrName', width: 80, sortable: true, align: 'center' },
+                     { title: '拼音码', field: 'PinyinCode', width: 90 },
+                     { title: '五笔码', field: 'WubiCode', width: 90 },
+                ]],
+                toolbar: '#tb',
+                onDblClickRow: function (rowIndex, rowData) {
+                    $('#PhaCode').attr('disabled', 'disabled');
+                    $('#PhaName').attr('disabled', 'disabled');
+                    //$('#errdiv').attr('class', 'dis');
+                    getAjax("../DrugManagement/LoadForm",
+                        { id: rowData['PhaCode'] }, function (data) {
+                            var data = eval("(" + data + ")");
+                            SetWebControls(data);
+                        });
+                    $('#key').val(1);
+                    $('#dd').window('open');
+                },
+                onClickRow: function (index, row) {
+                    $('#del_id').val(row['PhaCode']);
+                }
+
+            })
+            var p = $('#grid').datagrid('getPager');
+            $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
+                beforePageText: '第',
+                afterPageText: '页   共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+            });
+        };
+
+        function InitDialog() {
+            $('#dd').dialog({
+                title: '修改信息',
+                width: 700,
+                height: 360,
+                top: ($(window).height() - 360) * 0.5,      //居中
+                left: ($(window).width() - 700) * 0.5,
+                closed: true,
+                cache: false,
+                modal: true,
+                buttons: '#dlg-buttons'
+            });
+        }
+
+
+        //绑定下拉框
+        function InitControl() {
+            var dataJson = "";
+            getAjax("/DrugManagement/LoadSelectDosageForm", null, function (data) {
+                datajson = eval("(" + data + ")");
+                $.each(datajson, function (i) {
+                    $("#DosageForm").append($("<option></option>").val(datajson[i].DosageID).html(datajson[i].DosageName));
+                });
+            })
+            dataJson = "";
+            getAjax("/DrugManagement/LoadSelectRepo", null, function (data) {
+                datajson = eval("(" + data + ")");
+                $.each(datajson, function (i) {
+                    $("#Repo").append($("<option></option>").val(datajson[i].RepoID).html(datajson[i].RepoName));
+                });
+            })
+            dataJson = "";
+            getAjax("/DrugManagement/LoadSelecDispenseWay", null, function (data) {
+                datajson = eval("(" + data + ")");
+                $.each(datajson, function (i) {
+                    $("#DispenseWay").append($("<option></option>").val(datajson[i].DispenseWayID).html(datajson[i].DispenseWayName));
+                });
+            })
+            dataJson = "";
+            getAjax("/DrugManagement/LoadSelecSc", null, function (data) {
+                datajson = eval("(" + data + ")");
+                $.each(datajson, function (i) {
+                    $("#StorageCondition").append($("<option></option>").val(datajson[i].StorageConditionID).html(datajson[i].StorageConditionName));
+                });
+            })
+            dataJson = "";
+            getAjax("/DrugManagement/LoadSelectPhaAttr", null, function (data) {
+                datajson = eval("(" + data + ")");
+                $.each(datajson, function (i) {
+                    $("#PhaAttr").append($("<option></option>").val(datajson[i].PhaAttrID).html(datajson[i].PhaAttrName));
+                });
+            })
+        }
+    </script>
+    <script>
+        //表单验证和提交
+        $(function () {
+            $('#form').validate({
+                rules: {
+                    PhaName: {
+                        required: true
+                    },
+                    PhaCode: {
+                        required: true
+                    },
+                    Spec: {
+                        required: true
+                    },
+                    Unit: {
+                        required: true
+                    },
+                    DosageForm: {
+                        required: true
+                    }
+                },
+                messages: {
+                    PhaName: "药品名不能为空！",
+                    PhaCode: "药品编号不能为空！",
+                    Spec: "规格不能为空！",
+                    Unit: "单位不能为空！",
+                    DosageForm: "剂型不能为空！"
+                },
+                errorLabelContainer: '#errdiv>ul',
+                wrapper: 'li',
+                submitHandler: function (form) {
+                    var postData = GetWebControls("#form");
+                    getAjax("/DrugManagement/AcceptClick?key=" + $('#key').val(),
+                        postData, function (data) {
+                            if (data == 1) {
+                                //此处可以优化，提示消息可更美观。
+                                alert("操作成功！");
+                                $('#dd').dialog('close');
+                                $("#grid").datagrid("reload");
+                                return true;
+                            }
+                            else if (data == -1) {
+                                alert("已存在该记录或单号重复，请重新填写！");
+                                return false;
+                            }
+                            else {
+                                alert("操作失败！");
+                                return false;
+                            }
+                        });
+                },
+                invalidHandler: function (form, validator) {  //不通过回调
+                    return false;
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .dis {
+            display: none;
+        }
+
+        fieldset {
+            border-color: #E0ECFF;
+        }
+
+        .tb-line {
+            margin-bottom: 5px;
+        }
+
+        .tb-col-160 {
+            width: 160px;
+        }
+
+        .tb-col-120 {
+            width: 120px;
+        }
+
+        .tb-col-80 {
+            width: 80px;
+        }
+    </style>
+</head>
+<body style="margin:2px;padding:0">
+    <div>
+        <div style="position:fixed;width:100%;height:100%">
+            <table id="grid"></table>
+        </div>
+        <input id="del_id" type="hidden" name="del_id" value="" />
+        <div id="tb" style="padding:3px">
+            <a id="add" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增</a>
+            <a id="del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除</a>
+            <a id="btnReload" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">刷新</a>
+            <span>拼音码:</span>
+            <input id="itemid" style="border:1px solid #ccc">
+            <a href="#" class="easyui-linkbutton" plain="true" onclick="InitGrid()">查找</a>
+        </div>
+    </div>
+
+    <div id="dd" class="easyui-dialog" style="position:relative">
+        <form id="form" name="form" method="post">
+            <input id="key" type="hidden" value="" />
+            <fieldset>
+                <legend>基本属性</legend>
+                <div class="tb-line">
+                    <span>药品编码：</span><input type="text" id="PhaCode" class="tb-col-120" name="PhaCode" value="" disabled="disabled" />
+                    <span>药品名：</span><input type="text" id="PhaName" class="tb-col-160" name="PhaName" value="" disabled="disabled" />
+                    <span>常用名：</span><input type="text" id="CommonName" class="tb-col-160" name="CommonName" value="" />
+                </div>
+                <div class="tb-line">
+                    <span>规 格：</span><input type="text" id="Spec" name="Spec" class="tb-col-80" value="" />
+                    <span>单 位：</span><input type="text" id="Unit" name="Unit" class="tb-col-80" value="" />
+                    <span>剂 型：</span><select id="DosageForm" name="DosageForm" class="tb-col-80"></select>
+                    <span>所属药库：</span><select id="Repo" name="Repo" class="tb-col-80"></select>
+                </div>
+                <div class="tb-line">
+                    <span>拼音代码：</span><input type="text" id="PinyinCode" name="PinyinCode" class="tb-col-80" value="" />
+                    <span>五笔代码：</span><input type="text" id="WubiCode" name="WubiCode" class="tb-col-80" value="" />
+                    <span>特殊药品：</span><input type="checkbox" id="IsSpecial" name="IsSpecial" value="" />
+                    <span>抗生素：</span><input type="checkbox" id="IsAntibiotic" name="IsAntibiotic" value="" />
+                    <span>急诊用药：</span><input type="checkbox" id="IsEmergency" name="IsEmergency" value="" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>药品包装</legend>
+                <div class="tb-line">
+                    <span>最小单位：</span><input type="text" id="MinUnit" class="tb-col-80" name="MinUnit" value="" />
+                    <span>药房规格：</span><input type="text" id="PharmacySpec" class="tb-col-80" name="PharmacySpec" value="" />
+                    <span>药房单位：</span><input type="text" id="PharmacyUnit" class="tb-col-80" name="PharmacyUnit" value="" />
+                    <span>药房包装：</span><input type="text" id="PharmacyPack" class="tb-col-80" name="PharmacyPack" value="" />
+                </div>
+                <div class="tb-line">
+                    <span>最小包装：</span><input type="text" id="MinPack" class="tb-col-80" name="MinPack" value="" />
+                    <span>病房规格：</span><input type="text" id="WardSpec" class="tb-col-80" name="WardSpec" value="" />
+                    <span>病房单位：</span><input type="text" id="WardUnit" class="tb-col-80" name="WardUnit" value="" />
+                    <span>病房包装：</span><input type="text" id="WardPack" class="tb-col-80" name="WardPack" value="" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>其他</legend>
+                <div class="tb-line">
+                    <span>发药方式：</span><select id="DispenseWay" name="DispenseWay" class="tb-col-80"></select>
+                    <span>药品属性：</span><select id="PhaAttr" name="PhaAttr" class="tb-col-80"></select>
+                    <span>贮存条件：</span><select id="StorageCondition" name="StorageCondition" class="tb-col-80"></select>
+                    <span>是否有效：</span><input type="checkbox" id="IsValid" name="IsValid" value="" />
+                </div>
+            </fieldset>
+            <div class="errdiv" id="errdiv">
+                <ul></ul>
+            </div>
+            <div id="dlg-buttons">
+                <a id="ok" href="#" class="easyui-linkbutton" iconcls="icon-ok">确定</a>
+                <a id="cancel" href="#" class="easyui-linkbutton" iconcls="icon-cancel">取消</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Release\MIMS.Service.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Release\MIMS.Service.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Release\Dapper.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Release\MIMS.Entity.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Release\MIMS.Entity.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Release\Dapper.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Release\Dapper.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\obj\Release\MIMS.Service.csprojResolveAssemblyReference.cache
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\obj\Release\MIMS.Service.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\obj\Release\MIMS.Service.pdb

@@ -1,0 +1,10 @@
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Release\MIMS.IBusiness.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Release\MIMS.IBusiness.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Release\Dapper.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Release\MIMS.Entity.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Release\MIMS.Entity.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Release\Dapper.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Release\Dapper.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\obj\Release\MIMS.IBusiness.csprojResolveAssemblyReference.cache
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\obj\Release\MIMS.IBusiness.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\obj\Release\MIMS.IBusiness.pdb

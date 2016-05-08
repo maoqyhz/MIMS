@@ -1,0 +1,51 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+ a{
+     text-decoration:none;
+ }
+
+#header {
+    height: 100px;
+    background: #6F5499;
+}
+
+#title {
+    font-family: 'Microsoft YaHei';
+    font-size: 32px;
+    color: #fff;
+    line-height: 50px;
+    position: absolute;
+    top: 20px;
+    left: 100px;
+}
+
+#logo {
+    width: 60px;
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    height: 60px;
+}
+
+#mainbody {
+    height:200px;
+}
+
+#footer {
+    background: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #777;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+
+}
+
+#foot {
+    text-align: center;
+    font-family: 'Microsoft JhengHei';
+    color: #cdbfe3;
+}

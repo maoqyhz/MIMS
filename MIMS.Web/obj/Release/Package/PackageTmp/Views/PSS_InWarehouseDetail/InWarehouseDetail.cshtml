@@ -1,0 +1,344 @@
+﻿@{
+    Layout = null;
+}
+@model MIMS.Entity.Model.PSS_InWarehouse
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InWarehouseDetail</title>
+    @*Easyui需要引入的文件*@
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+    <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="bookmark" href="/favicon.ico" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @*本地css和js引入*@
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Content/Site.js"></script>
+    <script>
+        $(function () {
+            var status = @Model.IsIW;
+            var msg = "";
+            if(status == 1)
+                msg = "已入库";
+            else
+                msg = "未入库";
+            $('#IsIW').text(msg);
+            if(status != 0)
+            {
+                $('#body').layout('remove', 'west');
+            }
+            else
+            {
+                InitPhaDialoggrid();
+            }
+            InitGrid();
+            InitDialog();
+            $('#ok').click(function () {
+                $('#errdiv').removeClass('dis');
+                $('#form').submit();
+            });
+            $('#cancel').click(function () {
+                $('#dd').dialog('close');
+            });
+        });
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid() {
+            $('#grid').datagrid({
+                url: '../PSS_InWarehouseDetail/LoadList',
+                singleSelect: true,
+                fit: true,
+                nowrap: true,//单行显示
+                autoRowHeight: false,
+                striped: false,     //斑马纹
+                collapsible: true,      //可折叠
+                pagination: true,
+                pageSize: 20,
+                fitColumns: true,       //自适应列宽
+                rownumbers: true,
+                sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: true,
+                loadMsg: '加载中，请等待',
+                queryParams: ({
+                    query:'@Model.IWID'
+                }),  //异步查询的参数
+                columns: [[
+                     { title: '编号', field: 'ID', hidden: true },
+                     { title: '药品编号', field: 'PhaCode', hidden: true },
+                     { title: '入库单号', field: 'IWID', hidden: true },
+                     { title: '药品名称', field: 'PhaName', sortable: true},
+                     { title: '规格', field: 'Spec', sortable: true },
+                     { title: '单位', field: 'Unit',  sortable: true, align: 'center' },
+                     { title: '拼音代码', field: 'PinyinCode',sortable: true, align: 'center' },
+                     { title: '产地', field: 'OrginName', sortable: true, align: 'center' },
+                     { title: '药品批次', field: 'PhaNo', sortable: true, align: 'center' },
+                     { title: '有效期', field: 'PhaExpiry', sortable: true, align: 'center' },
+                     { title: '采购价格', field: 'InWarehousePrice', sortable: true, align: 'center' },
+                     { title: '入库数量', field: 'InWarehouseCount', sortable: true, align: 'center' },
+                     { title: '采购金额', field: 'InWarehouseSum', sortable: true, align: 'center' },
+                     { title: '库存', field: 'Stock',  sortable: true, align: 'center' },
+                     { title: '供货单位', field: 'CompanyName',sortable: true }
+                ]],
+                onDblClickRow: function (rowIndex, rowData) {
+
+                },
+                onClickRow: function (index, row) {
+                    $('#del_id').val(row['ID']);
+                }
+
+            })
+            var p = $('#grid').datagrid('getPager');
+            $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
+                beforePageText: '第',
+                afterPageText: '页   共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+                buttons: [{
+                    iconCls:'icon-remove',
+                    handler:function(){
+                        if(@Model.IsIW == 0){
+                            getAjax("../PSS_InWarehouseDetail/Del", { id: $('#del_id').val() }, function (data) {
+                                if ($('#del_id').val() == null || $('#del_id').val() == "")
+                                    return false;
+                                if (data) {
+                                    //此处可以优化，提示消息可更美观。
+                                    alert("操作成功！");
+                                    $('#dd').dialog('close');
+                                    $("#grid").datagrid("reload");
+                                    return true;
+                                }
+                                else {
+                                    alert("操作失败！");
+                                    return false;
+                                }
+                            });
+                        }
+                        else
+                            alert("当前采购状态下无法编辑！");
+
+                    }
+                }]
+            });
+        };
+
+
+        //药品选择器
+        function InitPhaDialoggrid() {
+            $('#phagrid').datagrid({
+                url: '../PHA_Accounts/LoadList?',
+                fit: true,
+                nowrap: true,//单行显示
+                autoRowHeight: false,
+                singleSelect: true,
+                striped: false,     //斑马纹
+                collapsible: true,      //可折叠
+                pagination: true,
+                pageSize: 20,
+                fitColumns: true,       //自适应列宽
+                rownumbers: true,
+                sortName: 'PhaCode',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: true,
+                loadMsg: '加载中，请等待',
+                queryParams: ({
+                    pinyin: $('#phagrid_dir').val(),
+                    companyID:'@Model.CompanyID'
+                }),  //异步查询的参数
+                columns: [[
+                     { title: '编号', field: 'PhaCode', hidden: true },
+                     { title: '药名', field: 'PhaName', sortable: true },
+                     { title: '规格', field: 'Spec', sortable: true },
+                     { title: '单位', field: 'Unit', sortable: true, },
+                     { title: '产地', field: 'OrginName' }
+                ]],
+                toolbar: '#phagrid_tb',
+                onDblClickRow: function (rowIndex, rowData) {
+                    //$('#errdiv').attr('class', 'dis');
+                    $('#PhaNo').val("");
+                    $('#PhaExpiry').val("");
+                    $('#InWarehouseCount').val("");
+                    getAjax("../PHA_Accounts/LoadForm",
+                        { phaCode: rowData['PhaCode'], orginID: rowData['OrginID'] }, function (data) {
+                            var data = eval("(" + data + ")");
+                            SetWebControls(data);
+                        });
+                    $('#dd').dialog('open');
+                }
+            })
+            var p = $('#phagrid').datagrid('getPager');
+            $(p).pagination({
+                pageSize: 20,
+                pageList: [10, 12, 20, 40, 60, 100, 200],
+                beforePageText: '第',
+                afterPageText: '页   共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+            });
+        };
+
+        //初始化对话框
+        function InitDialog() {
+            $('#dd').dialog({
+                title: '添加药品',
+                width: 700,
+                height: 180,
+                top: ($(window).height() - 180) * 0.5,      //居中
+                left: ($(window).width() - 700) * 0.5,
+                closed: true,
+                cache: false,
+                modal: true,
+                buttons: '#dlg-buttons'
+            });
+        }
+    </script>
+    <script>
+        //表单验证和提交
+        $(function () {
+            $('#form').validate({
+                rules: {
+                    PhaNo: {
+                        required: true
+                    },
+                    PhaExpiry: {
+                        required: true
+                    },
+                    InWarehouseCount: {
+                        required: true
+                    }
+                },
+                messages: {
+                    PhaNo: "药品批次不能为空！",
+                    PhaExpiry: "有效期不能为空！",
+                    InWarehouseCount: "入库数量不能为空！",
+                },
+                errorLabelContainer: '#errdiv>ul',
+                wrapper: 'li',
+                submitHandler: function (form) {
+                    var postData = GetWebControls("#form");
+                    getAjax("/PSS_InWarehouseDetail/AcceptClick",
+                        postData, function (data) {
+                            if (data) {
+                                //此处可以优化，提示消息可更美观。
+                                alert("操作成功！");
+                                $('#dd').dialog('close');
+                                $("#grid").datagrid("reload");
+                                return true;
+                            }
+                            else {
+                                alert("操作失败！"); return false;
+                            }
+                        });
+                },
+                invalidHandler: function (form, validator) {  //不通过回调
+                    return false;
+                }
+            });
+        });
+    </script>
+    <style>
+        .dis {
+            display: none;
+        }
+
+        .tb-col-120 {
+            width: 120px;
+        }
+
+        .tb-col-80 {
+            width: 80px;
+        }
+
+        #errdiv {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body class="easyui-layout" id="body">
+    <div id="left_part" data-options="region:'west'" style="float:left;width:340px;">
+        <div id="phaselect">
+            <div style="position:fixed;width:340px;height:100%;">
+                <table id="phagrid"></table>
+            </div>
+            <div id="phagrid_tb" style="padding:3px">
+                <span>拼音码:</span>
+                <input id="phagrid_dir" style="border:1px solid #ccc">
+                <a href="#" class="easyui-linkbutton" plain="true" onclick="InitPhaDialoggrid()">查找</a>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center'" style="float:left">
+        <div data-options="region:'north'" style="height:25%;">
+            <h2 style="text-align:center;margin-top:20px;">中心医院药品入库单</h2>
+            <div>
+                <p style="font-weight:900;color:red;font-size:medium;text-align:right;margin-right:20%">
+                    No.<span id="PurchaseNo">@Model.IWID</span>
+                </p>
+                <div style="margin:10px 0 10px 20px ">
+                    <div style="display:inline-block;margin-right:10px">入库方式：<span style="color:red">@Model.Name</span></div>
+                    <div style="display:inline-block;margin-right:10px">进货单位：<span style="color:red">@Model.CompanyName</span></div>
+                    <div style="display:inline-block;margin-right:10px">入库状态：<span id="IsIW" style="color:red"></span></div>
+                    <div style="display:inline-block;margin-right:10px">入库时间：<span style="color:red">@Model.IWDate</span></div>
+                    <div style="display:inline-block;margin-right:10px">操作工号：<span style="color:red">@Model.OperateNo</span></div>
+                    <div style="display:inline-block;margin-right:10px;margin-top:10px">创建时间：<span style="color:red">@Model.OperateDate</span></div>
+                </div>
+                <div style="margin:0 0 10px 20px">
+                    <p id="OperateNo">备注：@Model.IWRemark</p>
+                </div>
+            </div>
+        </div>
+        <div data-options="region:'south'" style="height:70%">
+            <table id="grid"></table>
+            <input id="del_id" type="hidden" name="del_id" value=" " />
+        </div>
+    </div>
+
+    <div id="dd" class="easyui-dialog">
+        <form id="form" name="form" method="post">
+            <input type="hidden" id="IWID" name="IWID" value="@Model.IWID" />
+            <input type="hidden" id="IWWay" name="IWWay" value="@Model.IWWay" />
+            <input type="hidden" id="PhaCode" name="PhaCode" value=" " />
+            <input type="hidden" id="OrginID" name="OrginID" value=" " />
+            <table style="margin:8px">
+                <tr>
+                    <td>药品名:</td>
+                    <td><input type="text" id="PhaName" name="PhaName" class="tb-col-120" value=" " disabled="disabled" /></td>
+
+                    <td>规格:</td>
+                    <td><input type="text" id="Spec" name="Spec" class="tb-col-80" value=" " disabled="disabled" /></td>
+
+                    <td>单位:</td>
+                    <td><input type="text" id="Unit" name="Unit" class="tb-col-80" value=" " disabled="disabled" /></td>
+
+                    <td>产地:</td>
+                    <td><input type="text" id="OrginName" name="OrginName" class="tb-col-80" value=" " disabled="disabled" /></td>
+                </tr>
+                <tr>
+                    <td>药品批次:</td>
+                    <td><input type="text" id="PhaNo" name="PhaNo" class="tb-col-120" value="" /></td>
+                    <td>有效期:</td>
+                    <td><input type="text" id="PhaExpiry" name="PhaExpiry" class="tb-col-80" onclick="WdatePicker()" value="" /></td>
+                    <td>进货价格:</td>
+                    <td><input type="text" id="InWarehousePrice" name="InWarehousePrice" class="tb-col-80" value=" " disabled="disabled" /></td>
+                    <td>入库数量:</td>
+                    <td><input type="text" id="InWarehouseCount" name="InWarehouseCount" class="tb-col-80" value="" /></td>
+                </tr>
+            </table>
+            <div class="errdiv" id="errdiv">
+                <ul></ul>
+            </div>
+            <div id="dlg-buttons">
+                <a id="ok" href="#" class="easyui-linkbutton" iconcls="icon-ok">确定</a>
+                <a id="cancel" href="#" class="easyui-linkbutton" iconcls="icon-cancel">取消</a>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

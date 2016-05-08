@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "药品管理系统";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-1.4.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/login.css" />
+    <script>
+        $(function () {
+            $('#password').keydown(function () {
+                if (event.keyCode == 13) {
+                    $('#submit').click();
+                    return false;
+                }
+            });
+            $('#submit').click(function () {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                if (username == null || username == "") {
+                    alert("账号不能为空！");
+                    return false;
+                }
+                if (password == null || password == "") {
+                    alert("口令不能为空！");
+                    return false;
+                }
+                $.ajax({
+                    type: 'post',
+                    dataType: "text",
+                    url: '../User/CheckUserLogin',
+                    data: $('#login').serialize(),
+                    cache: false,
+                    async: false,
+                    success: function (msg) {
+                        var message;
+                        if (msg == 1)
+                            message = "账户不存在！";
+                        else if (msg == 3)
+                            message = "密码错误！";
+                        else
+                            window.location.href = "../Home/Index";
+                        $('#msg').text(message);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <form id="login">
+            <h1>药品管理系统</h1>
+            <fieldset id="inputs" class="">
+                <input id="username" name="username" type="text" placeholder="账号" autofocus="" required="">
+                <input id="password" name="password" type="password" placeholder="口令" required="">
+            </fieldset>
+            <div id="msg">
+            </div>
+
+            <fieldset id="actions" class="">
+                <input type="button" id="submit" value="登录">
+                <a href="">忘记密码</a>
+                <a href="">联系管理员</a>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

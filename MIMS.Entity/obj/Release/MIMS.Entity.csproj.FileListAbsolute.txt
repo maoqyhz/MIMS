@@ -1,0 +1,7 @@
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Release\MIMS.Entity.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Release\MIMS.Entity.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Release\Dapper.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Release\Dapper.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\bin\Release\Dapper.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\obj\Release\MIMS.Entity.dll
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Entity\obj\Release\MIMS.Entity.pdb
