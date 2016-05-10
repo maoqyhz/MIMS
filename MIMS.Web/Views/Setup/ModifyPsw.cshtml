@@ -31,7 +31,7 @@
                     postData, function (data) {
                         if (data == 1) {
                             //此处可以优化，提示消息可更美观。
-                            alert("修改成功！");
+                            $.messager.alert('提示', '密码修改成功!');
                             return true;
                         }
                         else if (data == -1) {

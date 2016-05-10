@@ -111,14 +111,13 @@
                             if ($('#del_id').val() == null || $('#del_id').val() == "")
                                 return false;
                             if (data) {
-                                //此处可以优化，提示消息可更美观。
-                                alert("操作成功！");
+                                $.messager.alert('提示', '删除药品成功!');
                                 $('#dd').dialog('close');
                                 $("#grid").datagrid("reload");
                                 return true;
                             }
                             else {
-                                alert("操作失败！");
+                                $.messager.alert('提示', '操作失败!');
                                 return false;
                             }
                         });
@@ -215,7 +214,7 @@
                     var stock = $('#Stock').val();
                     var get = $('#ExWarehouseNum').val();
                     if(parseFloat(get) > parseFloat(stock)){
-                        alert("出库数量超过现有库存，请重新输入!");
+                        $.messager.alert('提示', '出库数量超过现有库存，请重新输入!');
                         $('#ExWarehouseNum').val('');
                         return false;
                     }
@@ -223,14 +222,14 @@
                     getAjax("/PSS_ExWarehouseDetail/AcceptClick",
                         postData, function (data) {
                             if (data) {
-                                //此处可以优化，提示消息可更美观。
-                                alert("操作成功！");
+                                $.messager.alert('提示', '添加药品成功!');
                                 $('#dd').dialog('close');
                                 $("#grid").datagrid("reload");
                                 return true;
                             }
                             else {
-                                alert("操作失败！"); return false;
+                                $.messager.alert('提示', '操作失败!');
+                                return false;
                             }
                         });
                 },

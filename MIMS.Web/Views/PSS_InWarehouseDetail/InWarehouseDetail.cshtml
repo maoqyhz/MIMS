@@ -109,20 +109,19 @@
                                 if ($('#del_id').val() == null || $('#del_id').val() == "")
                                     return false;
                                 if (data) {
-                                    //此处可以优化，提示消息可更美观。
-                                    alert("操作成功！");
+                                    $.messager.alert('提示', '添加药品成功!');
                                     $('#dd').dialog('close');
                                     $("#grid").datagrid("reload");
                                     return true;
                                 }
                                 else {
-                                    alert("操作失败！");
+                                    $.messager.alert('提示', '操作失败!');
                                     return false;
                                 }
                             });
                         }
                         else
-                            alert("当前采购状态下无法编辑！");
+                            $.messager.alert('提示', '当前采购状态下无法编辑!');
 
                     }
                 }]
@@ -226,7 +225,7 @@
                         postData, function (data) {
                             if (data) {
                                 //此处可以优化，提示消息可更美观。
-                                alert("操作成功！");
+                                alert("添加药品成功！");
                                 $('#dd').dialog('close');
                                 $("#grid").datagrid("reload");
                                 return true;

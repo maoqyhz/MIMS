@@ -43,8 +43,8 @@
                 $('#dd').dialog('open');
             });
             $('#edit').click(function () {
-                $('#EWID').attr('disabled','disabled');
-                $('#EWWay').attr('disabled','disabled');
+                $('#EWID').attr('disabled', 'disabled');
+                $('#EWWay').attr('disabled', 'disabled');
                 getAjax("../PSS_ExWarehouse/LoadForm",
                         { id: $('#del_id').val() }, function (data) {
                             var data = eval("(" + data + ")");
@@ -62,14 +62,13 @@
                     if ($('#del_id').val() == null || $('#del_id').val() == "")
                         return false;
                     if (data) {
-                        //此处可以优化，提示消息可更美观。
-                        alert("操作成功！");
+                        $.messager.alert('提示', '操作成功！');
                         $('#dd').dialog('close');
                         $("#grid").datagrid("reload");
                         return true;
                     }
                     else {
-                        alert("操作失败！");
+                        $.messager.alert('提示', '操作失败!');
                         return false;
                     }
                 });
