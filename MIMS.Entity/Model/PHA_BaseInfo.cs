@@ -126,6 +126,16 @@ namespace MIMS.Entity.Model
         /// </summary>
         public string StorageConditionName { get; set; }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("药品编号：{0}\n", PhaCode);
+            sb.AppendFormat("药品名称：{0}\n", PhaName);
+            sb.AppendFormat("药品规格：{0}\n", Spec);
+            sb.AppendFormat("药品单位：{0}\n", Unit);
+            return sb.ToString();
+        }
+
     }
 }
 

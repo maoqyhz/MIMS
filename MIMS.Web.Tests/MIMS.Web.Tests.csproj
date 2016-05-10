@@ -38,6 +38,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -47,12 +51,41 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UserControllerTests.cs" />
+    <Compile Include="EncryptUtilsTests.cs" />
+    <Compile Include="PHA_BaseInfoBLLTests.cs" />
+    <Compile Include="PHA_BaseInfoDALTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSS_ExWarehouseDetailBLLTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -60,6 +93,32 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MIMS.Business\MIMS.Business.csproj">
+      <Project>{5ee9c33d-5e42-426f-8a1b-200b485ab383}</Project>
+      <Name>MIMS.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.Entity\MIMS.Entity.csproj">
+      <Project>{6eb934ef-77d9-4a84-a001-deef096814a6}</Project>
+      <Name>MIMS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.IBusiness\MIMS.IBusiness.csproj">
+      <Project>{3ecaf333-807b-48ea-acb6-c1404335d01b}</Project>
+      <Name>MIMS.IBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.Service\MIMS.Service.csproj">
+      <Project>{ADD37F07-9F39-43F1-8BA1-28908B4652C5}</Project>
+      <Name>MIMS.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.Utilities\MIMS.Utilities.csproj">
+      <Project>{139d048f-379a-4627-8bc2-d94ab1df1221}</Project>
+      <Name>MIMS.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIMS.Web\MIMS.Web.csproj">
+      <Project>{0f19c98b-f028-4b0b-9723-586982eb080d}</Project>
+      <Name>MIMS.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

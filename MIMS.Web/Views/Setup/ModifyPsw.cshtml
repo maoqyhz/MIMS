@@ -15,6 +15,7 @@
     <script type="text/javascript" src="~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
     <link href="~/Content/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" />
     <link href="~/Content/jquery-easyui-1.4.5/themes/icon.css" rel="stylesheet" />
+    <script src="~/Content/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
     <script src="~/Content/Site.js"></script>
     <script>
         $(function () {
@@ -22,11 +23,7 @@
                 var old_psw = $('#Password').val();
                 var new_psw = $('#newPassword').val();
                 if (old_psw == null || old_psw == "") {
-                    alert("原密码不能为空！");
-                    return false;
-                }
-                if (old_psw == null || old_psw == "") {
-                    alert("原密码不能为空！");
+                    $.messager.alert('提示', '原密码不能为空!');
                     return false;
                 }
                 var postData = GetWebControls("#form");
@@ -38,13 +35,13 @@
                             return true;
                         }
                         else if (data == -1) {
-                            alert("原密码输入错误");
+                            $.messager.alert('提示', '原密码输入错误!');
                             $('#Password').textbox('clear');
                             $('#newPassword').textbox('clear');
                             return false;
                         }
                         else {
-                            alert("操作失败！");
+                          $.messager.alert('提示', '操作失败!');
                             return false;
                         }
                     });
@@ -89,7 +86,7 @@
                     </table>
                 </form>
                 <div style="padding:5px 0 0 120px">
-                    <a href="javascript:void(0)"  class="easyui-linkbutton" id="modify">修改</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" id="modify">修改</a>
                 </div>
             </div>
         </div>

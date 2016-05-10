@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 12.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="12.0">
+ <Targets>
+  <Target Name="F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Service\bin\Debug\MIMS.Service.dll">
+   <Modules>
+    <Module Name="mims.service.dll">
+     <Namespaces>
+      <Namespace Name="MIMS.Service">
+       <Types>
+        <Type Name="COM_UserDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'COM_UserDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'COM_UserDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_AccountsDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_AccountsDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_AccountsDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_BaseInfoDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_BaseInfoDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_BaseInfoDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_DispenseWayDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_DispenseWayDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_DispenseWayDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_DosageFormDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_DosageFormDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_DosageFormDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_OrginDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_OrginDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_OrginDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_PhaAttrDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_PhaAttrDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_PhaAttrDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_RepositoryDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_RepositoryDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_RepositoryDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PHA_StorageConditionDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PHA_StorageConditionDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PHA_StorageConditionDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_ExWarehouseDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_ExWarehouseDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_ExWarehouseDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_ExWarehouseDetailDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_ExWarehouseDetailDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_ExWarehouseDetailDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_ExWarehouseModeDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_ExWarehouseModeDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_ExWarehouseModeDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_InWarehouseDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_InWarehouseDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_InWarehouseDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_InWarehouseDetailDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_InWarehouseDetailDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_InWarehouseDetailDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_InWarehouseModeDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_InWarehouseModeDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_InWarehouseModeDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_PurchaseCompanyDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_PurchaseCompanyDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_PurchaseCompanyDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_PurchasePlanDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_PurchasePlanDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_PurchasePlanDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PSS_PurchasePlanDetailDAL" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2016-05-10 06:08:24Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">在 'PSS_PurchasePlanDetailDAL' 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  'SqlConnection'。如果以前提供过 'PSS_PurchasePlanDetailDAL'，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001">
+   <Name>具有可释放字段的类型应该是可释放的</Name>
+   <Description>声明可释放成员的类型也应实现 IDisposable。如果该类型没有任何非托管资源，请不要在其上实现终结器。</Description>
+   <Resolution Name="DependsOnFix">在 {0} 上实现 IDisposable，因为它创建下列 IDisposable 类型的成员:  {1}。如果以前提供过 {0}，对于现有使用者来说，向此类型添加用于实现 IDisposable 的新成员属于重大更改。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182172.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">类别</String>
+  <String Key="Certainty">确定性</String>
+  <String Key="CollapseAll">全部折叠</String>
+  <String Key="CheckId">检查 ID</String>
+  <String Key="Error">错误</String>
+  <String Key="Errors">错误</String>
+  <String Key="ExpandAll">全部展开</String>
+  <String Key="Help">帮助</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">消息</String>
+  <String Key="LocationNotStoredInPdb">[位置未存储在 Pdb 中]</String>
+  <String Key="Project">项目</String>
+  <String Key="Resolution">解析</String>
+  <String Key="Rule">规则</String>
+  <String Key="RuleFile">规则文件</String>
+  <String Key="RuleDescription">规则说明</String>
+  <String Key="Source">源</String>
+  <String Key="Status">状态</String>
+  <String Key="Target">目标</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">代码分析报告</String>
+ </Localized>
+</FxCopReport>

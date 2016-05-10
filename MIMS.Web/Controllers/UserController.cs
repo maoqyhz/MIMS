@@ -12,6 +12,7 @@ namespace MIMS.Web.Controllers
 {
     public class UserController : Controller
     {
+
         ICOM_UserBLL icom_userbll = new COM_UserBLL();
         // GET: User
         public ActionResult Login()

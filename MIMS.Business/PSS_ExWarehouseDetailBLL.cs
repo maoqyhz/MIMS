@@ -22,13 +22,24 @@ namespace MIMS.Business
             Dictionary<string, object> prams = new Dictionary<string, object>();
             if (ht["EWID"] != null && !string.IsNullOrEmpty(ht["EWID"].ToString()))
             {
-                where = " AND EWID = @EWID";
+                where += " AND EWID = @EWID";
                 prams.Add("@EWID", ht["EWID"]);
             }
             if (ht["PhaCode"] != null && !string.IsNullOrEmpty(ht["PhaCode"].ToString()))
             {
-                where = " AND PhaCode = @PhaCode";
+                where += " AND PhaCode = @PhaCode";
                 prams.Add("@PhaCode", ht["PhaCode"]);
+            }
+            if (ht["OrginID"] != null && !string.IsNullOrEmpty(ht["OrginID"].ToString()))
+            {
+                where += " AND OrginID = @OrginID";
+                prams.Add("@OrginID", ht["OrginID"]);
+            }
+            if ((ht["startDate"] != null && !string.IsNullOrEmpty(ht["startDate"].ToString())) ||
+                (ht["endDate"] != null && !string.IsNullOrEmpty(ht["endDate"].ToString())))
+            {
+                where += string.Format(" AND EWDate >= '{0}' AND EWDate <= '{1}'",
+                    ht["startDate"].ToString(), ht["endDate"].ToString());
             }
             return dal.GetList(prams, where);
         }

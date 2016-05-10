@@ -3,6 +3,7 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Debug\MIMS.Util
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Debug\Dapper.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Debug\Dapper.pdb
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Debug\Dapper.xml
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\obj\Debug\MIMS.Utilities.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\obj\Debug\MIMS.Utilities.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\obj\Debug\MIMS.Utilities.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Debug\MIMS.Utilities.dll.CodeAnalysisLog.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Debug\MIMS.Utilities.dll.lastcodeanalysissucceeded

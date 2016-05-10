@@ -12,3 +12,5 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\Dapper.xml
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\obj\Debug\MIMS.Business.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\obj\Debug\MIMS.Business.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\obj\Debug\MIMS.Business.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\MIMS.Business.dll.CodeAnalysisLog.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Business\bin\Debug\MIMS.Business.dll.lastcodeanalysissucceeded

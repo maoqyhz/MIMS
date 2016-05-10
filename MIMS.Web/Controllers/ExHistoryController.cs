@@ -36,10 +36,13 @@ namespace MIMS.Web.Controllers
             }));
         }
 
-        public ActionResult SearchDetailByPha(string PhaCode)
+        public ActionResult SearchDetailByPha(string PhaCode, string OrginID, string startDate, string endDate)
         {
             Hashtable ht = new Hashtable();
             ht.Add("PhaCode", PhaCode);
+            ht.Add("OrginID", OrginID);
+            ht.Add("startDate", startDate);
+            ht.Add("endDate", endDate);
             return Json(ipss_exwarehousedetailbll.GetList(ht));
         }
 

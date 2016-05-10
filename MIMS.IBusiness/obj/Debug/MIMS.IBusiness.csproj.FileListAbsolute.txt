@@ -8,3 +8,5 @@ F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Debug\Dapper.xm
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\obj\Debug\MIMS.IBusiness.csprojResolveAssemblyReference.cache
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\obj\Debug\MIMS.IBusiness.dll
 F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\obj\Debug\MIMS.IBusiness.pdb
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Debug\MIMS.IBusiness.dll.CodeAnalysisLog.xml
+F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.IBusiness\bin\Debug\MIMS.IBusiness.dll.lastcodeanalysissucceeded
