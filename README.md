@@ -18,3 +18,10 @@ MIMS是一个药库管理系统，它主要有以下功能。
 数据库文件在`MIMS/MIMS.Web/App_data`中,附加到sql server2012中，修改web.config中的链接字符串即可。
 
 ## 运行界面
+![](https://github.com/maoqyhz/MIMS/blob/master/Intro/1.jpg)
+
+![](https://github.com/maoqyhz/MIMS/blob/master/Intro/2.jpg)
+
+![](https://github.com/maoqyhz/MIMS/blob/master/Intro/3.jpg)
+
+![](https://github.com/maoqyhz/MIMS/blob/master/Intro/4.jpg)
