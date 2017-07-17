@@ -1,8 +1,0 @@
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Release\MIMS.Utilities.dll
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Release\MIMS.Utilities.pdb
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Release\Dapper.dll
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Release\Dapper.pdb
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\bin\Release\Dapper.xml
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\obj\Release\MIMS.Utilities.csprojResolveAssemblyReference.cache
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\obj\Release\MIMS.Utilities.dll
-F:\Workspace\visual studio 2013\Projects\MIMS\MIMS.Utilities\obj\Release\MIMS.Utilities.pdb
