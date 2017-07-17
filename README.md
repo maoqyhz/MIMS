@@ -22,6 +22,6 @@ MIMS是一个药库管理系统，它主要有以下功能。
 
 ![](https://github.com/maoqyhz/MIMS/blob/master/Intro/2.jpg)
 
-![](https://github.com/maoqyhz/MIMS/blob/master/Intro/3.jpg)
+![](https://github.com/maoqyhz/MIMS/blob/master/Intro/3.png)
 
 ![](https://github.com/maoqyhz/MIMS/blob/master/Intro/4.jpg)
